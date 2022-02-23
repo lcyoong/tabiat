@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HabitController;
+use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,4 +19,4 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
-Route::get('my-tracker', [HabitController::class, 'index']);
+Route::get('track/{date?}', [TrackController::class, 'show']);
