@@ -19,7 +19,7 @@ class TrackController extends Controller
         }
 
         // Redirect future date tracking
-        if ($date->diff(today())->days > 0) {
+        if (!$date->isPast()) {
             return redirect('/track');
         }
 
