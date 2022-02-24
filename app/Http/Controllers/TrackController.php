@@ -23,10 +23,8 @@ class TrackController extends Controller
             return redirect('/track');
         }
 
-        $human_difference = $date->diff(today())->days < 1 ? 'today' : $date->diffForHumans(['options' => Carbon::ONE_DAY_WORDS]);
+        $date = $date->format('Y-m-d');
 
-        $date = $date->toFormattedDateString();
-
-        return Inertia::render('Track', compact('habits', 'date', 'human_difference'));
+        return Inertia::render('Track', compact('habits', 'date'));
     }
 }
