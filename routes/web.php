@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('track/{date?}', [TrackController::class, 'show']);
+Route::post('track', [TrackController::class, 'store']);
+Route::post('track/delete', [TrackController::class, 'delete']);

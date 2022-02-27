@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Habit;
+use App\Models\Track;
 use Carbon\Carbon;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Request;
 
 class TrackController extends Controller
 {
-    public function show($date = null)
+    public function show(Request $request, $date = null)
     {
         $habits = Habit::get();
 
@@ -25,6 +27,31 @@ class TrackController extends Controller
 
         $date = $date->format('Y-m-d');
 
-        return Inertia::render('Track', compact('habits', 'date'));
+        $tracking = Track::where('tra_date', $date)->get();
+        // ->mapWithKeys(function ($item, $key) {
+        //     return [$item['tra_habit'] => true];
+        // })->toArray();
+
+        return Inertia::render('Track', compact('habits', 'date', 'tracking'));
+    }
+
+    public function store(Request $request)
+    {
+        $input = $request->input();
+
+        return Track::firstOrCreate([
+            'tra_habit' => $input['habit'],
+            'tra_date' => $input['date'],
+        ]);
+    }
+
+    public function delete(Request $request)
+    {
+        $input = $request->input();
+
+        return Track::where([
+            'tra_habit' => $input['habit'],
+            'tra_date' => $input['date'],
+        ])->delete();
     }
 }
