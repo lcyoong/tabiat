@@ -19,8 +19,8 @@
         <div class="my-6">
             <span
                 class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
-                >8/10</span
-            >
+                >{{ track_count() }}/ {{ habit_count() }}
+            </span>
             daily habits achieved
         </div>
         <ul>
@@ -28,8 +28,13 @@
                 <!-- This example requires Tailwind CSS v2.0+ -->
                 <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
                 <button
+                    @click="toggle(habit.hab_id, date, $event)"
                     type="button"
-                    class="bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    :class="{
+                        'bg-gray-200': !tracks[habit.hab_id],
+                        'bg-indigo-600': tracks[habit.hab_id],
+                    }"
                     role="switch"
                     aria-checked="false"
                 >
@@ -37,7 +42,11 @@
                     <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
                     <span
                         aria-hidden="true"
-                        class="translate-x-0 pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
+                        class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
+                        :class="{
+                            'translate-x-0': !tracks[habit.hab_id],
+                            'translate-x-5': tracks[habit.hab_id],
+                        }"
                     ></span>
                 </button>
                 <div class="ml-4">{{ habit.hab_name }}</div>
@@ -58,6 +67,7 @@
 <script>
 import moment from "moment";
 const date_format = "YYYY-MM-DD";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
     props: {
@@ -65,6 +75,12 @@ export default {
         tracking: Array,
         date: String,
         human_difference: String,
+    },
+
+    data() {
+        return {
+            tracks: [],
+        };
     },
 
     methods: {
@@ -86,13 +102,58 @@ export default {
 
             return moment(date).endOf("day").fromNow();
         },
+
         previousDay: function (date) {
             return moment(date).subtract(1, "days").format(date_format);
         },
+
         nextDay: function (date) {
-            console.log(date);
             return moment(date).add(1, "days").format(date_format);
         },
+
+        toggle: function (id, date, event) {
+            this.tracks[id] = !this.tracks[id];
+
+            if (this.tracks[id]) {
+                axios.post(
+                    "/track/",
+                    {
+                        date: this.date,
+                        habit: id,
+                    },
+                    {
+                        onSuccess: (page) => {
+                            console.log("hello");
+                        },
+                    }
+                );
+            } else {
+                axios.post("/track/delete", {
+                    date: this.date,
+                    habit: id,
+                });
+            }
+        },
+
+        habit_count: function () {
+            return this.habits.length;
+        },
+
+        track_count: function () {
+            for (
+                var i = 0, len = 0;
+                i < this.tracks.length;
+                i++, this.tracks[i] == true && len++
+            );
+
+            return len;
+        },
+    },
+
+    created() {
+        this.tracking.forEach((element) => {
+            this.tracks[element.tra_habit] = true;
+        });
     },
 };
 </script>

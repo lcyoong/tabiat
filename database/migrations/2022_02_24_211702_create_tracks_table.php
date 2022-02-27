@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHabitsTable extends Migration
+class CreateTracksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateHabitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('habits', function (Blueprint $table) {
-            $table->increments('hab_id');
-            $table->string('hab_name', 255);
-            $table->string('hab_unit', 255)->nullable();
-            $table->integer('hab_value')->default(0);
+        Schema::create('tracks', function (Blueprint $table) {
+            $table->increments('tra_id');
+            $table->integer('tra_habit');
+            $table->date('tra_date');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateHabitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('habits');
+        Schema::dropIfExists('tracks');
     }
 }
