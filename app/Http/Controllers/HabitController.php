@@ -35,7 +35,8 @@ class HabitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+        return Habit::create($input);
     }
 
     /**

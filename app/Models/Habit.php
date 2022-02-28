@@ -11,6 +11,8 @@ class Habit extends Model
 
     protected $primaryKey = "hab_id";
 
+    protected $guarded = [];
+
     public function tracks()
     {
         return $this->hasMany(Track::class, 'tra_habit');
