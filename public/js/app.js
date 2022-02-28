@@ -19331,10 +19331,6 @@ var date_format = "YYYY-MM-DD";
         axios.post("/track/", {
           date: this.date,
           habit: id
-        }, {
-          onSuccess: function onSuccess(page) {
-            console.log("hello");
-          }
         });
       } else {
         axios.post("/track/delete", {
@@ -19359,11 +19355,12 @@ var date_format = "YYYY-MM-DD";
     deleteHabit: function deleteHabit(id) {
       axios.post("/habit/delete/" + id).then(this.removeLocalHabit.bind(this, id));
     },
-    removeLocalHabit: function removeLocalHabit(response, id) {
+    removeLocalHabit: function removeLocalHabit(id, response) {
       var index = this.habits.findIndex(function (item) {
         return item.hab_id === id;
       });
       this.habits.splice(index, 1);
+      this.tracks.splice(id, 1);
     }
   },
   created: function created() {
