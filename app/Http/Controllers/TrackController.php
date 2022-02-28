@@ -28,9 +28,6 @@ class TrackController extends Controller
         $date = $date->format('Y-m-d');
 
         $tracking = Track::where('tra_date', $date)->get();
-        // ->mapWithKeys(function ($item, $key) {
-        //     return [$item['tra_habit'] => true];
-        // })->toArray();
 
         return Inertia::render('Track', compact('habits', 'date', 'tracking'));
     }
