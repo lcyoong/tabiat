@@ -23,7 +23,7 @@
             </span>
             daily habits achieved
         </div>
-        <ul class="space-y-6 my-6">
+        <ul class="space-y-6 my-6" @mouseout="active_habit = 0">
             <li
                 class="flex items-center justify-between hover:bg-indigo-100 px-4 py-2"
                 v-for="habit in habits"
@@ -78,11 +78,36 @@
             </li>
         </ul>
         <button
+            v-if="showAddHabitForm == false"
+            @click="showAddHabitForm = true"
             type="button"
             class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
             New habit
         </button>
+        <div v-else>
+            <form
+                class="flex flex-column justify-between space-x-2"
+                @submit.prevent="addNewHabit"
+            >
+                <input
+                    type="text"
+                    v-model="habit_title"
+                    class="rounded-xl w-full grow border-gray-300 text-sm"
+                />
+                <button
+                    class="rounded-full bg-indigo-500 text-white text-sm px-4"
+                >
+                    Submit
+                </button>
+                <button
+                    @click="showAddHabitForm = false"
+                    class="rounded-full bg-gray-200 text-sm px-4"
+                >
+                    Cancel
+                </button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -103,6 +128,8 @@ export default {
         return {
             tracks: [],
             active_habit: null,
+            showAddHabitForm: false,
+            habit_title: null,
         };
     },
 
@@ -173,6 +200,17 @@ export default {
             axios
                 .post("/habit/delete/" + id)
                 .then(this.removeLocalHabit.bind(this, id));
+        },
+
+        addNewHabit: function () {
+            var self = this;
+            axios
+                .post("/habit", {
+                    hab_name: this.habit_title,
+                })
+                .then(function (response) {
+                    self.showAddHabitForm = false;
+                });
         },
 
         removeLocalHabit: function (id, response) {

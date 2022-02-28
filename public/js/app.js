@@ -19296,7 +19296,9 @@ var date_format = "YYYY-MM-DD";
   data: function data() {
     return {
       tracks: [],
-      active_habit: null
+      active_habit: null,
+      showAddHabitForm: false,
+      habit_title: null
     };
   },
   methods: {
@@ -19354,6 +19356,14 @@ var date_format = "YYYY-MM-DD";
     },
     deleteHabit: function deleteHabit(id) {
       axios.post("/habit/delete/" + id).then(this.removeLocalHabit.bind(this, id));
+    },
+    addNewHabit: function addNewHabit() {
+      var self = this;
+      axios.post("/habit", {
+        hab_name: this.habit_title
+      }).then(function (response) {
+        self.showAddHabitForm = false;
+      });
     },
     removeLocalHabit: function removeLocalHabit(id, response) {
       var index = this.habits.findIndex(function (item) {
@@ -19425,24 +19435,21 @@ var _hoisted_8 = {
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" daily habits achieved ");
 
-var _hoisted_10 = {
-  "class": "space-y-6 my-6"
-};
-var _hoisted_11 = ["onMouseover"];
-var _hoisted_12 = ["onClick"];
+var _hoisted_10 = ["onMouseover"];
+var _hoisted_11 = ["onClick"];
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
 }, "Use setting", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_13 = {
   "class": "ml-4 grow"
 };
-var _hoisted_15 = ["onClick"];
+var _hoisted_14 = ["onClick"];
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "h-4 w-4 flex-none hover:text-red-500",
   fill: "none",
   viewBox: "0 0 24 24",
@@ -19456,12 +19463,14 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_17 = [_hoisted_16];
+var _hoisted_16 = [_hoisted_15];
+var _hoisted_17 = {
+  key: 1
+};
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "button",
-  "class": "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-}, " New habit ", -1
+  "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
+}, " Submit ", -1
 /* HOISTED */
 );
 
@@ -19480,7 +19489,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_7)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.track_count()) + "/ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.habit_count()), 1
   /* TEXT */
-  ), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.habits, function (habit) {
+  ), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
+    "class": "space-y-6 my-6",
+    onMouseout: _cache[0] || (_cache[0] = function ($event) {
+      return $data.active_habit = 0;
+    })
+  }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.habits, function (habit) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       "class": "flex items-center justify-between hover:bg-indigo-100 px-4 py-2",
       onMouseover: function onMouseover($event) {
@@ -19497,7 +19511,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }]),
       role: "switch",
       "aria-checked": "false"
-    }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Enabled: \"translate-x-5\", Not Enabled: \"translate-x-0\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    }, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Enabled: \"translate-x-5\", Not Enabled: \"translate-x-0\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
       "aria-hidden": "true",
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200", {
         'translate-x-0': !$data.tracks[habit.hab_id],
@@ -19507,7 +19521,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* CLASS */
     )], 10
     /* CLASS, PROPS */
-    , _hoisted_12), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(habit.hab_name), 1
+    , _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(habit.hab_name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-right", {
@@ -19519,16 +19533,45 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.deleteHabit(habit.hab_id);
       }
-    }, _hoisted_17, 8
+    }, _hoisted_16, 8
     /* PROPS */
-    , _hoisted_15)], 2
+    , _hoisted_14)], 2
     /* CLASS */
     )], 40
     /* PROPS, HYDRATE_EVENTS */
-    , _hoisted_11);
+    , _hoisted_10);
   }), 256
   /* UNKEYED_FRAGMENT */
-  ))]), _hoisted_18]);
+  ))], 32
+  /* HYDRATE_EVENTS */
+  ), $data.showAddHabitForm == false ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $data.showAddHabitForm = true;
+    }),
+    type: "button",
+    "class": "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  }, " New habit ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    "class": "flex flex-column justify-between space-x-2",
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.addNewHabit && $options.addNewHabit.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.habit_title = $event;
+    }),
+    "class": "rounded-xl w-full grow border-gray-300 text-sm"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.habit_title]]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $data.showAddHabitForm = false;
+    }),
+    "class": "rounded-full bg-gray-200 text-sm px-4"
+  }, " Cancel ")], 32
+  /* HYDRATE_EVENTS */
+  )]))]);
 }
 
 /***/ }),
