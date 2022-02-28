@@ -139,18 +139,10 @@ export default {
             this.tracks[id] = !this.tracks[id];
 
             if (this.tracks[id]) {
-                axios.post(
-                    "/track/",
-                    {
-                        date: this.date,
-                        habit: id,
-                    },
-                    {
-                        onSuccess: (page) => {
-                            console.log("hello");
-                        },
-                    }
-                );
+                axios.post("/track/", {
+                    date: this.date,
+                    habit: id,
+                });
             } else {
                 axios.post("/track/delete", {
                     date: this.date,
@@ -183,9 +175,10 @@ export default {
                 .then(this.removeLocalHabit.bind(this, id));
         },
 
-        removeLocalHabit: function (response, id) {
-            const index = this.habits.findIndex((item) => item.hab_id === id);
+        removeLocalHabit: function (id, response) {
+            let index = this.habits.findIndex((item) => item.hab_id === id);
             this.habits.splice(index, 1);
+            this.tracks.splice(id, 1);
         },
     },
 

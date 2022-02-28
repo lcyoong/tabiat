@@ -80,6 +80,7 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
+        $habit->tracks()->delete();
         return $habit->delete();
     }
 }
