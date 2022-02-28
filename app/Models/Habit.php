@@ -9,6 +9,8 @@ class Habit extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "hab_id";
+
     public function tracks()
     {
         return $this->hasMany(Track::class, 'tra_habit');

@@ -16,17 +16,19 @@
                 <a :href="'/track/' + nextDay(date)">Next day</a>
             </div>
         </div>
-        <div class="my-6">
+        <div>
             <span
                 class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
                 >{{ track_count() }}/ {{ habit_count() }}
             </span>
             daily habits achieved
         </div>
-        <ul>
-            <li class="my-4 flex items-center" v-for="habit in habits">
-                <!-- This example requires Tailwind CSS v2.0+ -->
-                <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+        <ul class="space-y-6 my-6">
+            <li
+                class="flex items-center justify-between hover:bg-indigo-100 px-4 py-2"
+                v-for="habit in habits"
+                @mouseover="hoverOnHabit(habit.hab_id)"
+            >
                 <button
                     @click="toggle(habit.hab_id, date, $event)"
                     type="button"
@@ -49,9 +51,29 @@
                         }"
                     ></span>
                 </button>
-                <div class="ml-4">{{ habit.hab_name }}</div>
-                <div class="grow text-right">
-                    <a href>x</a>
+                <div class="ml-4 grow">{{ habit.hab_name }}</div>
+                <div
+                    class="text-right"
+                    :class="{
+                        'inline-bloc': active_habit == habit.hab_id,
+                        hidden: active_habit != habit.hab_id,
+                    }"
+                >
+                    <a href="#" @click="deleteHabit(habit.hab_id)">
+                        <svg
+                            class="h-4 w-4 flex-none hover:text-red-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
+                        </svg>
+                    </a>
                 </div>
             </li>
         </ul>
@@ -80,6 +102,7 @@ export default {
     data() {
         return {
             tracks: [],
+            active_habit: null,
         };
     },
 
@@ -87,6 +110,7 @@ export default {
         getHumanDate: function (date) {
             return moment(date).format("DD MMM, YYYY");
         },
+
         getDateContext: function (date) {
             const today = moment().format(date_format);
             const tomorrow = moment().add(1, "day").format(date_format);
@@ -147,6 +171,21 @@ export default {
             );
 
             return len;
+        },
+
+        hoverOnHabit: function (id) {
+            this.active_habit = id;
+        },
+
+        deleteHabit: function (id) {
+            axios
+                .post("/habit/delete/" + id)
+                .then(this.removeLocalHabit.bind(this, id));
+        },
+
+        removeLocalHabit: function (response, id) {
+            const index = this.habits.findIndex((item) => item.hab_id === id);
+            this.habits.splice(index, 1);
         },
     },
 

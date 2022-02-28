@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HabitController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,3 +23,5 @@ Route::get('/', function () {
 Route::get('track/{date?}', [TrackController::class, 'show']);
 Route::post('track', [TrackController::class, 'store']);
 Route::post('track/delete', [TrackController::class, 'delete']);
+
+Route::post('habit/delete/{habit}', [HabitController::class, 'destroy']);
