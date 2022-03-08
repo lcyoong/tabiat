@@ -7,6 +7,7 @@ import {
 import {
     createInertiaApp
 } from '@inertiajs/inertia-vue3'
+import Toggle from "./Shared/Toggle";
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
