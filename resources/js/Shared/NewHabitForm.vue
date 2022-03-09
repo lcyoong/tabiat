@@ -17,7 +17,7 @@
       <button type="submit" class="rounded-full bg-indigo-500 text-white text-sm px-4">Submit</button>
       <button
         type="button"
-        @click="$emit('cancelForm')"
+        @click="showAddHabitForm = false"
         class="rounded-full bg-gray-200 text-sm px-4"
       >Cancel</button>
     </form>
