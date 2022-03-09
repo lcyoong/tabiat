@@ -19864,7 +19864,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.hab_name]]), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.$emit('cancelForm');
+      return $data.showAddHabitForm = false;
     }),
     "class": "rounded-full bg-gray-200 text-sm px-4"
   }, "Cancel")], 32
