@@ -87,12 +87,10 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        // $habit->tracks()->delete();
+        $habit->tracks()->delete();
 
-        // $habit->delete();
-        // return redirect()->route('track.index');
+        $habit->delete();
 
-        return back();
-
+        return back()->setStatusCode(303);
     }
 }

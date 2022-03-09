@@ -19341,6 +19341,9 @@ __webpack_require__.r(__webpack_exports__);
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"]("/habit/" + id, {
         preserveState: true,
         preserveScroll: true,
+        onBefore: function onBefore() {
+          return confirm("Are you sure you want to delete this user?");
+        },
         onSuccess: function onSuccess(page) {
           console.log(page);
         }
