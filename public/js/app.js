@@ -19357,7 +19357,7 @@ __webpack_require__.r(__webpack_exports__);
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
           _this.showAddHabitForm = false;
-          _this.new_habit_form = null;
+          _this.new_habit_form = {};
         }
       });
     },
@@ -19368,7 +19368,7 @@ __webpack_require__.r(__webpack_exports__);
         preserveState: true,
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
-          _this2.edit_habit_form = null;
+          _this2.edit_habit_form = {};
         }
       });
     },
@@ -19593,7 +19593,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.habits, function (habit) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
-      "class": "hover:bg-indigo-100 px-4 py-2",
+      "class": "rounded-full hover:bg-indigo-50 px-4 py-2",
       onMouseover: function onMouseover($event) {
         return $options.hoverOnHabit(habit.hab_id);
       }
@@ -19664,7 +19664,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.showAddHabitForm = true;
     }),
     type: "button",
-    "class": "inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    "class": "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
   }, "New habit")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "flex flex-column justify-between space-x-2",
     onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
@@ -19798,6 +19798,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "rounded-full px-4 py-2 bg-blue-600 text-white text-sm hover:bg-blue-500",
     href: '/track/' + $options.previousDay()
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -19813,6 +19814,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getDateContext()), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "rounded-full px-4 py-2 bg-blue-600 text-white text-sm hover:bg-blue-500",
     href: '/track/' + $options.nextDay()
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
