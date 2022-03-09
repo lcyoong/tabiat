@@ -173,6 +173,7 @@ export default {
       Inertia.delete("/habit/" + id, {
         preserveState: true,
         preserveScroll: true,
+        onBefore: () => confirm("Are you sure you want to delete this user?"),
         onSuccess: page => {
           console.log(page);
         }
