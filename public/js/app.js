@@ -19282,8 +19282,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Shared_Toggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Shared/Toggle */ "./resources/js/Shared/Toggle.vue");
 /* harmony import */ var _Shared_TrackNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Shared/TrackNav */ "./resources/js/Shared/TrackNav.vue");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Shared_EditHabitForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Shared/EditHabitForm */ "./resources/js/Shared/EditHabitForm.vue");
+/* harmony import */ var _Shared_NewHabitForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Shared/NewHabitForm */ "./resources/js/Shared/NewHabitForm.vue");
+/* harmony import */ var _Shared_DeleteHabitButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Shared/DeleteHabitButton */ "./resources/js/Shared/DeleteHabitButton.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+
 
 
 
@@ -19296,20 +19300,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     Toggle: _Shared_Toggle__WEBPACK_IMPORTED_MODULE_0__["default"],
-    TrackNav: _Shared_TrackNav__WEBPACK_IMPORTED_MODULE_1__["default"]
+    TrackNav: _Shared_TrackNav__WEBPACK_IMPORTED_MODULE_1__["default"],
+    EditHabitForm: _Shared_EditHabitForm__WEBPACK_IMPORTED_MODULE_2__["default"],
+    NewHabitForm: _Shared_NewHabitForm__WEBPACK_IMPORTED_MODULE_3__["default"],
+    DeleteHabitButton: _Shared_DeleteHabitButton__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
       tracks: [],
       active_habit: null,
-      showAddHabitForm: false,
-      edit_habit_form: {},
-      new_habit_form: {}
+      edit_habit_form: {}
     };
   },
   methods: {
     toggled: function toggled(id) {
-      console.log(id);
       this.tracks[id] = !this.tracks[id];
 
       if (this.tracks[id]) {
@@ -19337,41 +19341,6 @@ __webpack_require__.r(__webpack_exports__);
     hoverOnHabit: function hoverOnHabit(id) {
       this.active_habit = id;
     },
-    deleteHabit: function deleteHabit(id) {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"]("/habit/" + id, {
-        preserveState: true,
-        preserveScroll: true,
-        onBefore: function onBefore() {
-          return confirm("Are you sure you want to delete this user?");
-        },
-        onSuccess: function onSuccess(page) {
-          console.log(page);
-        }
-      });
-    },
-    addNewHabit: function addNewHabit() {
-      var _this = this;
-
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post("/habit", this.new_habit_form, {
-        preserveState: true,
-        preserveScroll: true,
-        onSuccess: function onSuccess(page) {
-          _this.showAddHabitForm = false;
-          _this.new_habit_form = {};
-        }
-      });
-    },
-    updateHabit: function updateHabit(id) {
-      var _this2 = this;
-
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post("/habit/" + this.edit_habit_form.hab_id, this.edit_habit_form, {
-        preserveState: true,
-        preserveScroll: true,
-        onSuccess: function onSuccess(page) {
-          _this2.edit_habit_form = {};
-        }
-      });
-    },
     removeLocalHabit: function removeLocalHabit(id, response) {
       var index = this.habits.findIndex(function (item) {
         return item.hab_id === id;
@@ -19381,10 +19350,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this = this;
 
     this.tracking.forEach(function (element) {
-      _this3.tracks[element.tra_habit] = true;
+      _this.tracks[element.tra_habit] = true;
     });
   }
 });
@@ -19403,6 +19372,118 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    habit: Object
+  },
+  methods: {
+    deleteHabit: function deleteHabit() {
+      var _this = this;
+
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia["delete"]("/habit/" + this.habit.hab_id, {
+        preserveState: true,
+        preserveScroll: true,
+        onBefore: function onBefore() {
+          return confirm("Are you sure you want to delete this user?");
+        },
+        onSuccess: function onSuccess(page) {
+          _this.$emit("deleteSuccessful");
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/EditHabitForm.vue?vue&type=script&lang=js":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/EditHabitForm.vue?vue&type=script&lang=js ***!
+  \***************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    form: {}
+  },
+  methods: {
+    updateHabit: function updateHabit(id) {
+      var _this = this;
+
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post("/habit/" + this.form.hab_id, this.form, {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: function onSuccess(page) {
+          //   this.form = {};
+          _this.$emit("updatedSuccessful");
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/NewHabitForm.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/NewHabitForm.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      showAddHabitForm: false,
+      form: {}
+    };
+  },
+  methods: {
+    addNewHabit: function addNewHabit() {
+      var _this = this;
+
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post("/habit", this.form, {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: function onSuccess(page) {
+          _this.showAddHabitForm = false;
+          _this.form = {};
+
+          _this.$emit("storedSuccessful");
+        }
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -19507,32 +19588,24 @@ var _hoisted_1 = {
   "class": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
 };
 var _hoisted_2 = {
+  "class": "my-4"
+};
+var _hoisted_3 = {
   "class": "inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" daily habits achieved ");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" daily habits achieved ");
 
-var _hoisted_4 = ["onMouseover"];
-var _hoisted_5 = {
-  key: 0
-};
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
-}, "Submit", -1
-/* HOISTED */
-);
-
-var _hoisted_7 = {
+var _hoisted_5 = ["onMouseover"];
+var _hoisted_6 = {
   "class": "flex items-center justify-between"
 };
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "ml-4 grow"
 };
-var _hoisted_9 = ["onClick"];
+var _hoisted_8 = ["onClick"];
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   "class": "h-4 w-4 hover:text-green-500",
   fill: "none",
@@ -19547,48 +19620,27 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_11 = [_hoisted_10];
-var _hoisted_12 = ["onClick"];
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-4 w-4 flex-none hover:text-red-500",
-  fill: "none",
-  viewBox: "0 0 24 24",
-  stroke: "currentColor"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "stroke-width": "2",
-  d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_14 = [_hoisted_13];
-var _hoisted_15 = {
-  key: 1
-};
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
-}, "Submit", -1
-/* HOISTED */
-);
-
+var _hoisted_10 = [_hoisted_9];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_TrackNav = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TrackNav");
 
+  var _component_EditHabitForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EditHabitForm");
+
   var _component_Toggle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Toggle");
+
+  var _component_DeleteHabitButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DeleteHabitButton");
+
+  var _component_NewHabitForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NewHabitForm");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TrackNav, {
     date: $props.date
   }, null, 8
   /* PROPS */
-  , ["date"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.track_count()) + "/ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.habit_count()), 1
+  , ["date"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.track_count()) + "/ " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.habit_count()), 1
   /* TEXT */
-  ), _hoisted_3]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end track counter"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
+  ), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end track counter"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
     "class": "space-y-6 my-6",
-    onMouseout: _cache[3] || (_cache[3] = function ($event) {
+    onMouseout: _cache[2] || (_cache[2] = function ($event) {
       return $data.active_habit = 0;
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.habits, function (habit) {
@@ -19597,35 +19649,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onMouseover: function onMouseover($event) {
         return $options.hoverOnHabit(habit.hab_id);
       }
-    }, [$data.edit_habit_form == habit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-      "class": "flex flex-column justify-between space-x-2",
-      onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-        return $options.updateHabit && $options.updateHabit.apply($options, arguments);
-      }, ["prevent"]))
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-      type: "text",
-      "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-        return $data.edit_habit_form.hab_name = $event;
+    }, [$data.edit_habit_form == habit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_EditHabitForm, {
+      key: 0,
+      form: habit,
+      onCancelForm: _cache[0] || (_cache[0] = function ($event) {
+        return $data.edit_habit_form = {};
       }),
-      "class": "rounded-xl w-full grow border-gray-300 text-sm"
-    }, null, 512
-    /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.edit_habit_form.hab_name]]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      onClick: _cache[1] || (_cache[1] = function ($event) {
-        return $data.edit_habit_form = null;
-      }),
-      "class": "rounded-full bg-gray-200 text-sm px-4"
-    }, "Cancel")], 32
-    /* HYDRATE_EVENTS */
-    )])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      onUpdatedSuccessful: _cache[1] || (_cache[1] = function ($event) {
+        return $data.edit_habit_form = {};
+      })
+    }, null, 8
+    /* PROPS */
+    , ["form"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: 1
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end: Edit habit form"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toggle, {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end: Edit habit form"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toggle, {
       init_value: $data.tracks[habit.hab_id],
       "key-value": habit.hab_id,
       onToggled: $options.toggled
     }, null, 8
     /* PROPS */
-    , ["init_value", "key-value", "onToggled"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(habit.hab_name), 1
+    , ["init_value", "key-value", "onToggled"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(habit.hab_name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-right flex items-center justify-between", {
@@ -19638,54 +19681,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return $data.edit_habit_form = habit;
       }, ["prevent"]),
       "class": "mr-2"
-    }, _hoisted_11, 8
+    }, _hoisted_10, 8
     /* PROPS */
-    , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("edit habit button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-      href: "#",
-      onClick: function onClick($event) {
-        return $options.deleteHabit(habit.hab_id);
-      }
-    }, _hoisted_14, 8
+    , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("edit habit button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_DeleteHabitButton, {
+      habit: habit
+    }, null, 8
     /* PROPS */
-    , _hoisted_12), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("delete habit button")], 2
+    , ["habit"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("delete habit button")], 2
     /* CLASS */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end habit controls")])], 2112
     /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     ))], 40
     /* PROPS, HYDRATE_EVENTS */
-    , _hoisted_4);
+    , _hoisted_5);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))], 32
   /* HYDRATE_EVENTS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end habit list"), $data.showAddHabitForm == false ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    key: 0,
-    onClick: _cache[4] || (_cache[4] = function ($event) {
-      return $data.showAddHabitForm = true;
-    }),
-    type: "button",
-    "class": "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-  }, "New habit")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    "class": "flex flex-column justify-between space-x-2",
-    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.addNewHabit && $options.addNewHabit.apply($options, arguments);
-    }, ["prevent"]))
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.new_habit_form.hab_name = $event;
-    }),
-    "class": "rounded-xl w-full grow border-gray-300 text-sm"
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.new_habit_form.hab_name]]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[6] || (_cache[6] = function ($event) {
-      return $data.showAddHabitForm = false;
-    }),
-    "class": "rounded-full bg-gray-200 text-sm px-4"
-  }, "Cancel")], 32
-  /* HYDRATE_EVENTS */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end new habit")]))]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end habit list"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NewHabitForm), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end new habit")]);
 }
 
 /***/ }),
@@ -19712,6 +19725,153 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVN
 var _hoisted_6 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_6);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "h-4 w-4 flex-none hover:text-red-500",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  stroke: "currentColor"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_2 = [_hoisted_1];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+    href: "#",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.deleteHabit();
+    })
+  }, _hoisted_2);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/EditHabitForm.vue?vue&type=template&id=4fa574c2":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/EditHabitForm.vue?vue&type=template&id=4fa574c2 ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
+}, "Submit", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+    "class": "flex flex-column justify-between space-x-2",
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.updateHabit && $options.updateHabit.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $props.form.hab_name = $event;
+    }),
+    "class": "rounded-xl w-full grow border-gray-300 text-sm"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.form.hab_name]]), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.$emit('cancelForm');
+    }),
+    "class": "rounded-full bg-gray-200 text-sm px-4"
+  }, "Cancel")], 32
+  /* HYDRATE_EVENTS */
+  );
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/NewHabitForm.vue?vue&type=template&id=04cacdf4":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/NewHabitForm.vue?vue&type=template&id=04cacdf4 ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
+}, "Submit", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$data.showAddHabitForm == false ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $data.showAddHabitForm = true;
+    }),
+    type: "button",
+    "class": "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  }, "New habit")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("New habit button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    "class": "flex flex-column justify-between space-x-2",
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.addNewHabit && $options.addNewHabit.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.form.hab_name = $event;
+    }),
+    "class": "rounded-xl w-full grow border-gray-300 text-sm"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.hab_name]]), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "button",
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.$emit('cancelForm');
+    }),
+    "class": "rounded-full bg-gray-200 text-sm px-4"
+  }, "Cancel")], 32
+  /* HYDRATE_EVENTS */
+  )], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("New habit form")]);
 }
 
 /***/ }),
@@ -64763,6 +64923,90 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Shared/DeleteHabitButton.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Shared/DeleteHabitButton.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DeleteHabitButton_vue_vue_type_template_id_4f3eb9ef__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef */ "./resources/js/Shared/DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef");
+/* harmony import */ var _DeleteHabitButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteHabitButton.vue?vue&type=script&lang=js */ "./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js");
+/* harmony import */ var _Users_lcyoong_Project_valet_habit_tracker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_lcyoong_Project_valet_habit_tracker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_DeleteHabitButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_DeleteHabitButton_vue_vue_type_template_id_4f3eb9ef__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Shared/DeleteHabitButton.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/Shared/EditHabitForm.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/Shared/EditHabitForm.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EditHabitForm_vue_vue_type_template_id_4fa574c2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditHabitForm.vue?vue&type=template&id=4fa574c2 */ "./resources/js/Shared/EditHabitForm.vue?vue&type=template&id=4fa574c2");
+/* harmony import */ var _EditHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditHabitForm.vue?vue&type=script&lang=js */ "./resources/js/Shared/EditHabitForm.vue?vue&type=script&lang=js");
+/* harmony import */ var _Users_lcyoong_Project_valet_habit_tracker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_lcyoong_Project_valet_habit_tracker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_EditHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_EditHabitForm_vue_vue_type_template_id_4fa574c2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Shared/EditHabitForm.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/Shared/NewHabitForm.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/Shared/NewHabitForm.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _NewHabitForm_vue_vue_type_template_id_04cacdf4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewHabitForm.vue?vue&type=template&id=04cacdf4 */ "./resources/js/Shared/NewHabitForm.vue?vue&type=template&id=04cacdf4");
+/* harmony import */ var _NewHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewHabitForm.vue?vue&type=script&lang=js */ "./resources/js/Shared/NewHabitForm.vue?vue&type=script&lang=js");
+/* harmony import */ var _Users_lcyoong_Project_valet_habit_tracker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_lcyoong_Project_valet_habit_tracker_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_NewHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_NewHabitForm_vue_vue_type_template_id_04cacdf4__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Shared/NewHabitForm.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Toggle.vue":
 /*!****************************************!*\
   !*** ./resources/js/Shared/Toggle.vue ***!
@@ -64851,6 +65095,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeleteHabitButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeleteHabitButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DeleteHabitButton.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Shared/EditHabitForm.vue?vue&type=script&lang=js":
+/*!***********************************************************************!*\
+  !*** ./resources/js/Shared/EditHabitForm.vue?vue&type=script&lang=js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EditHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EditHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./EditHabitForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/EditHabitForm.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Shared/NewHabitForm.vue?vue&type=script&lang=js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/Shared/NewHabitForm.vue?vue&type=script&lang=js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewHabitForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./NewHabitForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/NewHabitForm.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Shared/Toggle.vue?vue&type=script&lang=js":
 /*!****************************************************************!*\
   !*** ./resources/js/Shared/Toggle.vue?vue&type=script&lang=js ***!
@@ -64911,6 +65203,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Welcome_vue_vue_type_template_id_317d1a6e__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Welcome_vue_vue_type_template_id_317d1a6e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Welcome.vue?vue&type=template&id=317d1a6e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Welcome.vue?vue&type=template&id=317d1a6e");
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Shared/DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeleteHabitButton_vue_vue_type_template_id_4f3eb9ef__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DeleteHabitButton_vue_vue_type_template_id_4f3eb9ef__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/DeleteHabitButton.vue?vue&type=template&id=4f3eb9ef");
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/EditHabitForm.vue?vue&type=template&id=4fa574c2":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Shared/EditHabitForm.vue?vue&type=template&id=4fa574c2 ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EditHabitForm_vue_vue_type_template_id_4fa574c2__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EditHabitForm_vue_vue_type_template_id_4fa574c2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./EditHabitForm.vue?vue&type=template&id=4fa574c2 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/EditHabitForm.vue?vue&type=template&id=4fa574c2");
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/NewHabitForm.vue?vue&type=template&id=04cacdf4":
+/*!****************************************************************************!*\
+  !*** ./resources/js/Shared/NewHabitForm.vue?vue&type=template&id=04cacdf4 ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewHabitForm_vue_vue_type_template_id_04cacdf4__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_NewHabitForm_vue_vue_type_template_id_04cacdf4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./NewHabitForm.vue?vue&type=template&id=04cacdf4 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/NewHabitForm.vue?vue&type=template&id=04cacdf4");
 
 
 /***/ }),
