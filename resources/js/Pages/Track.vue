@@ -12,37 +12,74 @@
 
     <ul class="space-y-6 my-6" @mouseout="active_habit = 0">
       <li
-        class="flex items-center justify-between hover:bg-indigo-100 px-4 py-2"
+        class="hover:bg-indigo-100 px-4 py-2"
         v-for="habit in habits"
         @mouseover="hoverOnHabit(habit.hab_id)"
       >
-        <Toggle :init_value="tracks[habit.hab_id]" :key-value="habit.hab_id" @toggled="toggled" />
+        <div v-if="edit_habit_form == habit">
+          <form class="flex flex-column justify-between space-x-2" @submit.prevent="updateHabit">
+            <input
+              type="text"
+              v-model="edit_habit_form.hab_name"
+              class="rounded-xl w-full grow border-gray-300 text-sm"
+            />
+            <button type="submit" class="rounded-full bg-indigo-500 text-white text-sm px-4">Submit</button>
+            <button
+              @click="edit_habit_form = null"
+              class="rounded-full bg-gray-200 text-sm px-4"
+            >Cancel</button>
+          </form>
+        </div>
+        <!--end: Edit habit form-->
 
-        <div class="ml-4 grow">{{ habit.hab_name }}</div>
+        <div v-else class="flex items-center justify-between">
+          <Toggle :init_value="tracks[habit.hab_id]" :key-value="habit.hab_id" @toggled="toggled" />
 
-        <div
-          class="text-right"
-          :class="{
+          <div class="ml-4 grow">{{ habit.hab_name }}</div>
+
+          <div
+            class="text-right flex items-center justify-between"
+            :class="{
               'inline-block': active_habit == habit.hab_id,
               hidden: active_habit != habit.hab_id,
           }"
-        >
-          <a href="#" @click="deleteHabit(habit.hab_id)">
-            <svg
-              class="h-4 w-4 flex-none hover:text-red-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+          >
+            <a href="#" @click.prevent="edit_habit_form = habit" class="mr-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 hover:text-green-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
                 stroke-width="2"
-                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-              />
-            </svg>
-          </a>
-          <!--end delete habit-->
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                />
+              </svg>
+            </a>
+            <!--edit habit button-->
+
+            <a href="#" @click="deleteHabit(habit.hab_id)">
+              <svg
+                class="h-4 w-4 flex-none hover:text-red-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </a>
+            <!--delete habit button-->
+          </div>
+          <!--end habit controls-->
         </div>
       </li>
     </ul>
@@ -58,7 +95,7 @@
       <form class="flex flex-column justify-between space-x-2" @submit.prevent="addNewHabit">
         <input
           type="text"
-          v-model="habit_title"
+          v-model="new_habit_form.hab_name"
           class="rounded-xl w-full grow border-gray-300 text-sm"
         />
         <button class="rounded-full bg-indigo-500 text-white text-sm px-4">Submit</button>
@@ -76,6 +113,7 @@
 import Toggle from "../Shared/Toggle";
 import TrackNav from "../Shared/TrackNav";
 import { Inertia } from "@inertiajs/inertia";
+import { reactive } from "vue";
 
 export default {
   props: {
@@ -91,7 +129,8 @@ export default {
       tracks: [],
       active_habit: null,
       showAddHabitForm: false,
-      habit_title: null
+      edit_habit_form: {},
+      new_habit_form: {}
     };
   },
 
@@ -141,17 +180,25 @@ export default {
     },
 
     addNewHabit: function() {
+      Inertia.post("/habit", this.new_habit_form, {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: page => {
+          this.showAddHabitForm = false;
+          this.new_habit_form = null;
+        }
+      });
+    },
+
+    updateHabit: function(id) {
       Inertia.post(
-        "/habit",
-        {
-          hab_name: this.habit_title
-        },
+        "/habit/" + this.edit_habit_form.hab_id,
+        this.edit_habit_form,
         {
           preserveState: true,
           preserveScroll: true,
           onSuccess: page => {
-            this.showAddHabitForm = false;
-            this.habit_title = null;
+            this.edit_habit_form = null;
           }
         }
       );

@@ -25,4 +25,5 @@ Route::post('track', [TrackController::class, 'store']);
 Route::post('track/delete', [TrackController::class, 'delete']);
 
 Route::post('habit', [HabitController::class, 'store']);
+Route::post('habit/{habit}', [HabitController::class, 'update']);
 Route::delete('habit/{habit}', [HabitController::class, 'destroy']);
