@@ -1,44 +1,31 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between">
-      <div>
-        <a :href="'/track/' + previousDay(date)">Previous day</a>
-      </div>
-      <div class="text-center">
-        <h1
-          class="text-2xl font-bold leading-7 mt-4 text-gray-900 sm:text-xl sm:truncate"
-        >{{ getHumanDate(date) }}</h1>
-        <div class="text-xs">{{ getDateContext(date) }}</div>
-      </div>
-      <div>
-        <a :href="'/track/' + nextDay(date)">Next day</a>
-      </div>
-    </div>
+    <TrackNav :date="date" />
+
     <div>
       <span
         class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
       >{{ track_count() }}/ {{ habit_count() }}</span>
       daily habits achieved
     </div>
+    <!--end track counter-->
+
     <ul class="space-y-6 my-6" @mouseout="active_habit = 0">
       <li
         class="flex items-center justify-between hover:bg-indigo-100 px-4 py-2"
         v-for="habit in habits"
         @mouseover="hoverOnHabit(habit.hab_id)"
       >
-        <Toggle
-          :init_value="tracks[habit.hab_id]"
-          :key-value="habit.hab_id"
-          :check="true"
-          @toggled="toggled"
-        />
+        <Toggle :init_value="tracks[habit.hab_id]" :key-value="habit.hab_id" @toggled="toggled" />
+
         <div class="ml-4 grow">{{ habit.hab_name }}</div>
+
         <div
           class="text-right"
           :class="{
-                        'inline-bloc': active_habit == habit.hab_id,
-                        hidden: active_habit != habit.hab_id,
-                    }"
+              'inline-block': active_habit == habit.hab_id,
+              hidden: active_habit != habit.hab_id,
+          }"
         >
           <a href="#" @click="deleteHabit(habit.hab_id)">
             <svg
@@ -55,9 +42,12 @@
               />
             </svg>
           </a>
+          <!--end delete habit-->
         </div>
       </li>
     </ul>
+    <!--end habit list-->
+
     <button
       v-if="showAddHabitForm == false"
       @click="showAddHabitForm = true"
@@ -77,25 +67,24 @@
           class="rounded-full bg-gray-200 text-sm px-4"
         >Cancel</button>
       </form>
+      <!--end new habit-->
     </div>
-    <!-- <Toggle init_value="1" check="0" /> -->
   </div>
 </template>
 
 <script>
-import moment from "moment";
 import Toggle from "../Shared/Toggle";
-const date_format = "YYYY-MM-DD";
+import TrackNav from "../Shared/TrackNav";
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
   props: {
-    habits: Array,
-    tracking: Array,
     date: String,
-    human_difference: String
+    habits: Array,
+    tracking: Array
   },
-  components: { Toggle },
+
+  components: { Toggle, TrackNav },
 
   data() {
     return {
@@ -107,59 +96,6 @@ export default {
   },
 
   methods: {
-    getHumanDate: function(date) {
-      return moment(date).format("DD MMM, YYYY");
-    },
-
-    getDateContext: function(date) {
-      const today = moment().format(date_format);
-      const tomorrow = moment()
-        .add(1, "day")
-        .format(date_format);
-      const yesterday = moment()
-        .subtract(1, "day")
-        .format(date_format);
-
-      if (date == today) {
-        return "today";
-      } else if (date == yesterday) {
-        return "yesterday";
-      } else if (date == tomorrow) {
-        return "tomorrow";
-      }
-
-      return moment(date)
-        .endOf("day")
-        .fromNow();
-    },
-
-    previousDay: function(date) {
-      return moment(date)
-        .subtract(1, "days")
-        .format(date_format);
-    },
-
-    nextDay: function(date) {
-      return moment(date)
-        .add(1, "days")
-        .format(date_format);
-    },
-
-    // toggle: function(id, date, event) {
-    //   this.tracks[id] = !this.tracks[id];
-
-    //   if (this.tracks[id]) {
-    //     axios.post("/track/", {
-    //       date: this.date,
-    //       habit: id
-    //     });
-    //   } else {
-    //     axios.post("/track/delete", {
-    //       date: this.date,
-    //       habit: id
-    //     });
-    //   }
-    // },
     toggled: function(id) {
       console.log(id);
       this.tracks[id] = !this.tracks[id];
@@ -195,28 +131,30 @@ export default {
     },
 
     deleteHabit: function(id) {
-      axios
-        .post("/habit/delete/" + id)
-        // .then(Inertia.reload({ only: ["habits"] }));
-        .then(function(response) {
-          Inertia.reload({ only: ["habits"] });
-        });
-
-      // .then(this.removeLocalHabit.bind(this, id));
+      Inertia.delete("/habit/" + id, {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: page => {
+          console.log(page);
+        }
+      });
     },
 
     addNewHabit: function() {
-      var self = this;
-      axios
-        .post("/habit", {
+      Inertia.post(
+        "/habit",
+        {
           hab_name: this.habit_title
-        })
-        .then(function(response) {
-          self.showAddHabitForm = false;
-          self.habit_title = null;
-          // Refresh the list
-          Inertia.reload({ only: ["habits"] });
-        });
+        },
+        {
+          preserveState: true,
+          preserveScroll: true,
+          onSuccess: page => {
+            this.showAddHabitForm = false;
+            this.habit_title = null;
+          }
+        }
+      );
     },
 
     removeLocalHabit: function(id, response) {
