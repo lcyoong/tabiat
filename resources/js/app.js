@@ -5,7 +5,8 @@ import {
     h
 } from 'vue';
 import {
-    createInertiaApp
+    createInertiaApp,
+    Link
 } from '@inertiajs/inertia-vue3'
 import Toggle from "./Shared/Toggle";
 
@@ -21,6 +22,7 @@ createInertiaApp({
                 render: () => h(App, props)
             })
             .use(plugin)
+            .component("Link", Link)
             .mount(el)
     },
 })

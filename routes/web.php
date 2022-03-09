@@ -18,11 +18,11 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
-});
+})->name('welcome');
 
-Route::get('track/{date?}', [TrackController::class, 'show']);
+Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
 Route::post('track', [TrackController::class, 'store']);
 Route::post('track/delete', [TrackController::class, 'delete']);
 
-Route::post('habit/delete/{habit}', [HabitController::class, 'destroy']);
 Route::post('habit', [HabitController::class, 'store']);
+Route::delete('habit/{habit}', [HabitController::class, 'destroy']);

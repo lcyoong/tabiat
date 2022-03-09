@@ -36,7 +36,11 @@ class HabitController extends Controller
     public function store(Request $request)
     {
         $input = $request->input();
-        return Habit::create($input);
+
+        Habit::create($input);
+
+        return back()->withInput();
+        // return Redirect::route('track.index');
     }
 
     /**
@@ -81,7 +85,12 @@ class HabitController extends Controller
      */
     public function destroy(Habit $habit)
     {
-        $habit->tracks()->delete();
-        return $habit->delete();
+        // $habit->tracks()->delete();
+
+        // $habit->delete();
+        // return redirect()->route('track.index');
+
+        return back();
+
     }
 }
