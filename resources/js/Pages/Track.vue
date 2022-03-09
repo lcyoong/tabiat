@@ -12,7 +12,7 @@
 
     <ul class="space-y-6 my-6" @mouseout="active_habit = 0">
       <li
-        class="hover:bg-indigo-100 px-4 py-2"
+        class="rounded-full hover:bg-indigo-50 px-4 py-2"
         v-for="habit in habits"
         @mouseover="hoverOnHabit(habit.hab_id)"
       >
@@ -89,7 +89,7 @@
       v-if="showAddHabitForm == false"
       @click="showAddHabitForm = true"
       type="button"
-      class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
     >New habit</button>
     <div v-else>
       <form class="flex flex-column justify-between space-x-2" @submit.prevent="addNewHabit">
@@ -186,7 +186,7 @@ export default {
         preserveScroll: true,
         onSuccess: page => {
           this.showAddHabitForm = false;
-          this.new_habit_form = null;
+          this.new_habit_form = {};
         }
       });
     },
@@ -199,7 +199,7 @@ export default {
           preserveState: true,
           preserveScroll: true,
           onSuccess: page => {
-            this.edit_habit_form = null;
+            this.edit_habit_form = {};
           }
         }
       );

@@ -1,7 +1,10 @@
 <template>
   <div class="flex items-center justify-between">
     <div>
-      <Link :href="'/track/' + previousDay()">Previous day</Link>
+      <Link
+        class="rounded-full px-4 py-2 bg-blue-600 text-white text-sm hover:bg-blue-500"
+        :href="'/track/' + previousDay()"
+      >Previous day</Link>
     </div>
     <div class="text-center">
       <h1
@@ -10,7 +13,10 @@
       <div class="text-xs">{{ getDateContext() }}</div>
     </div>
     <div>
-      <Link :href="'/track/' + nextDay()">Next day</Link>
+      <Link
+        class="rounded-full px-4 py-2 bg-blue-600 text-white text-sm hover:bg-blue-500"
+        :href="'/track/' + nextDay()"
+      >Next day</Link>
     </div>
   </div>
 </template>
