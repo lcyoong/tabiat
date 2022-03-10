@@ -19310,8 +19310,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tracks: [],
       active_habit: null,
-      edit_habit_form: {}
+      edit_habit_form: {},
+      localErrors: this.errors
     };
+  },
+  watch: {
+    errors: function errors(newValue) {
+      this.localErrors = newValue;
+    }
   },
   methods: {
     toggled: function toggled(id) {
@@ -19348,6 +19354,10 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.habits.splice(index, 1);
       this.tracks.splice(id, 1);
+    },
+    cancelEditForm: function cancelEditForm() {
+      this.edit_habit_form = {};
+      this.localErrors = {};
     }
   },
   created: function created() {
@@ -19428,7 +19438,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    form: {}
+    form: {},
+    errors: Object
+  },
+  emits: ["cancelForm", "updatedSuccessful"],
+  data: function data() {
+    return {
+      localErrors: this.errors
+    };
+  },
+  watch: {
+    errors: function errors(newValue) {
+      this.localErrors = newValue;
+    }
   },
   methods: {
     updateHabit: function updateHabit(id) {
@@ -19442,6 +19464,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.$emit("updatedSuccessful");
         }
       });
+    },
+    cancelForm: function cancelForm() {
+      this.localErrors = {};
+      this.$emit("cancelForm");
     }
   }
 });
@@ -19465,6 +19491,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     errors: Object
   },
+  emits: ["storedSuccessful", "cancel"],
   data: function data() {
     return {
       showAddHabitForm: false,
@@ -19655,7 +19682,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end track counter"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
     "class": "space-y-6 my-6",
-    onMouseout: _cache[2] || (_cache[2] = function ($event) {
+    onMouseout: _cache[1] || (_cache[1] = function ($event) {
       return $data.active_habit = 0;
     })
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.habits, function (habit) {
@@ -19664,18 +19691,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onMouseover: function onMouseover($event) {
         return $options.hoverOnHabit(habit.hab_id);
       }
-    }, [$data.edit_habit_form == habit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_EditHabitForm, {
+    }, [$data.edit_habit_form.hab_id == habit.hab_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_EditHabitForm, {
       key: 0,
       form: habit,
-      onCancelForm: _cache[0] || (_cache[0] = function ($event) {
-        return $data.edit_habit_form = {};
-      }),
-      onUpdatedSuccessful: _cache[1] || (_cache[1] = function ($event) {
+      errors: $data.localErrors.update_habit,
+      onCancelForm: $options.cancelEditForm,
+      onUpdatedSuccessful: _cache[0] || (_cache[0] = function ($event) {
         return $data.edit_habit_form = {};
       })
     }, null, 8
     /* PROPS */
-    , ["form"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    , ["form", "errors", "onCancelForm"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: 1
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end: Edit habit form"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toggle, {
       init_value: $data.tracks[habit.hab_id],
@@ -19714,7 +19740,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ))], 32
   /* HYDRATE_EVENTS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end habit list"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NewHabitForm, {
-    errors: $props.errors
+    errors: $data.localErrors.store_habit
   }, null, 8
   /* PROPS */
   , ["errors"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end new habit")]);
@@ -19809,8 +19835,12 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_2 = {
+  key: 0,
+  "class": "text-xs text-red-500"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "flex flex-column justify-between space-x-2",
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.updateHabit && $options.updateHabit.apply($options, arguments);
@@ -19825,12 +19855,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.form.hab_name]]), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.$emit('cancelForm');
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.cancelForm && $options.cancelForm.apply($options, arguments);
     }),
     "class": "rounded-full bg-gray-200 text-sm px-4"
   }, "Cancel")], 32
   /* HYDRATE_EVENTS */
+  ), $data.localErrors && $data.localErrors.hab_name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.localErrors.hab_name[0]), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  /* STABLE_FRAGMENT */
   );
 }
 
@@ -19894,7 +19928,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS */
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  )), $data.localErrors.hab_name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.localErrors.hab_name[0]), 1
+  )), $data.localErrors && $data.localErrors.hab_name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.localErrors.hab_name[0]), 1
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("New habit form")]);
 }
