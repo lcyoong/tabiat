@@ -17,9 +17,10 @@
         @mouseover="hoverOnHabit(habit.hab_id)"
       >
         <EditHabitForm
-          v-if="edit_habit_form == habit"
+          v-if="edit_habit_form.hab_id == habit.hab_id"
           :form="habit"
-          @cancel-form="edit_habit_form = {}"
+          :errors="localErrors.update_habit"
+          @cancel-form="cancelEditForm"
           @updated-successful="edit_habit_form = {}"
         />
         <!--end: Edit habit form-->
@@ -63,7 +64,7 @@
     </ul>
     <!--end habit list-->
 
-    <NewHabitForm :errors="errors" />
+    <NewHabitForm :errors="localErrors.store_habit" />
     <!--end new habit-->
   </div>
 </template>
@@ -96,8 +97,15 @@ export default {
     return {
       tracks: [],
       active_habit: null,
-      edit_habit_form: {}
+      edit_habit_form: {},
+      localErrors: this.errors
     };
+  },
+
+  watch: {
+    errors(newValue) {
+      this.localErrors = newValue;
+    }
   },
 
   methods: {
@@ -138,6 +146,11 @@ export default {
       let index = this.habits.findIndex(item => item.hab_id === id);
       this.habits.splice(index, 1);
       this.tracks.splice(id, 1);
+    },
+
+    cancelEditForm: function() {
+      this.edit_habit_form = {};
+      this.localErrors = {};
     }
   },
 

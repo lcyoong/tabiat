@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Habit;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class HabitController extends Controller
 {
@@ -35,7 +36,7 @@ class HabitController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validateWithBag('store_habit', [
             'hab_name' => 'required|unique:habits|max:255',
         ]);
 
@@ -75,11 +76,15 @@ class HabitController extends Controller
      */
     public function update(Request $request, Habit $habit)
     {
-        $validated = $request->validate([
-            'hab_name' => 'required|unique:habits|max:255',
+        $validated = $request->validateWithBag('update_habit', [
+            'hab_name' => [
+                'required',
+                Rule::unique('habits')->ignore($habit->hab_id, 'hab_id'),
+                'max:255',
+            ],
         ]);
 
-        $habit->update($request->input());
+        $habit->update($validated);
 
         return back()->withInput();
     }
