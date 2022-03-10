@@ -12,15 +12,13 @@
       <input
         type="text"
         v-model="form.hab_name"
-        class="rounded-xl w-full grow border-gray-300 text-sm"
+        class="rounded-xl w-full border-gray-300 grow text-sm"
       />
       <button type="submit" class="rounded-full bg-indigo-500 text-white text-sm px-4">Submit</button>
-      <button
-        type="button"
-        @click="showAddHabitForm = false"
-        class="rounded-full bg-gray-200 text-sm px-4"
-      >Cancel</button>
+      <button type="button" @click="cancel" class="rounded-full bg-gray-200 text-sm px-4">Cancel</button>
     </form>
+    <div class="text-xs text-red-500" v-if="localErrors.hab_name">{{ localErrors.hab_name[0] }}</div>
+
     <!--New habit form-->
   </div>
 </template>
@@ -29,11 +27,22 @@
 import { Inertia } from "@inertiajs/inertia";
 
 export default {
+  props: {
+    errors: Object
+  },
+
   data() {
     return {
       showAddHabitForm: false,
-      form: {}
+      form: {},
+      localErrors: this.errors
     };
+  },
+
+  watch: {
+    errors(newValue) {
+      this.localErrors = newValue;
+    }
   },
 
   methods: {
@@ -47,6 +56,12 @@ export default {
           this.$emit("storedSuccessful");
         }
       });
+    },
+
+    cancel() {
+      this.showAddHabitForm = false;
+      this.localErrors = {};
+      this.form = {};
     }
   }
 };

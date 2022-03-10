@@ -35,12 +35,13 @@ class HabitController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->input();
+        $validated = $request->validate([
+            'hab_name' => 'required|unique:habits|max:255',
+        ]);
 
-        Habit::create($input);
+        Habit::create($validated);
 
         return back()->withInput();
-        // return Redirect::route('track.index');
     }
 
     /**
@@ -74,6 +75,10 @@ class HabitController extends Controller
      */
     public function update(Request $request, Habit $habit)
     {
+        $validated = $request->validate([
+            'hab_name' => 'required|unique:habits|max:255',
+        ]);
+
         $habit->update($request->input());
 
         return back()->withInput();
