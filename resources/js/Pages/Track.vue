@@ -63,7 +63,7 @@
     </ul>
     <!--end habit list-->
 
-    <NewHabitForm />
+    <NewHabitForm :errors="errors" />
     <!--end new habit-->
   </div>
 </template>
@@ -80,7 +80,8 @@ export default {
   props: {
     date: String,
     habits: Array,
-    tracking: Array
+    tracking: Array,
+    errors: Object
   },
 
   components: {
