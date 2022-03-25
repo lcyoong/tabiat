@@ -5,7 +5,7 @@
     <div class="my-4">
       <span
         class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
-      >{{ track_count() }}/ {{ habit_count() }}</span>
+      >{{ trackCount() }}/ {{ habitCount() }}</span>
       daily habits achieved
     </div>
     <!--end track counter-->
@@ -124,11 +124,11 @@ export default {
       }
     },
 
-    habit_count: function() {
+    habitCount: function() {
       return this.habits.length;
     },
 
-    track_count: function() {
+    trackCount: function() {
       for (
         var i = 0, len = 0;
         i < this.tracks.length;
