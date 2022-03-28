@@ -22,7 +22,7 @@ class TrackController extends Controller
 
         // Redirect future date tracking
         if (!$date->isPast()) {
-            return redirect('/track');
+            return redirect()->route('track.index');
         }
 
         $date = $date->format('Y-m-d');

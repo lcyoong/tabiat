@@ -24,19 +24,19 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
-    Route::post('track', [TrackController::class, 'store']);
-    Route::post('track/delete', [TrackController::class, 'delete']);
+    Route::post('track', [TrackController::class, 'store'])->name('track.store');
+    Route::post('track/delete', [TrackController::class, 'delete'])->name('track.store');
 
     Route::post('habit', [HabitController::class, 'store']);
     Route::post('habit/{habit}', [HabitController::class, 'update']);
     Route::delete('habit/{habit}', [HabitController::class, 'destroy']);
 });
 
-Route::get('/auth/redirect', function () {
+Route::get('/auth/linkedin/redirect', function () {
     return Socialite::driver('linkedin')->redirect();
 })->name('login.linkedin');
 
-Route::get('/auth/callback', function () {
+Route::get('/auth/linkedin/callback', function () {
     $ouser = Socialite::driver('linkedin')->stateless()->user();
 
     // Get or create new user based on email
@@ -50,5 +50,5 @@ Route::get('/auth/callback', function () {
     // Login the user
     Auth::login($user);
 
-    return redirect('/track');
+    return redirect()->route('track.index');
 });

@@ -18,11 +18,15 @@ createInertiaApp({
         props,
         plugin
     }) {
-        createApp({
-                render: () => h(App, props)
-            })
-            .use(plugin)
+        const app = createApp({
+            render: () => h(App, props)
+        });
+
+        app.config.globalProperties.$route = route
+
+        app.use(plugin)
             .component("Link", Link)
             .mount(el)
+
     },
 })
