@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/auth/linkedin/redirect', function () {
     return Socialite::driver('linkedin')->redirect();
-})->name('login.linkedin');
+})->name('linkedin.login');
 
 Route::get('/auth/linkedin/callback', function () {
     $ouser = Socialite::driver('linkedin')->stateless()->user();
@@ -51,4 +51,4 @@ Route::get('/auth/linkedin/callback', function () {
     Auth::login($user);
 
     return redirect()->route('track.index');
-});
+})->name('linkedin.callback');
