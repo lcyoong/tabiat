@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::post('track', [TrackController::class, 'store'])->name('track.store');
     Route::post('track/delete', [TrackController::class, 'delete'])->name('track.store');
 
-    Route::post('habit', [HabitController::class, 'store']);
-    Route::post('habit/{habit}', [HabitController::class, 'update']);
-    Route::delete('habit/{habit}', [HabitController::class, 'destroy']);
+    Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
+    Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
+    Route::delete('habit/{habit}', [HabitController::class, 'destroy'])->name('habit.delete');
 });
 
 Route::get('/auth/linkedin/redirect', function () {
