@@ -33,7 +33,7 @@ return [
     'linkedin' => [
         'client_id' => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect' => env('APP_URL') . '/auth/callback',
+        'redirect' => env('APP_URL') . '/auth/linkedin/callback',
     ],
 
 ];
