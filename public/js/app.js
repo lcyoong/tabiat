@@ -19453,7 +19453,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteHabit: function deleteHabit() {
       var _this = this;
 
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia["delete"]("/habit/" + this.habit.hab_id, {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia["delete"](this.$route("habit.delete", this.habit.hab_id), {
         preserveState: true,
         preserveScroll: true,
         onBefore: function onBefore() {
@@ -19502,7 +19502,7 @@ __webpack_require__.r(__webpack_exports__);
     updateHabit: function updateHabit(id) {
       var _this = this;
 
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post("/habit/" + this.form.hab_id, this.form, {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(this.$route("habit.update", this.form.hab_id), this.form, {
         preserveState: true,
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
@@ -19582,7 +19582,7 @@ __webpack_require__.r(__webpack_exports__);
     addNewHabit: function addNewHabit() {
       var _this = this;
 
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post("/habit", this.form, {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_0__.Inertia.post(this.$route("habit.store"), this.form, {
         preserveState: true,
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
@@ -20034,7 +20034,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
-}, "Submit", -1
+}, " Submit ", -1
 /* HOISTED */
 );
 
@@ -20062,7 +20062,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.cancelForm && $options.cancelForm.apply($options, arguments);
     }),
     "class": "rounded-full bg-gray-200 text-sm px-4"
-  }, "Cancel")], 32
+  }, " Cancel ")], 32
   /* HYDRATE_EVENTS */
   ), $data.localErrors && $data.localErrors.hab_name ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.localErrors.hab_name[0]), 1
   /* TEXT */
@@ -20218,7 +20218,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "rounded-full bg-indigo-500 text-white text-sm px-4"
-}, "Submit", -1
+}, " Submit ", -1
 /* HOISTED */
 );
 
@@ -20234,7 +20234,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "button",
     "class": "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-  }, "New habit")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  }, " New habit ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("New habit button"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "flex flex-column justify-between space-x-2",
@@ -20255,7 +20255,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.cancel && $options.cancel.apply($options, arguments);
     }),
     "class": "rounded-full bg-gray-200 text-sm px-4"
-  }, "Cancel")], 32
+  }, " Cancel ")], 32
   /* HYDRATE_EVENTS */
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
