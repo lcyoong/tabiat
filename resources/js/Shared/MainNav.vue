@@ -5,6 +5,7 @@
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button
+            @click="toggleMobileMenu()"
             type="button"
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
@@ -62,7 +63,7 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a
-                href="#"
+                :href="$route('track.index')"
                 class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                 aria-current="page"
               >Track</a>
@@ -103,7 +104,7 @@
           <div class="ml-3 relative">
             <div>
               <button
-                @click="toggleMenu()"
+                @click="toggleProfileMenu()"
                 type="button"
                 class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 id="user-menu-button"
@@ -120,8 +121,8 @@
             -->
             <div
               class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform"
-              :class="{'transition ease-in duration-75 hidden opacity-0 scale-95' : !showMenu,
-                'transition ease-out duration-100 opacity-100 scale-100' : showMenu,
+              :class="{'transition ease-in duration-75 hidden opacity-0 scale-95' : !showProfileMenu,
+                'transition ease-out duration-100 opacity-100 scale-100' : showProfileMenu,
               }"
               role="menu"
               aria-orientation="vertical"
@@ -157,29 +158,23 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
+    <div
+      class="sm:hidden"
+      :class="{'inline-block': showMobileMenu, 'hidden': !showMobileMenu}"
+      id="mobile-menu"
+    >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a
-          href="#"
+          :href="$route('track.index')"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
           aria-current="page"
-        >Dashboard</a>
+        >Track</a>
 
         <a
           href="#"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Team</a>
-
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Projects</a>
-
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Calendar</a>
+        >Achivements</a>
       </div>
     </div>
   </nav>
@@ -192,13 +187,17 @@ import { usePage } from "@inertiajs/inertia-vue3";
 export default {
   data() {
     return {
-      showMenu: false
+      showProfileMenu: false,
+      showMobileMenu: false
     };
   },
 
   methods: {
-    toggleMenu: function() {
-      this.showMenu = !this.showMenu;
+    toggleProfileMenu: function() {
+      this.showProfileMenu = !this.showProfileMenu;
+    },
+    toggleMobileMenu: function() {
+      this.showMobileMenu = !this.showMobileMenu;
     }
   },
 
