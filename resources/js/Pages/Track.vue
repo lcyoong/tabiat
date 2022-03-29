@@ -129,7 +129,7 @@ export default {
                     habit: id,
                 });
             } else {
-                axios.post("/track/delete", {
+                axios.post(this.$route("track.delete"), {
                     date: this.date,
                     habit: id,
                 });

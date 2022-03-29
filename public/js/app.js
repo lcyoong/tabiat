@@ -19375,7 +19375,7 @@ __webpack_require__.r(__webpack_exports__);
           habit: id
         });
       } else {
-        axios.post("/track/delete", {
+        axios.post(this.$route("track.delete"), {
           date: this.date,
           habit: id
         });
@@ -19536,6 +19536,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      showMenu: false
+    };
+  },
+  methods: {
+    toggleMenu: function toggleMenu() {
+      this.showMenu = !this.showMenu;
+    }
+  },
   setup: function setup() {
     var user = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.usePage)().props.value.user;
@@ -20163,32 +20173,18 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_8 = {
   "class": "ml-3 relative"
 };
-var _hoisted_9 = {
-  type: "button",
-  "class": "bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white",
-  id: "user-menu-button",
-  "aria-expanded": "false",
-  "aria-haspopup": "true"
-};
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
 }, "Open user menu", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = ["src"];
-var _hoisted_12 = {
-  "class": "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none",
-  role: "menu",
-  "aria-orientation": "vertical",
-  "aria-labelledby": "user-menu-button",
-  tabindex: "-1"
-};
+var _hoisted_10 = ["src"];
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#",
-  "class": "block px-4 py-2 text-sm text-gray-700",
+  "class": "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100",
   role: "menuitem",
   tabindex: "-1",
   id: "user-menu-item-0"
@@ -20196,9 +20192,9 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "#",
-  "class": "block px-4 py-2 text-sm text-gray-700",
+  "class": "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100",
   role: "menuitem",
   tabindex: "-1",
   id: "user-menu-item-1"
@@ -20206,34 +20202,54 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Sign out");
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Sign out");
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"sm:hidden\" id=\"mobile-menu\"><div class=\"px-2 pt-2 pb-3 space-y-1\"><!-- Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot; --><a href=\"#\" class=\"bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium\" aria-current=\"page\">Dashboard</a><a href=\"#\" class=\"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium\">Team</a><a href=\"#\" class=\"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium\">Projects</a><a href=\"#\" class=\"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium\">Calendar</a></div></div>", 1);
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"sm:hidden\" id=\"mobile-menu\"><div class=\"px-2 pt-2 pb-3 space-y-1\"><!-- Current: &quot;bg-gray-900 text-white&quot;, Default: &quot;text-gray-300 hover:bg-gray-700 hover:text-white&quot; --><a href=\"#\" class=\"bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium\" aria-current=\"page\">Dashboard</a><a href=\"#\" class=\"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium\">Team</a><a href=\"#\" class=\"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium\">Projects</a><a href=\"#\" class=\"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium\">Calendar</a></div></div>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile dropdown "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Profile dropdown "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.toggleMenu();
+    }),
+    type: "button",
+    "class": "bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white",
+    id: "user-menu-button",
+    "aria-expanded": "false",
+    "aria-haspopup": "true"
+  }, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     "class": "h-8 w-8 rounded-full",
     src: $setup.user.avatar,
     alt: ""
   }, null, 8
   /* PROPS */
-  , _hoisted_11)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n            Dropdown menu, show/hide based on menu state.\n\n            Entering: \"transition ease-out duration-100\"\n              From: \"transform opacity-0 scale-95\"\n              To: \"transform opacity-100 scale-100\"\n            Leaving: \"transition ease-in duration-75\"\n              From: \"transform opacity-100 scale-100\"\n              To: \"transform opacity-0 scale-95\"\n            "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Active: \"bg-gray-100\", Not Active: \"\" "), _hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  , _hoisted_10)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\n            Dropdown menu, show/hide based on menu state.\n            "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform", {
+      'transition ease-in duration-75 hidden opacity-0 scale-95': !$data.showMenu,
+      'transition ease-out duration-100 opacity-100 scale-100': $data.showMenu
+    }]),
+    role: "menu",
+    "aria-orientation": "vertical",
+    "aria-labelledby": "user-menu-button",
+    tabindex: "-1"
+  }, [_hoisted_11, _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: "/logout",
     method: "post",
-    "class": "block px-4 py-2 text-sm text-gray-700",
+    "class": "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100",
     role: "menuitem",
     tabindex: "-1",
     id: "user-menu-item-2"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_15];
+      return [_hoisted_13];
     }),
     _: 1
     /* STABLE */
 
-  })])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile menu, show/hide based on menu state. "), _hoisted_16]);
+  })], 2
+  /* CLASS */
+  )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Mobile menu, show/hide based on menu state. "), _hoisted_14]);
 }
 
 /***/ }),
@@ -20442,11 +20458,28 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
         App = _ref.App,
         props = _ref.props,
         plugin = _ref.plugin;
+    var clickOutside = {
+      beforeMount: function beforeMount(el, binding) {
+        el.clickOutsideEvent = function (event) {
+          // here I check that click was outside the el and his children
+          if (!(el == event.target || el.contains(event.target))) {
+            // and if it did, call method provided in attribute value
+            binding.value();
+          }
+        };
+
+        document.addEventListener("click", el.clickOutsideEvent);
+      },
+      unmounted: function unmounted(el) {
+        document.removeEventListener("click", el.clickOutsideEvent);
+      }
+    };
     var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(App, props);
       }
     });
+    app.directive("click-outside", clickOutside);
     app.config.globalProperties.$route = route;
     app.use(plugin).component("Link", _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link).mount(el);
   }
