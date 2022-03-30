@@ -15,4 +15,5 @@ class Track extends Model
     {
         return $ths->belongsTo(Habit::class);
     }
+
 }

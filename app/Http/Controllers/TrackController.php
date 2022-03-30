@@ -12,7 +12,7 @@ class TrackController extends Controller
 {
     public function show(Request $request, $date = null)
     {
-        $habits = Habit::get();
+        $habits = Habit::authUser()->get();
 
         try {
             $date = new Carbon($date);
