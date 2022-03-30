@@ -18,6 +18,7 @@ class CreateHabitsTable extends Migration
             $table->string('hab_name', 255);
             $table->string('hab_unit', 255)->nullable();
             $table->integer('hab_value')->default(0);
+            $table->integer('hab_user');
             $table->timestamps();
         });
     }
