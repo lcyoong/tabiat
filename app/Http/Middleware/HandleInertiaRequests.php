@@ -42,6 +42,10 @@ class HandleInertiaRequests extends Middleware
             ? $request->user()->only('id', 'name', 'email', 'avatar')
             : null
             ,
+            'app' => [
+                'name' => env('APP_NAME'),
+                'domain' => env('APP_DOMAIN'),
+            ],
         ]);
     }
 }
