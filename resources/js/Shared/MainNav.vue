@@ -62,11 +62,11 @@
           <div class="hidden sm:block">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a
+              <Link
                 :href="$route('track.index')"
                 class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                 aria-current="page"
-              >Track</a>
+              >Track</Link>
               <a
                 href="#"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -129,13 +129,13 @@
               aria-labelledby="user-menu-button"
               tabindex="-1"
             >
-              <a
+              <Link
                 :href="$route('account.profile')"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-0"
-              >Your Profile</a>
+              >Your Profile</Link>
               <a
                 href="#"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -165,16 +165,16 @@
     >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a
+        <Link
           :href="$route('track.index')"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
           aria-current="page"
-        >Track</a>
+        >Track</Link>
 
-        <a
+        <!-- <a
           href="#"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-        >Achivements</a>
+        >Achivements</a>-->
       </div>
     </div>
   </nav>
