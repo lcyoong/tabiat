@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\TrackController;
 use App\Models\User;
@@ -25,11 +26,13 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');
-    Route::post('track/delete', [TrackController::class, 'delete'])->name('track.store');
+    Route::post('track/delete', [TrackController::class, 'delete'])->name('track.delete');
 
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
     Route::delete('habit/{habit}', [HabitController::class, 'destroy'])->name('habit.delete');
+
+    Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
 });
 
 Route::get('/auth/linkedin/redirect', function () {
