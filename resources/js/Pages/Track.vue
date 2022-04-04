@@ -27,7 +27,14 @@
         <!--end: Edit habit form-->
 
         <div v-else class="flex items-center justify-between">
-          <Toggle :init_value="tracks[habit.hab_id]" :key-value="habit.hab_id" @toggled="toggled" />
+          <div>
+            <MiniKudos :id="habit.hab_id" :triggerId="lastToggledOn"></MiniKudos>
+            <Toggle
+              :init_value="tracks[habit.hab_id]"
+              :key-value="habit.hab_id"
+              @toggled="toggled"
+            />
+          </div>
 
           <div class="ml-4 grow">{{ habit.hab_name }}</div>
 
@@ -76,6 +83,7 @@ import TrackNav from "../Shared/TrackNav";
 import EditHabitForm from "../Shared/EditHabitForm";
 import NewHabitForm from "../Shared/NewHabitForm";
 import MainNav from "../Shared/MainNav";
+import MiniKudos from "../Shared/MiniKudos";
 import DeleteHabitButton from "../Shared/DeleteHabitButton";
 import { Inertia } from "@inertiajs/inertia";
 
@@ -93,7 +101,8 @@ export default {
     EditHabitForm,
     NewHabitForm,
     DeleteHabitButton,
-    MainNav
+    MainNav,
+    MiniKudos
   },
 
   data() {
@@ -101,7 +110,8 @@ export default {
       tracks: [],
       active_habit: null,
       edit_habit_form: {},
-      localErrors: this.errors
+      localErrors: this.errors,
+      lastToggledOn: null
     };
   },
 
@@ -112,6 +122,7 @@ export default {
   },
 
   methods: {
+    // When habit tracking is toggled
     toggled: function(id) {
       if (this.tracks[id] != undefined) {
         this.tracks[id] = !this.tracks[id];
@@ -121,11 +132,13 @@ export default {
 
       // Post action according to the toggle state
       if (this.tracks[id]) {
+        this.lastToggledOn = id;
         axios.post(this.$route("track.store"), {
           date: this.date,
           habit: id
         });
       } else {
+        this.lastToggledOn = null;
         axios.post(this.$route("track.delete"), {
           date: this.date,
           habit: id
