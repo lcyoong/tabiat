@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Providers;
+namespace App\Listeners;
 
+use App\Events\HabitTracked;
+use App\Events\SomethingAchieved;
 use App\Models\Achievement;
 use App\Models\Habit;
-use App\Providers\HabitTracked;
 use Illuminate\Database\Eloquent\Builder;
 
 class CheckForAchievement
@@ -34,11 +35,13 @@ class CheckForAchievement
         })->count();
 
         if ($pending == 0) {
-            Achievement::create([
+            $achievement = Achievement::create([
                 'ach_user' => $track->habit->hab_user,
                 'ach_code' => 'daily_complete',
                 'ach_parameter' => serialize(['date' => $track->tra_date]),
             ]);
+
+            SomethingAchieved::dispatch($achievement);
         };
 
     }

@@ -86,6 +86,8 @@ import MainNav from "../Shared/MainNav";
 import MiniKudos from "../Shared/MiniKudos";
 import DeleteHabitButton from "../Shared/DeleteHabitButton";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-vue3";
+import { computed } from "vue";
 
 export default {
   props: {
@@ -169,6 +171,11 @@ export default {
     this.tracking.forEach(element => {
       this.tracks[element.tra_habit] = true;
     });
+  },
+
+  setup() {
+    const user = computed(() => usePage().props.value.user);
+    return { user };
   }
 };
 </script>
