@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Providers\HabitTracked;
+use App\Events\HabitTracked;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

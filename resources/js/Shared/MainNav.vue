@@ -64,13 +64,18 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <Link
                 :href="$route('track.index')"
-                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                :class="{'bg-gray-900 text-white' : isActiveLink($route('track.index'))}"
                 aria-current="page"
               >Track</Link>
               <a
-                href="#"
+                :href="$route('achievement.index')"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >Achievements</a>
+                :class="{'bg-gray-900 text-white' : isActiveLink($route('achievement.index'))}"
+              >
+                Achievements
+                <AchievementCounter :counter="user.achievement_count" />
+              </a>
             </div>
           </div>
         </div>
@@ -183,8 +188,13 @@
 <script>
 import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
+import AchievementCounter from "../Shared/AchievementCounter";
 
 export default {
+  components: {
+    AchievementCounter
+  },
+
   data() {
     return {
       showProfileMenu: false,
@@ -198,6 +208,14 @@ export default {
     },
     toggleMobileMenu: function() {
       this.showMobileMenu = !this.showMobileMenu;
+    },
+
+    isActiveLink: function(url) {
+      if (window.location.href.includes(url)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
 

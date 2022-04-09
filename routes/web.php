@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\TrackController;
 use App\Models\User;
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
     Route::delete('habit/{habit}', [HabitController::class, 'destroy'])->name('habit.delete');
+
+    Route::get('achievements', [AchievementController::class, 'index'])->name('achievement.index');
 
     Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
 });
