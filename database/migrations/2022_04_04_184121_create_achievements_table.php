@@ -18,6 +18,7 @@ class CreateAchievementsTable extends Migration
             $table->integer('ach_user');
             $table->string('ach_code', 255);
             $table->string('ach_parameter', 255)->nullable();
+            $table->datetime('ach_viewed')->nullable();
             $table->timestamps();
         });
     }

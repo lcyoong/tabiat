@@ -74,7 +74,7 @@
                 :class="{'bg-gray-900 text-white' : isActiveLink($route('achievement.index'))}"
               >
                 Achievements
-                <AchievementCounter :counter="user.achievement_count" />
+                <AchievementCounter :counter="user.new_achievement_count" />
               </a>
             </div>
           </div>
