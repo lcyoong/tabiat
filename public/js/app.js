@@ -20910,7 +20910,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'bg-gray-900 text-white': $options.isActiveLink(_ctx.$route('achievement.index'))
     }])
   }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AchievementCounter, {
-    counter: $setup.user.achievement_count
+    counter: $setup.user.new_achievement_count
   }, null, 8
   /* PROPS */
   , ["counter"])], 10

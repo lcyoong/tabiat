@@ -11,7 +11,11 @@ class AchievementController extends Controller
     {
         $achievements = Achievement::authUser()->orderBy('ach_id', 'desc')->paginate(10);
 
-        return Inertia::render('Achievement', compact('achievements'));
+        // Tag new achievements as viewed
+        Achievement::authUser()->whereNull('ach_viewed')->update([
+            'ach_viewed' => now(),
+        ]);
 
+        return Inertia::render('Achievement', compact('achievements'));
     }
 }
