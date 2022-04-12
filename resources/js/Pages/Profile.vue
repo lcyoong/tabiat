@@ -35,7 +35,7 @@
               </div>
             </div>
 
-            <div
+            <!-- <div
               class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
             >
               <label
@@ -51,7 +51,7 @@
                 ></textarea>
                 <p class="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>
               </div>
-            </div>
+            </div>-->
 
             <div
               class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5"
@@ -68,7 +68,7 @@
               </div>
             </div>
 
-            <div
+            <!-- <div
               class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
             >
               <label
@@ -108,7 +108,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -154,7 +154,7 @@
           </div>
         </div>
 
-        <div class="divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+        <!-- <div class="divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
             <h3 class="text-lg leading-6 font-medium text-gray-900">Notifications</h3>
             <p
@@ -288,7 +288,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
 
       <div class="pt-5">

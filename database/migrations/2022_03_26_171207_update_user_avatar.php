@@ -15,6 +15,7 @@ class UpdateUserAvatar extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('avatar', 255)->nullable();
+            $table->string('signup_with', 255)->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class UpdateUserAvatar extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('avatar');
+            $table->dropColumn('signup_with');
         });
 
     }
