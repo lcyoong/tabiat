@@ -51,6 +51,7 @@ Route::get('/auth/linkedin/callback', function () {
         'name' => $ouser->name,
         'password' => bcrypt(Str::random(40)),
         'avatar' => $ouser->avatar,
+        'signup_with' => 'linkedin',
     ]);
 
     // Login the user

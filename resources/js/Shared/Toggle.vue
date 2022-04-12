@@ -39,7 +39,7 @@ export default {
   methods: {
     toggle: function() {
       this.value = !this.value;
-      this.$emit("Toggled", this.keyValue);
+      this.$emit("toggled", this.keyValue);
     }
   }
 };

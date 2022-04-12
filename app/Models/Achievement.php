@@ -16,7 +16,13 @@ class Achievement extends Model
 
     public function scopeAuthUser($query)
     {
-        return $query->where('ach_user', Auth::user()->id);
+        return $this->scopeUser($query, Auth::user()->id);
+        // return $query->where('ach_user', Auth::user()->id);
+    }
+
+    public function scopeUser($query, $user)
+    {
+        return $query->where('ach_user', $user);
     }
 
 }

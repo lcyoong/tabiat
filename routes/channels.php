@@ -20,3 +20,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('achievement.{userId}', function ($user, $userId) {
     return $user->id == $userId;
 });
+
+Broadcast::channel('reset-achievement-notification.{userId}', function ($user, $userId) {
+    return $user->id == $userId;
+});
