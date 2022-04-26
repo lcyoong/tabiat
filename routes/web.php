@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\FacebookAuthController;
 use App\Http\Controllers\HabitController;
+use App\Http\Controllers\LinkedInAuthController;
 use App\Http\Controllers\TrackController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,24 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
 });
 
-Route::get('/auth/linkedin/redirect', function () {
-    return Socialite::driver('linkedin')->redirect();
-})->name('linkedin.login');
+Route::get('/auth/linkedin/redirect', [LinkedInAuthController::class, 'redirect'])->name('linkedin.login');
+Route::get('/auth/linkedin/callback', [LinkedInAuthController::class, 'callback'])->name('linkedin.callback');
 
-Route::get('/auth/linkedin/callback', function () {
-    $ouser = Socialite::driver('linkedin')->stateless()->user();
-
-    // Get or create new user based on email
-    $user = User::updateOrCreate(['email' => $ouser->email], [
-        'email' => $ouser->email,
-        'name' => $ouser->name,
-        'password' => bcrypt(Str::random(40)),
-        'avatar' => $ouser->avatar,
-        'signup_with' => 'linkedin',
-    ]);
-
-    // Login the user
-    Auth::login($user);
-
-    return redirect()->route('track.index');
-})->name('linkedin.callback');
+Route::get('/auth/facebook/redirect', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
+Route::get('/auth/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');

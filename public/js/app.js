@@ -20040,7 +20040,7 @@ var _hoisted_11 = ["href"];
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "sr-only"
-}, "Sign in with Linkedin", -1
+}, "Sign in with Facebook", -1
 /* HOISTED */
 );
 
@@ -20082,7 +20082,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, _hoisted_10, 8
   /* PROPS */
   , _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: _ctx.$route('linkedin.login'),
+    href: _ctx.$route('facebook.login'),
     "class": "w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
   }, _hoisted_14, 8
   /* PROPS */
