@@ -16,7 +16,7 @@ class TrackController extends Controller
 
         try {
             $date = new Carbon($date);
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
             abort(500);
         }
 

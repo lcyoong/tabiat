@@ -9,6 +9,20 @@ import {
     Link
 } from '@inertiajs/inertia-vue3'
 import Toggle from "./Shared/Toggle";
+import {
+    createStore
+} from 'vuex';
+
+import {
+    track
+} from './store/track.js';
+
+
+const store = createStore({
+    modules: {
+        track
+    }
+})
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
@@ -44,7 +58,9 @@ createInertiaApp({
 
         app.use(plugin)
             .component("Link", Link)
+            .use(store)
             .mount(el)
+
 
     },
 })

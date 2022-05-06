@@ -35,6 +35,8 @@ export default {
                     this.$emit("deleteSuccessful");
                 },
             });
+
+            this.$store.commit("deleteTrack", this.habit.hab_id);
         },
     },
 };

@@ -19,6 +19,13 @@ class CreateTracksTable extends Migration
             $table->date('tra_date');
             $table->timestamps();
         });
+
+        Schema::create('track_images', function (Blueprint $table) {
+            $table->increments('trai_id');
+            $table->integer('trai_track');
+            $table->string('trai_path');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -29,5 +36,7 @@ class CreateTracksTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tracks');
+
+        Schema::dropIfExists('track_images');
     }
 }
