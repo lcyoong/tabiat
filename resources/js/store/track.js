@@ -41,7 +41,11 @@ export const track = {
         toggleTrack(state, id) {
             if (state.tracks[id] != undefined) {
                 state.tracks[id] = !state.tracks[id];
-                state.lastAchieved = null
+                if (state.tracks[id]) {
+                    state.lastAchieved = id
+                } else {
+                    state.lastAchieved = null
+                }
             } else {
                 state.tracks[id] = true;
                 state.lastAchieved = id

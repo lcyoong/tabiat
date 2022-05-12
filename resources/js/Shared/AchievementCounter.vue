@@ -26,7 +26,7 @@ export default {
     Echo.private("achievement." + this.user.id).listen(
       "SomethingAchieved",
       e => {
-        console.log(e.achievement);
+        // console.log(e.achievement);
         this.hurray = true;
         this.realCounter++;
         setTimeout(() => {
@@ -39,7 +39,7 @@ export default {
       "AchievementVisited",
       e => {
         this.realCounter = 0;
-        console.log(this.realCounter);
+        // console.log(this.realCounter);
         // setTimeout(() => {
         // }, 1000);
       }

@@ -19764,7 +19764,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     Echo["private"]("achievement." + this.user.id).listen("SomethingAchieved", function (e) {
-      console.log(e.achievement);
+      // console.log(e.achievement);
       _this.hurray = true;
       _this.realCounter++;
       setTimeout(function () {
@@ -19772,8 +19772,8 @@ __webpack_require__.r(__webpack_exports__);
       }, 1000);
     });
     Echo["private"]("reset-achievement-notification." + this.user.id).listen("AchievementVisited", function (e) {
-      _this.realCounter = 0;
-      console.log(_this.realCounter); // setTimeout(() => {
+      _this.realCounter = 0; // console.log(this.realCounter);
+      // setTimeout(() => {
       // }, 1000);
     });
   },
@@ -20095,8 +20095,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     habit: {},
     is_active: null,
-    date: String,
-    is_toggled: null
+    date: String
   },
   components: {
     Toggle: _Shared_Toggle__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -20639,14 +20638,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("end: Edit habit form"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TrackItem, {
       habit: habit,
       is_active: $data.active_habit == habit.hab_id,
-      is_toggled: _ctx.$store.getters.isOn(habit.hab_id),
       date: $props.date,
       onClickEdit: function onClickEdit($event) {
         return $data.edit_habit_form = habit;
       }
     }, null, 8
     /* PROPS */
-    , ["habit", "is_active", "is_toggled", "date", "onClickEdit"])], 2112
+    , ["habit", "is_active", "date", "onClickEdit"])], 2112
     /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     ))], 40
     /* PROPS, HYDRATE_EVENTS */
@@ -21336,7 +21334,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["id", "triggerId"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Toggle, {
-    init_value: $props.is_toggled,
+    init_value: _ctx.$store.getters.isOn($props.habit.hab_id),
     "key-value": $props.habit.hab_id,
     onToggled: $options.toggled
   }, null, 8
@@ -21579,7 +21577,12 @@ var track = {
     toggleTrack: function toggleTrack(state, id) {
       if (state.tracks[id] != undefined) {
         state.tracks[id] = !state.tracks[id];
-        state.lastAchieved = null;
+
+        if (state.tracks[id]) {
+          state.lastAchieved = id;
+        } else {
+          state.lastAchieved = null;
+        }
       } else {
         state.tracks[id] = true;
         state.lastAchieved = id;
