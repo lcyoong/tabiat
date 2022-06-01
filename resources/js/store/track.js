@@ -1,7 +1,8 @@
 export const track = {
     state: () => ({
         tracks: [],
-        lastAchieved: null
+        lastAchieved: null,
+        trackPhoto: null
     }),
 
     actions: {
@@ -58,7 +59,16 @@ export const track = {
 
         clearTracks(state) {
             state.tracks = []
-        }
+        },
+
+        setTrackPhoto(state, id) {
+            state.trackPhoto = id
+        },
+
+        hideTrackPhoto(state) {
+            state.trackPhoto = null
+        },
+
     },
 
     getters: {
@@ -71,6 +81,10 @@ export const track = {
 
         lastAchieved: (state) => {
             return state.lastAchieved;
+        },
+
+        trackPhoto: (state) => {
+            return state.trackPhoto;
         },
 
         trackCount: (state) => {

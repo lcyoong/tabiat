@@ -8,7 +8,10 @@
         @toggled="toggled"
       />
     </div>
-
+    <div
+      class="ml-4 rounded-full border border-dashed hover:border-gray-600 border-gray-300 w-8 h-8 cursor-pointer"
+      @click="$store.commit('setTrackPhoto', habit)"
+    ></div>
     <div class="ml-4 grow">{{ habit.hab_name }}</div>
 
     <div
@@ -77,26 +80,6 @@ export default {
         id: id,
         date: this.date
       });
-      // if (this.tracks[id] != undefined) {
-      //     this.tracks[id] = !this.tracks[id];
-      // } else {
-      //     this.tracks[id] = true;
-      // }
-
-      // Post action according to the toggle state
-      // if (this.tracks[id]) {
-      //     this.lastToggledOn = id;
-      //     axios.post(this.$route("track.store"), {
-      //         date: this.date,
-      //         habit: id,
-      //     });
-      // } else {
-      //     this.lastToggledOn = null;
-      //     axios.post(this.$route("track.delete"), {
-      //         date: this.date,
-      //         habit: id,
-      //     });
-      // }
     }
   }
 };

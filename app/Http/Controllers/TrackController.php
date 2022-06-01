@@ -51,4 +51,5 @@ class TrackController extends Controller
             'tra_date' => $input['date'],
         ])->delete();
     }
+
 }

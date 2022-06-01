@@ -37,6 +37,8 @@
     <!--end habit list-->
 
     <NewHabitForm :errors="localErrors.store_habit" />
+    <AttachPhoto></AttachPhoto>
+
     <!--end new habit-->
   </div>
 </template>
@@ -47,6 +49,7 @@ import TrackItem from "../Shared/TrackItem";
 import EditHabitForm from "../Shared/EditHabitForm";
 import NewHabitForm from "../Shared/NewHabitForm";
 import MainNav from "../Shared/MainNav";
+import AttachPhoto from "../Shared/AttachPhoto";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-vue3";
 import { computed } from "vue";
@@ -64,7 +67,8 @@ export default {
     TrackItem,
     EditHabitForm,
     NewHabitForm,
-    MainNav
+    MainNav,
+    AttachPhoto
   },
 
   data() {

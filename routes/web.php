@@ -6,6 +6,7 @@ use App\Http\Controllers\FacebookAuthController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\LinkedInAuthController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\TrackPhotoController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');
     Route::post('track/delete', [TrackController::class, 'delete'])->name('track.delete');
+    Route::post('track/photos', [TrackPhotoController::class, 'store'])->name('track.photo.store');
 
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');

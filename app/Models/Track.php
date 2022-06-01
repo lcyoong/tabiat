@@ -11,6 +11,8 @@ class Track extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "tra_id";
+
     protected $fillable = ['tra_habit', 'tra_date'];
 
     public function habit()
