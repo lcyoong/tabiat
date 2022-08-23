@@ -29,7 +29,7 @@ class LinkedInAuthController extends Controller
         // Reject if email is registered with a different driver
 
         // Get or create new user based on email
-        $user = User::firstOrCreate(['email' => $ouser->email],
+        $user = User::updateOrCreate(['email' => $ouser->email],
             [
                 'name' => $ouser->name,
                 'password' => bcrypt(Str::random(40)),
