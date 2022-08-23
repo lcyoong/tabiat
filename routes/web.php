@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountProfileController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\FacebookAuthController;
 use App\Http\Controllers\HabitController;
@@ -37,7 +37,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('achievements', [AchievementController::class, 'index'])->name('achievement.index');
 
-    Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
+    Route::get('account/profile', [AccountProfileController::class, 'show'])->name('profile.show');
+    Route::post('account/profile', [AccountProfileController::class, 'update'])->name('profile.update');
+
 });
 
 Route::get('/auth/linkedin/redirect', [LinkedInAuthController::class, 'redirect'])->name('linkedin.login');

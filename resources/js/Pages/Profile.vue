@@ -1,7 +1,8 @@
 <template>
   <MainNav />
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-    <form class="space-y-8 divide-y divide-gray-200">
+    <form class="space-y-8 divide-y divide-gray-200" @submit.prevent="postUpdateUser">
+      <input type="hidden" v-model="form.user.id"/>
       <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
           <div>
@@ -25,9 +26,8 @@
                     class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm"
                   >{{ $page.props.app.domain }}/</span>
                   <input
+                    v-model="form.user.user_name"
                     type="text"
-                    name="username"
-                    id="username"
                     autocomplete="username"
                     class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                   />
@@ -130,9 +130,10 @@
               <div class="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  v-model="user.name"
+                  v-model="form.user.name"
                   class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 />
+                <ValidationError :error="errors.name"/>
               </div>
             </div>
 
@@ -146,9 +147,10 @@
               <div class="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="email"
-                  v-model="user.email"
+                  v-model="form.user.email"
                   class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                 />
+                <ValidationError :error="errors.email"/>
               </div>
             </div>
           </div>
@@ -290,33 +292,60 @@
           </div>
         </div>-->
       </div>
-
-      <div class="pt-5">
+      
+      <div class="pt-5">        
         <div class="flex justify-end">
-          <button
-            type="button"
-            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >Cancel</button>
-          <button
-            type="submit"
-            class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >Save</button>
+            <button
+              type="button"
+              class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >Cancel</button>
+            <button
+              type="submit"
+              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >Save</button>
         </div>
       </div>
+
+      <SimpleMessage :message="message"></SimpleMessage>
+
     </form>
   </div>
 </template>
 
-<script>
+<script setup>
 import MainNav from "../Shared/MainNav";
+import { ref, onBeforeMount } from "vue";
+import { useForm } from '@inertiajs/inertia-vue3';
+import SimpleMessage from "../Shared/SimpleMessage";
+import ValidationError from "../Shared/ValidationError";
 
-export default {
-  props: {
-    user: Object
-  },
+let props = defineProps({
+    user: Object,
+    errors: Object,
+});
 
-  components: {
-    MainNav
-  }
+const message = ref('');
+
+const form = useForm({
+    user: null,
+});
+
+onBeforeMount(() => {
+    form.user = props.user;
+})
+
+const postUpdateUser = () => {
+    message.value = '';
+
+    form
+        .transform((data) => ({
+          ...data.user
+        }))
+        .post(route('profile.update'), {
+        preserveScroll: true,
+        onSuccess: (data) => {
+            message.value = "Profile successfully updated"
+        },
+    });
 };
 </script>
