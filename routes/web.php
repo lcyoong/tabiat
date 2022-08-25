@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AccountProfileController;
-use App\Http\Controllers\AchievementController;
-use App\Http\Controllers\FacebookAuthController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\HabitController;
-use App\Http\Controllers\LinkedInAuthController;
 use App\Http\Controllers\TrackController;
 use App\Http\Controllers\TrackPhotoController;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\FacebookAuthController;
+use App\Http\Controllers\LinkedInAuthController;
+use App\Http\Controllers\AccountProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::middleware('auth')->group(function () {
+    Route::get('goal', [GoalController::class, 'index'])->name('goal.index');
+    Route::get('goal/new', [GoalController::class, 'create'])->name('goal.create');
+
     Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');
     Route::post('track/delete', [TrackController::class, 'delete'])->name('track.delete');
