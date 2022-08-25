@@ -1,20 +1,15 @@
 <template>
-  <MainNav />
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-    <form class="space-y-8 divide-y divide-gray-200" @submit.prevent="postUpdateUser">
+  <Layout>
+    <template #header>
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Profile</h3>
+    </template>
+    <form @submit.prevent="postUpdateUser">
       <input type="hidden" v-model="form.user.id"/>
-      <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+      <div class="space-y-8 sm:space-y-5">
         <div>
-          <div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Profile</h3>
-            <p
-              class="mt-1 max-w-2xl text-sm text-gray-500"
-            >This information will be displayed publicly so be careful what you share.</p>
-          </div>
-
           <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
             <div
-              class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5"
+              class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5"
             >
               <label
                 for="username"
@@ -294,7 +289,7 @@
         </div>-->
       </div>
       
-      <div class="pt-5">        
+      <div class="py-5">        
         <div class="flex justify-end">
             <button
               type="button"
@@ -310,15 +305,15 @@
       <SimpleMessage :message="message"></SimpleMessage>
 
     </form>
-  </div>
+  </Layout>
 </template>
 
 <script setup>
-import MainNav from "../Shared/MainNav";
+import Layout from "@/Shared/Layout";
 import { ref, onBeforeMount } from "vue";
 import { useForm } from '@inertiajs/inertia-vue3';
-import SimpleMessage from "../Shared/SimpleMessage";
-import ValidationError from "../Shared/ValidationError";
+import SimpleMessage from "@/Shared/SimpleMessage";
+import ValidationError from "@/Shared/ValidationError";
 
 let props = defineProps({
     user: Object,

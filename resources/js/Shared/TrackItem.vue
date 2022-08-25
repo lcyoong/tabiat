@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import Toggle from "../Shared/Toggle";
-import DeleteHabitButton from "../Shared/DeleteHabitButton";
-import MiniKudos from "../Shared/MiniKudos";
+import Toggle from "@/Shared/Toggle";
+import DeleteHabitButton from "@/Shared/DeleteHabitButton";
+import MiniKudos from "@/Shared/MiniKudos";
 
 export default {
   props: {

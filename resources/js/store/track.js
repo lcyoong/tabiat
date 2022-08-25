@@ -22,8 +22,6 @@ export const track = {
                     habit: id,
                 });
             } else {
-                // this.lastToggledOn = null;
-                // axios.post(this.$route("track.delete"), {
                 axios.post("/track/delete", {
                     date: date,
                     habit: id,

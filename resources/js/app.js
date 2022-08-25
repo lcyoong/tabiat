@@ -1,66 +1,31 @@
-require('./bootstrap');
+import './bootstrap';
 
-import {
-    createApp,
-    h
-} from 'vue';
-import {
-    createInertiaApp,
-    Link
-} from '@inertiajs/inertia-vue3'
-import Toggle from "./Shared/Toggle";
-import {
-    createStore
-} from 'vuex';
+import route from 'ziggy';
+import { ZiggyVue, Ziggy } from 'ziggy';
+import { createApp, h } from 'vue'
+import { createInertiaApp, Link } from '@inertiajs/inertia-vue3'
+import Layout from "./Shared/Layout";
 
-import {
-    track
-} from './store/track.js';
-
-
-const store = createStore({
-    modules: {
-        track
-    }
-})
-
+// Start - Inertia
 createInertiaApp({
-    resolve: name => require(`./Pages/${name}`),
-    setup({
-        el,
-        App,
-        props,
-        plugin
-    }) {
-        const clickOutside = {
-            beforeMount: (el, binding) => {
-                el.clickOutsideEvent = event => {
-                    // here I check that click was outside the el and his children
-                    if (!(el == event.target || el.contains(event.target))) {
-                        // and if it did, call method provided in attribute value
-                        binding.value();
-                    }
-                };
-                document.addEventListener("click", el.clickOutsideEvent);
-            },
-            unmounted: el => {
-                document.removeEventListener("click", el.clickOutsideEvent);
-            },
-        };
-
-        const app = createApp({
-            render: () => h(App, props)
-        });
-
-        app.directive("click-outside", clickOutside);
-
-        app.config.globalProperties.$route = route
-
-        app.use(plugin)
-            .component("Link", Link)
-            .use(store)
-            .mount(el)
-
-
+    // title: (title) => `${title} - ${appName}`,
+    resolve: (name) => {
+        const page = require(`./Pages/${name}.vue`)
+        page.layout = page.layout || Layout
+        return page
+    },
+    setup({ el, app, props, plugin }) {
+        return createApp({ render: () => h(app, props) })
+        .use(plugin)
+        .use(ZiggyVue, Ziggy)
+        .component('Link', Link)
+        .mount(el);    
     },
 })
+  
+import { InertiaProgress } from '@inertiajs/progress'
+InertiaProgress.init({
+    color: 'red',
+})
+// End - Inertia
+  

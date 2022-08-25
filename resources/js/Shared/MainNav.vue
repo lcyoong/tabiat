@@ -63,15 +63,21 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <Link
-                :href="$route('track.index')"
+                :href="route('goal.index')"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                :class="{'bg-gray-900 text-white' : isActiveLink($route('track.index'))}"
+                :class="{'bg-gray-900 text-white' : isActiveLink(route('goal.index'))}"
                 aria-current="page"
-              >Track</Link>
-              <Link
-                :href="$route('achievement.index')"
+              >Goals</Link>
+              <!-- <Link
+                :href="route('track.index')"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                :class="{'bg-gray-900 text-white' : isActiveLink($route('achievement.index'))}"
+                :class="{'bg-gray-900 text-white' : isActiveLink(route('track.index'))}"
+                aria-current="page"
+              >Track</Link> -->
+              <Link
+                :href="route('achievement.index')"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                :class="{'bg-gray-900 text-white' : isActiveLink(route('achievement.index'))}"
               >
                 Achievements
                 <AchievementCounter :counter="user.new_achievement_count" />
@@ -112,7 +118,7 @@
               tabindex="-1"
             >
               <Link
-                :href="$route('profile.show')"
+                :href="route('profile.show')"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
                 tabindex="-1"
@@ -142,13 +148,13 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <Link
-          :href="$route('track.index')"
+          :href="route('track.index')"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
           aria-current="page"
         >Track</Link>
 
         <Link
-          :href="$route('achievement.index')"
+          :href="route('achievement.index')"
           class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
         >Achivements</Link>
       </div>
@@ -159,7 +165,7 @@
 <script>
 import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
-import AchievementCounter from "../Shared/AchievementCounter";
+import AchievementCounter from "@/Shared/AchievementCounter";
 
 export default {
   components: {

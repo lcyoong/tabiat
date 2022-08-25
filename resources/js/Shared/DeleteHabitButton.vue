@@ -26,7 +26,7 @@ export default {
 
     methods: {
         deleteHabit: function () {
-            Inertia.delete(this.$route("habit.delete", this.habit.hab_id), {
+            Inertia.delete(this.route("habit.delete", this.habit.hab_id), {
                 preserveState: true,
                 preserveScroll: true,
                 onBefore: () =>
