@@ -5,6 +5,7 @@ import { ZiggyVue, Ziggy } from 'ziggy';
 import { createApp, h } from 'vue'
 import { createInertiaApp, Link } from '@inertiajs/inertia-vue3'
 import Layout from "./Shared/Layout";
+import ValidationError from "@/Shared/ValidationError";
 
 // Start - Inertia
 createInertiaApp({
@@ -19,6 +20,7 @@ createInertiaApp({
         .use(plugin)
         .use(ZiggyVue, Ziggy)
         .component('Link', Link)
+        .component('ValidationError', ValidationError)
         .mount(el);    
     },
 })

@@ -313,7 +313,6 @@ import Layout from "@/Shared/Layout";
 import { ref, onBeforeMount } from "vue";
 import { useForm } from '@inertiajs/inertia-vue3';
 import SimpleMessage from "@/Shared/SimpleMessage";
-import ValidationError from "@/Shared/ValidationError";
 
 let props = defineProps({
     user: Object,
