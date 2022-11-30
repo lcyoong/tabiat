@@ -27,8 +27,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::middleware('auth')->group(function () {
-    Route::get('goal', [GoalController::class, 'index'])->name('goal.index');
-    Route::get('goal/new', [GoalController::class, 'create'])->name('goal.create');
+    Route::get('goals', [GoalController::class, 'index'])->name('goal.index');
+    Route::get('goals/new', [GoalController::class, 'create'])->name('goal.create');
+    Route::post('goals', [GoalController::class, 'store'])->name('goal.store');
+
+    Route::get('goals/{goal}', [GoalController::class, 'track'])->name('goal.track');
 
     Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');

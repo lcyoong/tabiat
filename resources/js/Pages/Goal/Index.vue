@@ -3,26 +3,42 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
     <Link :href="route('goal.create')"><normal-button type="button">New Goal</normal-button></Link>
 
-    <div class="flow-root">
-      <ul role="list">
-        <li v-for="goal of goals.data">
-          <div class="relative pb-8">
-            <!-- <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span> -->
-            <div class="relative flex space-x-3">
-              <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                <div>
-                  <p class="text-sm text-gray-500">{{ goal.gol_name }}</p>
+    <div class="overflow-hidden bg-white shadow sm:rounded-md mt-4">
+      <ul role="list" class="divide-y divide-gray-200">
+        <li v-for="goal of goals.data" :key="goal.gol_id">
+          <Link :href="route('goal.track', goal.gol_id)" class="block hover:bg-gray-50">
+            <div class="flex items-center px-4 py-4 sm:px-6">
+              <div class="flex min-w-0 flex-1 items-center">
+                <div class="flex-shrink-0">
+                  <!-- <img class="h-12 w-12 rounded-full" :src="application.applicant.imageUrl" alt="" /> -->
                 </div>
-                <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                  <time datetime="2020-09-28">{{ dateFormat(goal.created_at) }}</time>
+                <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                  <div>
+                    <GoalSentence class="truncate flex space-x-1">
+                      <template #name>
+                        <div class="text-indigo-600">{{goal.gol_name}}</div>
+                      </template>
+                      <template #days>
+                        <div class="text-indigo-600">{{goal.gol_days}}</div>
+                      </template>
+                    </GoalSentence>
+                  </div>
+                  <div class="hidden md:block">
+                    <div>
+                      <p class="text-sm text-gray-900">
+                        Since {{ goal.created_at }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div>
+                <ChevronRightIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+              </div>
             </div>
-          </div>
+          </Link>
         </li>
       </ul>
-
-      <pagination class="mt-5" :links="goals.links" />
     </div>
   </div>
 </template>
@@ -31,10 +47,12 @@
 import MainNav from "@/Shared/MainNav";
 import NormalButton from "@/Shared/Button";
 import moment from "moment";
+import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 import Pagination from "@/Shared/Pagination";
+import GoalSentence from "@/Shared/GoalSentence";
 
 let props = defineProps({
-  goals: Array
+  goals: Object
 })
 
 const dateFormat = (value) => {

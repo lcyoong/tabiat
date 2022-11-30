@@ -12,6 +12,11 @@ class Habit extends Model
 
     protected $primaryKey = "hab_id";
 
+    protected $fillable = [
+        'hab_goal',
+        'hab_name',
+    ];
+
     protected $guarded = [];
 
     public function tracks()
@@ -25,15 +30,15 @@ class Habit extends Model
      * @param [type] $query
      * @return void
      */
-    public function scopeAuthUser($query)
-    {
-        return $query->where('hab_user', Auth::user()->id);
-    }
+    // public function scopeAuthUser($query)
+    // {
+    //     return $query->where('hab_user', Auth::user()->id);
+    // }
 
     protected static function booted()
     {
         static::creating(function ($habit) {
-            $habit->hab_user = Auth::user()->id;
+            // $habit->hab_user = Auth::user()->id;
         });
     }
 }

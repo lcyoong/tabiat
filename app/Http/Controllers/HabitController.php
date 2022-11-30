@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Goal;
 use App\Models\Habit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\StoreHabit;
+use Illuminate\Support\Facades\Auth;
 
 class HabitController extends Controller
 {
@@ -35,19 +37,9 @@ class HabitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreHabit $request, Goal $goal)
     {
-        $validated = $request->validateWithBag('store_habit', [
-            'hab_name' => [
-                'required',
-                'max:255',
-                Rule::unique('habits')->where(function ($query) {
-                    $query->where('hab_user', Auth::user()->id);
-                }),
-            ],
-        ]);
-
-        Habit::create($validated);
+        Habit::create($request->input());
 
         return back()->withInput();
     }
