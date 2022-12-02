@@ -21,19 +21,40 @@
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 tabindex="-1"
               >Edit</a>
-              <Link
-                href="/logout"
-                method="post"
+              <a
+                href="#;"
+                @click.prevent="clickRemoveGoal()"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                role="menuitem"
                 tabindex="-1"
-                as="button"
-                id="user-menu-item-2"
-              >Delete</Link>
+              >Remove</a>
             </div>
         </div>
       </div>
     </template>
+
+    <p class="text-xl">Habits</p>
+    <ul v-if="(goal.habits.length > 0)" role="list">
+      <li v-for="habit of goal.habits" :key="habit.hab_id" class="overflow-hidden bg-white shadow sm:rounded-md my-4">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="flex min-w-0 flex-1 items-center">
+            <div class="flex-shrink-0">
+              <!-- <img class="h-12 w-12 rounded-full" :src="application.applicant.imageUrl" alt="" /> -->
+            </div>
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <ChevronRightIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div v-else class="text-lg text-bold text-gray-300 my-5">
+      Habits can help towards realizing your goal. Start now.
+    </div>
 
     <form class="flex items-start space-x-2" @submit.prevent="createHabit">
       <div class="flex-1">
@@ -43,29 +64,10 @@
       <button type="submit" class="flex-none justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add</button>
     </form>
 
-    <!--Track-->
-    <div class="overflow-hidden bg-white shadow sm:rounded-md mt-4">
-      <ul role="list" class="divide-y divide-gray-200">
-        <li v-for="habit of goal.habits" :key="habit.hab_id">
-            <div class="flex items-center px-4 py-4 sm:px-6">
-              <div class="flex min-w-0 flex-1 items-center">
-                <div class="flex-shrink-0">
-                  <!-- <img class="h-12 w-12 rounded-full" :src="application.applicant.imageUrl" alt="" /> -->
-                </div>
-                <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-                  <div>
-                    <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <ChevronRightIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-            </div>
-        </li>
-      </ul>
-    </div>
-    <GoalEditModal :errors="errors" :goal="goal" ref="goalModalRef"></GoalEditModal>
+    <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef"></GoalEditModal>
+
+    <GoalRemoveModal :errors="errors" :goal="goal" ref="removeGoalModalRef"></GoalRemoveModal>
+
   </Layout>
 </template>
 
@@ -76,6 +78,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { ref } from "vue";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalEditModal from "@/Modals/GoalEditModal";
+import GoalRemoveModal from "@/Modals/GoalRemoveModal";
 import { DotsVerticalIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 
 let prop = defineProps({
@@ -85,7 +88,9 @@ let prop = defineProps({
 
 let showGoalMenu = ref(false)
 
-const goalModalRef = ref()
+const editGoalModalRef = ref()
+
+const removeGoalModalRef = ref()
 
 const form = useForm({
   hab_goal: prop.goal.gol_id,
@@ -93,7 +98,12 @@ const form = useForm({
 });
 
 function clickEditGoal() {
-  goalModalRef.value.show()
+  editGoalModalRef.value.show()
+  showGoalMenu.value = false
+}
+
+function clickRemoveGoal() {
+  removeGoalModalRef.value.show()
   showGoalMenu.value = false
 }
 
