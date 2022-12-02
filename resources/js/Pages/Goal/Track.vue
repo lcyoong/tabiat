@@ -1,15 +1,37 @@
 <template>
   <Layout title="New User">
     <template #header>
-      <div class="flex space-x-1">
-        <GoalSentence class="truncate flex space-x-1 text-2xl">
-          <template #name>
-            <div class="text-indigo-600">{{goal.gol_name}}</div>
-          </template>
-          <template #days>
-            <div class="text-indigo-600">{{goal.gol_days}}</div>
-          </template>
-        </GoalSentence>
+      <div class="flex space-x-1 items-center justify-between">
+        <GoalSentenceReadOnly :name="goal.gol_name" :days="goal.gol_days" class="text-2xl"/>
+        <div class="ml-3 relative">
+          <a href="#;" @click.prevent="showGoalMenu = !showGoalMenu"><DotsVerticalIcon class="h-5 w-5 text-gray-400"/></a>
+          <div
+              class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform"
+              :class="{'transition ease-in duration-75 hidden opacity-0 scale-95' : !showGoalMenu,
+                'transition ease-out duration-100 opacity-100 scale-100' : showGoalMenu,
+              }"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+            >
+              <a
+                href="#;"
+                @click.prevent="clickEditGoal()"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                tabindex="-1"
+              >Edit</a>
+              <Link
+                href="/logout"
+                method="post"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                role="menuitem"
+                tabindex="-1"
+                as="button"
+                id="user-menu-item-2"
+              >Delete</Link>
+            </div>
+        </div>
       </div>
     </template>
 
@@ -42,7 +64,8 @@
             </div>
         </li>
       </ul>
-    </div>    
+    </div>
+    <GoalEditModal :errors="errors" :goal="goal" ref="goalModalRef"></GoalEditModal>
   </Layout>
 </template>
 
@@ -50,17 +73,29 @@
 import Layout from "@/Shared/Layout";
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from "@inertiajs/inertia";
-import GoalSentence from "@/Shared/GoalSentence";
+import { ref } from "vue";
+import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
+import GoalEditModal from "@/Modals/GoalEditModal";
+import { DotsVerticalIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 
 let prop = defineProps({
   goal: Object,
   errors: Object
 })
 
+let showGoalMenu = ref(false)
+
+const goalModalRef = ref()
+
 const form = useForm({
   hab_goal: prop.goal.gol_id,
   hab_name: null,
 });
+
+function clickEditGoal() {
+  goalModalRef.value.show()
+  showGoalMenu.value = false
+}
 
 function createHabit() {
   Inertia.post(route("habit.store"), form, {

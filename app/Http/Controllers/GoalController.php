@@ -6,6 +6,7 @@ use App\Models\Goal;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGoal;
+use App\Http\Requests\UpdateGoal;
 
 class GoalController extends Controller
 {
@@ -27,6 +28,13 @@ class GoalController extends Controller
 
         return redirect()->route('goal.index');
     }
+
+    public function update(UpdateGoal $request, Goal $goal)
+    {
+        $goal->update($request->input());
+
+        return back();
+    }    
 
     public function track(Request $request, Goal $goal)
     {

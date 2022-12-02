@@ -1,7 +1,8 @@
 <template>
   <MainNav />
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-    <Link :href="route('goal.create')"><normal-button type="button">New Goal</normal-button></Link>
+    <!-- <Link :href="route('goal.create')"><normal-button type="button">New Goal</normal-button></Link> -->
+    <a href="#;" @click.prevent="goalModalRef.show()"><normal-button type="button">New Goal</normal-button></a>    
 
     <div class="overflow-hidden bg-white shadow sm:rounded-md mt-4">
       <ul role="list" class="divide-y divide-gray-200">
@@ -14,14 +15,7 @@
                 </div>
                 <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                   <div>
-                    <GoalSentence class="truncate flex space-x-1">
-                      <template #name>
-                        <div class="text-indigo-600">{{goal.gol_name}}</div>
-                      </template>
-                      <template #days>
-                        <div class="text-indigo-600">{{goal.gol_days}}</div>
-                      </template>
-                    </GoalSentence>
+                    <GoalSentenceReadOnly :name="goal.gol_name" :days="goal.gol_days"/>
                   </div>
                   <div class="hidden md:block">
                     <div>
@@ -41,6 +35,7 @@
       </ul>
     </div>
   </div>
+  <GoalCreateModal :errors="errors" ref="goalModalRef"></GoalCreateModal>
 </template>
 
 <script setup>
@@ -49,11 +44,16 @@ import NormalButton from "@/Shared/Button";
 import moment from "moment";
 import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/outline'
 import Pagination from "@/Shared/Pagination";
-import GoalSentence from "@/Shared/GoalSentence";
+import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
+import GoalCreateModal from "@/Modals/GoalCreateModal";
+import { ref } from "vue";
 
 let props = defineProps({
-  goals: Object
+  goals: Object,
+  errors: Object
 })
+
+const goalModalRef = ref()
 
 const dateFormat = (value) => {
   return moment(value).format("DD MMM, YYYY");
