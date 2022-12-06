@@ -17,10 +17,10 @@ class GoalController extends Controller
         return Inertia::render('Goal/Index', compact('goals'));
     }
 
-    public function create()
-    {
-        return Inertia::render('Goal/Create');
-    }
+    // public function create()
+    // {
+    //     return Inertia::render('Goal/Create');
+    // }
 
     public function store(StoreGoal $request)
     {

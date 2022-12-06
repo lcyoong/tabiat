@@ -7,6 +7,22 @@ import { createInertiaApp, Link } from '@inertiajs/inertia-vue3'
 import Layout from "./Shared/Layout";
 import ValidationError from "@/Shared/ValidationError";
 
+const clickOutside = {
+    beforeMount: (el, binding) => {
+      el.clickOutsideEvent = event => {
+        // here I check that click was outside the el and his children
+        if (!(el == event.target || el.contains(event.target))) {
+          // and if it did, call method provided in attribute value
+          binding.value();
+        }
+      };
+      document.addEventListener("click", el.clickOutsideEvent);
+    },
+    unmounted: el => {
+      document.removeEventListener("click", el.clickOutsideEvent);
+    },
+  };
+
 // Start - Inertia
 createInertiaApp({
     // title: (title) => `${title} - ${appName}`,
@@ -21,6 +37,7 @@ createInertiaApp({
         .use(ZiggyVue, Ziggy)
         .component('Link', Link)
         .component('ValidationError', ValidationError)
+        .directive("click-outside", clickOutside)
         .mount(el);    
     },
 })

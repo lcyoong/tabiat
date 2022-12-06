@@ -1,53 +1,42 @@
 <template>
-  <Layout title="New User">
+  <Layout title="Track Your Goal">
     <template #header>
       <div class="flex space-x-1 items-center justify-between">
-        <GoalSentenceReadOnly :name="goal.gol_name" :days="goal.gol_days" class="text-2xl"/>
-        <div class="ml-3 relative">
-          <a href="#;" @click.prevent="showGoalMenu = !showGoalMenu"><DotsVerticalIcon class="h-5 w-5 text-gray-400"/></a>
-          <div
-              class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transform"
-              :class="{'transition ease-in duration-75 hidden opacity-0 scale-95' : !showGoalMenu,
-                'transition ease-out duration-100 opacity-100 scale-100' : showGoalMenu,
-              }"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="user-menu-button"
-              tabindex="-1"
-            >
-              <a
-                href="#;"
-                @click.prevent="clickEditGoal()"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                tabindex="-1"
-              >Edit</a>
-              <a
-                href="#;"
-                @click.prevent="clickRemoveGoal()"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                tabindex="-1"
-              >Remove</a>
-            </div>
-        </div>
+        <GoalSentenceReadOnly 
+          :name="goal.gol_name" 
+          :days="goal.gol_days" 
+          class="text-2xl"
+          />
+        <DropDownOptions :options="[
+            { label: 'Edit', action: 'editGoalClicked'},
+            { label: 'Remove', action: 'removeGoalClicked'},
+          ]"
+          @editGoalClicked="editGoal"
+          @removeGoalClicked="removeGoal"
+        />
       </div>
     </template>
 
     <p class="text-xl">Habits</p>
     <ul v-if="(goal.habits.length > 0)" role="list">
-      <li v-for="habit of goal.habits" :key="habit.hab_id" class="overflow-hidden bg-white shadow sm:rounded-md my-4">
+      <li v-for="habit of goal.habits" :key="habit.hab_id" class="bg-white shadow sm:rounded-md my-4">
         <div class="flex items-center px-4 py-4 sm:px-6">
+          <div>
+            <Toggle @toggleOn="onTrack(habit.hab_id)"/>
+          </div>
           <div class="flex min-w-0 flex-1 items-center">
-            <div class="flex-shrink-0">
-              <!-- <img class="h-12 w-12 rounded-full" :src="application.applicant.imageUrl" alt="" /> -->
-            </div>
             <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-              <div>
-                <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
-              </div>
+              <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
             </div>
           </div>
           <div>
-            <ChevronRightIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+            <DropDownOptions :id="('habit'+habit.hab_id)" :options="[
+                { label: 'Edit', action: 'editHabitClicked'},
+                { label: 'Remove', action: 'removeHabitClicked'},
+              ]"
+              @editHabitClicked="editHabit(habit.hab_id)"
+              @removeHabitClicked="removeHabit(habit.hab_id)"
+              />
           </div>
         </div>
       </li>
@@ -64,29 +53,28 @@
       <button type="submit" class="flex-none justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add</button>
     </form>
 
-    <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef"></GoalEditModal>
+    <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef"/>
 
-    <GoalRemoveModal :errors="errors" :goal="goal" ref="removeGoalModalRef"></GoalRemoveModal>
+    <GoalRemoveModal :errors="errors" :goal="goal" ref="removeGoalModalRef"/>
 
   </Layout>
 </template>
 
 <script setup>
-import Layout from "@/Shared/Layout";
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from "@inertiajs/inertia";
 import { ref } from "vue";
+import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalEditModal from "@/Modals/GoalEditModal";
 import GoalRemoveModal from "@/Modals/GoalRemoveModal";
-import { DotsVerticalIcon, ChevronRightIcon } from '@heroicons/vue/outline'
+import DropDownOptions from "@/Shared/DropDownOptions";
+import Toggle from "@/Shared/Toggle";
 
 let prop = defineProps({
   goal: Object,
   errors: Object
 })
-
-let showGoalMenu = ref(false)
 
 const editGoalModalRef = ref()
 
@@ -97,14 +85,24 @@ const form = useForm({
   hab_name: null,
 });
 
-function clickEditGoal() {
+function editGoal() {
   editGoalModalRef.value.show()
-  showGoalMenu.value = false
 }
 
-function clickRemoveGoal() {
+function removeGoal() {
   removeGoalModalRef.value.show()
-  showGoalMenu.value = false
+}
+
+function editHabit(id) {
+  console.log(id)
+}
+
+function removeHabit(id) {
+  console.log(id)
+}
+
+function onTrack(id) {
+  console.log(id)
 }
 
 function createHabit() {
