@@ -10,9 +10,11 @@
         <DropDownOptions :options="[
             { label: 'Edit', action: 'editGoalClicked'},
             { label: 'Remove', action: 'removeGoalClicked'},
+            { label: 'Milestone', action: 'goalMilestoneClicked'},
           ]"
           @editGoalClicked="editGoal"
           @removeGoalClicked="removeGoal"
+          @goalMilestoneClicked="removeGoal"
         />
       </div>
     </template>
@@ -21,20 +23,31 @@
     <ul v-if="(goal.habits.length > 0)" role="list">
       <li v-for="habit of goal.habits" :key="habit.hab_id" class="bg-white shadow sm:rounded-md my-4">
         <div class="flex items-center px-4 py-4 sm:px-6">
+          <!--Toggle-->
           <div>
             <Toggle @toggleOn="onTrack(habit.hab_id)"/>
           </div>
+
+          <!--Habit edit/display-->
           <div class="flex min-w-0 flex-1 items-center">
-            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+            <HabitEdit 
+              v-if="(editHabitForm === habit)" 
+              :habit="editHabitForm" 
+              @resetHabit="resetHabit"
+              @habitUpdated="resetHabit"
+            />
+            <div v-else class="min-w-0 flex-1 px-4">
               <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
             </div>
           </div>
+
+          <!--Habit options-->
           <div>
             <DropDownOptions :id="('habit'+habit.hab_id)" :options="[
                 { label: 'Edit', action: 'editHabitClicked'},
                 { label: 'Remove', action: 'removeHabitClicked'},
               ]"
-              @editHabitClicked="editHabit(habit.hab_id)"
+              @editHabitClicked="editHabit(habit)"
               @removeHabitClicked="removeHabit(habit.hab_id)"
               />
           </div>
@@ -45,13 +58,7 @@
       Habits can help towards realizing your goal. Start now.
     </div>
 
-    <form class="flex items-start space-x-2" @submit.prevent="createHabit">
-      <div class="flex-1">
-        <input type="text" v-model="form.hab_name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Stay in bed" />
-        <ValidationError :error="errors.hab_name"/>
-      </div>
-      <button type="submit" class="flex-none justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add</button>
-    </form>
+    <HabitCreate :goal="goal" :errors="errors"/>    
 
     <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef"/>
 
@@ -61,8 +68,6 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
-import { Inertia } from "@inertiajs/inertia";
 import { ref } from "vue";
 import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
@@ -70,6 +75,8 @@ import GoalEditModal from "@/Modals/GoalEditModal";
 import GoalRemoveModal from "@/Modals/GoalRemoveModal";
 import DropDownOptions from "@/Shared/DropDownOptions";
 import Toggle from "@/Shared/Toggle";
+import HabitEdit from "@/Shared/HabitEdit";
+import HabitCreate from "@/Shared/HabitCreate";
 
 let prop = defineProps({
   goal: Object,
@@ -80,10 +87,7 @@ const editGoalModalRef = ref()
 
 const removeGoalModalRef = ref()
 
-const form = useForm({
-  hab_goal: prop.goal.gol_id,
-  hab_name: null,
-});
+let editHabitForm = ref()
 
 function editGoal() {
   editGoalModalRef.value.show()
@@ -93,8 +97,12 @@ function removeGoal() {
   removeGoalModalRef.value.show()
 }
 
-function editHabit(id) {
-  console.log(id)
+function resetHabit() {
+  editHabitForm.value = null
+}
+
+function editHabit(habit) {
+  editHabitForm.value = habit
 }
 
 function removeHabit(id) {
@@ -103,16 +111,6 @@ function removeHabit(id) {
 
 function onTrack(id) {
   console.log(id)
-}
-
-function createHabit() {
-  Inertia.post(route("habit.store"), form, {
-        preserveState: true,
-        preserveScroll: true,
-        onSuccess: page => {
-          form.hab_name = null
-        }
-      });  
 }
 
 </script>

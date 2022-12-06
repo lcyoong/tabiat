@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('goals/new', [GoalController::class, 'create'])->name('goal.create');
     Route::post('goals', [GoalController::class, 'store'])->name('goal.store');
     Route::post('goals/{goal}', [GoalController::class, 'update'])->name('goal.update');
+    Route::delete('goals/{goal}', [GoalController::class, 'delete'])->name('goal.remove');
 
     Route::get('goals/{goal}', [GoalController::class, 'track'])->name('goal.track');
 

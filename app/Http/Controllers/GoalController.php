@@ -34,7 +34,7 @@ class GoalController extends Controller
         $goal->update($request->input());
 
         return back();
-    }    
+    }
 
     public function track(Request $request, Goal $goal)
     {
