@@ -19492,6 +19492,82 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/HabitRemoveModal.vue?vue&type=script&setup=true&lang=js":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/HabitRemoveModal.vue?vue&type=script&setup=true&lang=js ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _Shared_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/Modal */ "./resources/js/Shared/Modal.vue");
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    habit: Object,
+    errors: Object
+  },
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose;
+    var prop = __props;
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)(prop.habit);
+    var modalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return prop.habit;
+    }, function (value) {
+      form.hab_id = value.hab_id;
+    });
+
+    function removeHabit() {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"](route("habit.remove", {
+        habit: form.hab_id
+      }), {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: function onSuccess(page) {
+          modalRef.value.close();
+        }
+      });
+    }
+
+    var show = function show() {
+      modalRef.value.show();
+    };
+
+    expose({
+      show: show
+    });
+    var __returned__ = {
+      prop: prop,
+      form: form,
+      modalRef: modalRef,
+      removeHabit: removeHabit,
+      show: show,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm,
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia,
+      Modal: _Shared_Modal__WEBPACK_IMPORTED_MODULE_3__["default"]
+    };
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Achievement.vue?vue&type=script&lang=js":
 /*!************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Achievement.vue?vue&type=script&lang=js ***!
@@ -19615,6 +19691,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/Toggle */ "./resources/js/Shared/Toggle.vue");
 /* harmony import */ var _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/HabitEdit */ "./resources/js/Shared/HabitEdit.vue");
 /* harmony import */ var _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/HabitCreate */ "./resources/js/Shared/HabitCreate.vue");
+/* harmony import */ var _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Modals/HabitRemoveModal */ "./resources/js/Modals/HabitRemoveModal.vue");
+
 
 
 
@@ -19635,7 +19713,12 @@ __webpack_require__.r(__webpack_exports__);
     var prop = __props;
     var editGoalModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var removeGoalModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var removeHabitModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); // let inErrors = ref(prop.errors)
+
     var editHabitForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var removeHabitForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); // watch(() => prop.errors, (value) =>  {
+    //     inErrors.value = value
+    // })
 
     function editGoal() {
       editGoalModalRef.value.show();
@@ -19645,7 +19728,8 @@ __webpack_require__.r(__webpack_exports__);
       removeGoalModalRef.value.show();
     }
 
-    function resetHabit() {
+    function resetHabit(value) {
+      prop.errors['editHabit' + value.hab_id] = null;
       editHabitForm.value = null;
     }
 
@@ -19653,8 +19737,11 @@ __webpack_require__.r(__webpack_exports__);
       editHabitForm.value = habit;
     }
 
-    function removeHabit(id) {
-      console.log(id);
+    function removeHabit(habit) {
+      editHabitForm.value = null;
+      removeHabitForm.value = habit;
+      removeHabitModalRef.value.key = 2;
+      removeHabitModalRef.value.show();
     }
 
     function onTrack(id) {
@@ -19665,7 +19752,9 @@ __webpack_require__.r(__webpack_exports__);
       prop: prop,
       editGoalModalRef: editGoalModalRef,
       removeGoalModalRef: removeGoalModalRef,
+      removeHabitModalRef: removeHabitModalRef,
       editHabitForm: editHabitForm,
+      removeHabitForm: removeHabitForm,
       editGoal: editGoal,
       removeGoal: removeGoal,
       resetHabit: resetHabit,
@@ -19673,6 +19762,7 @@ __webpack_require__.r(__webpack_exports__);
       removeHabit: removeHabit,
       onTrack: onTrack,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
       Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_1__["default"],
       GoalSentenceReadOnly: _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_2__["default"],
       GoalEditModal: _Modals_GoalEditModal__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -19680,7 +19770,8 @@ __webpack_require__.r(__webpack_exports__);
       DropDownOptions: _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_5__["default"],
       Toggle: _Shared_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"],
       HabitEdit: _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_7__["default"],
-      HabitCreate: _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_8__["default"]
+      HabitCreate: _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_8__["default"],
+      HabitRemoveModal: _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_9__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20300,14 +20391,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    habit: Object
+    habit: Object,
+    errors: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose,
         emit = _ref.emit;
     expose();
-    var prop = __props; // import { ref } from "vue";
-
+    var prop = __props;
     var editHabitForm = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)(prop.habit);
 
     function updateHabit() {
@@ -20316,8 +20407,9 @@ __webpack_require__.r(__webpack_exports__);
       }), editHabitForm, {
         preserveState: true,
         preserveScroll: true,
-        onSuccess: function onSuccess(page) {
-          emit('habitUpdated');
+        errorBag: 'editHabit' + prop.habit.hab_id,
+        onSuccess: function onSuccess(page) {// console.log('sss');
+          // emit('habitUpdated')
         }
       });
     }
@@ -20512,12 +20604,18 @@ __webpack_require__.r(__webpack_exports__);
       open.value = true;
     };
 
+    var close = function close() {
+      open.value = false;
+    };
+
     expose({
-      show: show
+      show: show,
+      close: close
     });
     var __returned__ = {
       open: open,
       show: show,
+      close: close,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       Dialog: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.Dialog,
       DialogPanel: _headlessui_vue__WEBPACK_IMPORTED_MODULE_1__.DialogPanel,
@@ -21068,6 +21166,65 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/HabitRemoveModal.vue?vue&type=template&id=25f0ee20":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/HabitRemoveModal.vue?vue&type=template&id=25f0ee20 ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-xl font-bold"
+}, "Remove Habit", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-lg text-bold text-gray-600 my-5"
+}, " Are you sure you want to remove this habit? ", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = {
+  "class": "py-10 flex gap-2"
+};
+var _hoisted_4 = ["onClick"];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Modal"], {
+    ref: "modalRef"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        type: "submit",
+        onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.removeHabit, ["prevent"]),
+        "class": "flex-none justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      }, "Yes. Remove the habit", 8
+      /* PROPS */
+      , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        type: "button",
+        onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return $setup.modalRef.close();
+        }, ["prevent"])),
+        "class": "flex-none justify-center rounded-md border border-transparent bg-gray-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+      }, "No. Keep the habit")])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 512
+  /* NEED_PATCH */
+  );
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Achievement.vue?vue&type=template&id=6f8e3896":
 /*!****************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Achievement.vue?vue&type=template&id=6f8e3896 ***!
@@ -21335,14 +21492,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, null, 8
         /* PROPS */
-        , ["onToggleOn"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Habit edit/display"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$setup.editHabitForm === habit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["HabitEdit"], {
+        , ["onToggleOn"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Habit edit/display"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$setup.editHabitForm === habit || $props.errors['editHabit' + habit.hab_id] != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["HabitEdit"], {
           key: 0,
           habit: $setup.editHabitForm,
-          onResetHabit: $setup.resetHabit,
-          onHabitUpdated: $setup.resetHabit
+          errors: $props.errors,
+          onResetHabit: function onResetHabit($event) {
+            return $setup.resetHabit(habit);
+          },
+          onHabitUpdatedx: $setup.resetHabit
         }, null, 8
         /* PROPS */
-        , ["habit"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(habit.hab_name), 1
+        , ["habit", "errors", "onResetHabit"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(habit.hab_name), 1
         /* TEXT */
         )]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Habit options"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DropDownOptions"], {
           id: 'habit' + habit.hab_id,
@@ -21357,7 +21517,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return $setup.editHabit(habit);
           },
           onRemoveHabitClicked: function onRemoveHabitClicked($event) {
-            return $setup.removeHabit(habit.hab_id);
+            return $setup.removeHabit(habit);
           }
         }, null, 8
         /* PROPS */
@@ -21381,7 +21541,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ref: "removeGoalModalRef"
       }, null, 8
       /* PROPS */
-      , ["errors", "goal"])];
+      , ["errors", "goal"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["HabitRemoveModal"], {
+        key: 1,
+        errors: $props.errors,
+        habit: $setup.removeHabitForm,
+        ref: "removeHabitModalRef"
+      }, null, 8
+      /* PROPS */
+      , ["errors", "habit"]))];
     }),
     _: 1
     /* STABLE */
@@ -22328,22 +22495,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "min-w-0 flex flex-1 px-4 relative shadow-sm"
+  "class": "flex-1"
 };
-var _hoisted_2 = ["onKeyup"];
+var _hoisted_2 = {
+  "class": "min-w-0 flex px-4 relative shadow-sm"
+};
+var _hoisted_3 = ["onKeyup"];
+var _hoisted_4 = {
+  "class": "px-4"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  var _$props$errors;
+
+  var _component_ValidationError = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ValidationError");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)($setup.updateHabit, ["enter"]),
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.editHabitForm.hab_name = $event;
     }),
     "class": "block w-full rounded-md border-gray-300 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-    placeholder: "0.00",
-    "aria-describedby": "price-currency"
+    placeholder: "Stay in bed"
   }, null, 40
   /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_2), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.editHabitForm.hab_name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  , _hoisted_3), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.editHabitForm.hab_name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.$emit('resetHabit');
     }, ["prevent"])),
@@ -22351,7 +22527,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["RewindIcon"], {
     "class": "h-6 w-6",
     "aria-hidden": "true"
-  })])]);
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ValidationError, {
+    error: (_$props$errors = $props.errors['editHabit' + $setup.prop.habit.hab_id]) === null || _$props$errors === void 0 ? void 0 : _$props$errors.hab_name
+  }, null, 8
+  /* PROPS */
+  , ["error"])])]);
 }
 
 /***/ }),
@@ -75584,6 +75764,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Modals/HabitRemoveModal.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/Modals/HabitRemoveModal.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _HabitRemoveModal_vue_vue_type_template_id_25f0ee20__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HabitRemoveModal.vue?vue&type=template&id=25f0ee20 */ "./resources/js/Modals/HabitRemoveModal.vue?vue&type=template&id=25f0ee20");
+/* harmony import */ var _HabitRemoveModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HabitRemoveModal.vue?vue&type=script&setup=true&lang=js */ "./resources/js/Modals/HabitRemoveModal.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var _Users_lcyoong_Documents_basement_tabiat_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_lcyoong_Documents_basement_tabiat_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_HabitRemoveModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_HabitRemoveModal_vue_vue_type_template_id_25f0ee20__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Modals/HabitRemoveModal.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Achievement.vue":
 /*!********************************************!*\
   !*** ./resources/js/Pages/Achievement.vue ***!
@@ -76440,6 +76648,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Modals/HabitRemoveModal.vue?vue&type=script&setup=true&lang=js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/Modals/HabitRemoveModal.vue?vue&type=script&setup=true&lang=js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HabitRemoveModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HabitRemoveModal_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./HabitRemoveModal.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/HabitRemoveModal.vue?vue&type=script&setup=true&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Achievement.vue?vue&type=script&lang=js":
 /*!********************************************************************!*\
   !*** ./resources/js/Pages/Achievement.vue?vue&type=script&lang=js ***!
@@ -76916,6 +77140,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_GoalRemoveModal_vue_vue_type_template_id_4373844b__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_GoalRemoveModal_vue_vue_type_template_id_4373844b__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./GoalRemoveModal.vue?vue&type=template&id=4373844b */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/GoalRemoveModal.vue?vue&type=template&id=4373844b");
+
+
+/***/ }),
+
+/***/ "./resources/js/Modals/HabitRemoveModal.vue?vue&type=template&id=25f0ee20":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Modals/HabitRemoveModal.vue?vue&type=template&id=25f0ee20 ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HabitRemoveModal_vue_vue_type_template_id_25f0ee20__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HabitRemoveModal_vue_vue_type_template_id_25f0ee20__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./HabitRemoveModal.vue?vue&type=template&id=25f0ee20 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Modals/HabitRemoveModal.vue?vue&type=template&id=25f0ee20");
 
 
 /***/ }),

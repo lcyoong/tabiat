@@ -34,8 +34,12 @@
   const show = () => {
       open.value = true
   }
+
+  const close = () => {
+      open.value = false
+  }  
   
   defineExpose({
-      show
+      show, close
   })
   </script>

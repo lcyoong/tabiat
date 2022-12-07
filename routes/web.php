@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
-    Route::delete('habit/{habit}', [HabitController::class, 'destroy'])->name('habit.delete');
+    Route::delete('habit/{habit}', [HabitController::class, 'delete'])->name('habit.remove');
 
     Route::get('achievements', [AchievementController::class, 'index'])->name('achievement.index');
 

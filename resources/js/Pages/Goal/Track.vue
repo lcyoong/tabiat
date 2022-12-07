@@ -31,10 +31,11 @@
           <!--Habit edit/display-->
           <div class="flex min-w-0 flex-1 items-center">
             <HabitEdit 
-              v-if="(editHabitForm === habit)" 
+              v-if="(editHabitForm === habit || errors['editHabit' + habit.hab_id] != null)"
               :habit="editHabitForm" 
-              @resetHabit="resetHabit"
-              @habitUpdated="resetHabit"
+              :errors="errors"
+              @resetHabit="resetHabit(habit)"
+              @habitUpdatedx="resetHabit"
             />
             <div v-else class="min-w-0 flex-1 px-4">
               <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
@@ -48,7 +49,7 @@
                 { label: 'Remove', action: 'removeHabitClicked'},
               ]"
               @editHabitClicked="editHabit(habit)"
-              @removeHabitClicked="removeHabit(habit.hab_id)"
+              @removeHabitClicked="removeHabit(habit)"
               />
           </div>
         </div>
@@ -64,11 +65,13 @@
 
     <GoalRemoveModal :errors="errors" :goal="goal" ref="removeGoalModalRef"/>
 
+    <HabitRemoveModal :key="1" :errors="errors" :habit="removeHabitForm" ref="removeHabitModalRef"/>
+
   </Layout>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalEditModal from "@/Modals/GoalEditModal";
@@ -77,6 +80,7 @@ import DropDownOptions from "@/Shared/DropDownOptions";
 import Toggle from "@/Shared/Toggle";
 import HabitEdit from "@/Shared/HabitEdit";
 import HabitCreate from "@/Shared/HabitCreate";
+import HabitRemoveModal from "@/Modals/HabitRemoveModal";
 
 let prop = defineProps({
   goal: Object,
@@ -87,7 +91,17 @@ const editGoalModalRef = ref()
 
 const removeGoalModalRef = ref()
 
+const removeHabitModalRef = ref()
+
+// let inErrors = ref(prop.errors)
+
 let editHabitForm = ref()
+
+let removeHabitForm = ref()
+
+// watch(() => prop.errors, (value) =>  {
+//     inErrors.value = value
+// })
 
 function editGoal() {
   editGoalModalRef.value.show()
@@ -97,7 +111,8 @@ function removeGoal() {
   removeGoalModalRef.value.show()
 }
 
-function resetHabit() {
+function resetHabit(value) {
+  prop.errors['editHabit' + value.hab_id] = null
   editHabitForm.value = null
 }
 
@@ -105,8 +120,11 @@ function editHabit(habit) {
   editHabitForm.value = habit
 }
 
-function removeHabit(id) {
-  console.log(id)
+function removeHabit(habit) {
+  editHabitForm.value = null
+  removeHabitForm.value = habit
+  removeHabitModalRef.value.key = 2
+  removeHabitModalRef.value.show()
 }
 
 function onTrack(id) {
