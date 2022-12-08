@@ -39,7 +39,7 @@ function updateHabit() {
         errorBag: 'editHabit' + prop.habit.hab_id,
         onSuccess: page => {
             // console.log('sss');
-            // emit('habitUpdated')
+            emit('habitUpdated')
         }
       });  
 }

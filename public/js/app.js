@@ -19383,7 +19383,8 @@ __webpack_require__.r(__webpack_exports__);
     goal: Object
   },
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     var prop = __props;
     var modalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)(prop.goal);
@@ -19398,7 +19399,10 @@ __webpack_require__.r(__webpack_exports__);
       }), form, {
         preserveState: true,
         preserveScroll: true,
-        onSuccess: function onSuccess(page) {}
+        onSuccess: function onSuccess(page) {
+          emit('goalUpdated');
+          modalRef.value.close();
+        }
       });
     }
 
@@ -19409,6 +19413,7 @@ __webpack_require__.r(__webpack_exports__);
       prop: prop,
       modalRef: modalRef,
       form: form,
+      emit: emit,
       show: show,
       editGoal: editGoal,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -19733,7 +19738,10 @@ __webpack_require__.r(__webpack_exports__);
     var prop = __props;
     var editGoalModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var removeGoalModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
-    var removeHabitModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); // let inErrors = ref(prop.errors)
+    var removeHabitModalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var key = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
+      countDown: Date()
+    }); // let inErrors = ref(prop.errors)
 
     var editHabitForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     var removeHabitForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(); // watch(() => prop.errors, (value) =>  {
@@ -19795,6 +19803,7 @@ __webpack_require__.r(__webpack_exports__);
       editGoalModalRef: editGoalModalRef,
       removeGoalModalRef: removeGoalModalRef,
       removeHabitModalRef: removeHabitModalRef,
+      key: key,
       editHabitForm: editHabitForm,
       removeHabitForm: removeHabitForm,
       today: today,
@@ -20509,8 +20518,9 @@ __webpack_require__.r(__webpack_exports__);
         preserveState: true,
         preserveScroll: true,
         errorBag: 'editHabit' + prop.habit.hab_id,
-        onSuccess: function onSuccess(page) {// console.log('sss');
-          // emit('habitUpdated')
+        onSuccess: function onSuccess(page) {
+          // console.log('sss');
+          emit('habitUpdated');
         }
       });
     }
@@ -21581,12 +21591,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "text-2xl"
       }, null, 8
       /* PROPS */
-      , ["name", "days"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CountDown"], {
+      , ["name", "days"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["CountDown"], {
         fromDate: $props.goal.created_at,
-        days: $props.goal.gol_days
+        days: $props.goal.gol_days,
+        key: $setup.key['countDown']
       }, null, 8
       /* PROPS */
-      , ["fromDate", "days"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DropDownOptions"], {
+      , ["fromDate", "days"])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DropDownOptions"], {
         options: [{
           label: 'Edit',
           action: 'editGoalClicked'
@@ -21656,7 +21667,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["goal", "errors"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["GoalEditModal"], {
         errors: $props.errors,
         goal: $props.goal,
-        ref: "editGoalModalRef"
+        ref: "editGoalModalRef",
+        onGoalUpdated: _cache[0] || (_cache[0] = function ($event) {
+          return $setup.key['countDown'] = Date();
+        })
       }, null, 8
       /* PROPS */
       , ["errors", "goal"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["GoalRemoveModal"], {

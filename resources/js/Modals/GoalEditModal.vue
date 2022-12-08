@@ -35,6 +35,8 @@ const modalRef = ref()
 
 const form = useForm(prop.goal);
 
+const emit = defineEmits()
+
 const show = () => {
   modalRef.value.show()
 }
@@ -43,7 +45,9 @@ function editGoal() {
   Inertia.post(route("goal.update", {goal: form.gol_id}), form, {
         preserveState: true,
         preserveScroll: true,
-        onSuccess: page => {
+        onSuccess: page => {          
+          emit('goalUpdated')
+          modalRef.value.close()
         }
       }); 
 }

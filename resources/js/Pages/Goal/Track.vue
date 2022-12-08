@@ -6,8 +6,12 @@
           :name="goal.gol_name" 
           :days="goal.gol_days" 
           class="text-2xl"
-          />
-        <div><CountDown :fromDate="goal.created_at" :days="goal.gol_days"/></div>
+        />
+        <CountDown 
+          :fromDate="goal.created_at"
+          :days="goal.gol_days"
+          :key="key['countDown']"
+        />
         <DropDownOptions :options="[
             { label: 'Edit', action: 'editGoalClicked'},
             { label: 'Remove', action: 'removeGoalClicked'},
@@ -62,7 +66,7 @@
 
     <HabitCreate :goal="goal" :errors="errors"/>    
 
-    <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef"/>
+    <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef" @goalUpdated="key['countDown'] = Date()"/>
 
     <GoalRemoveModal :errors="errors" :goal="goal" ref="removeGoalModalRef"/>
 
@@ -97,6 +101,10 @@ const editGoalModalRef = ref()
 const removeGoalModalRef = ref()
 
 const removeHabitModalRef = ref()
+
+let key = ref({
+  countDown: Date()
+})
 
 // let inErrors = ref(prop.errors)
 
