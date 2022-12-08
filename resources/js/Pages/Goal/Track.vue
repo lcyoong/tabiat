@@ -26,7 +26,7 @@
         <div class="flex items-center px-4 py-4 sm:px-6">
           <!--Toggle-->
           <div>
-            <Toggle @toggleOn="onTrack(habit.hab_id)"/>
+            <Toggle @toggleOn="onTrack(habit.hab_id)" @toggleOff="offTrack(habit.hab_id)"/>
           </div>
 
           <!--Habit edit/display-->
@@ -73,6 +73,9 @@
 
 <script setup>
 import { ref, watch } from "vue";
+import { Inertia } from "@inertiajs/inertia";
+import { useForm } from '@inertiajs/inertia-vue3';
+import moment from "moment";
 import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalEditModal from "@/Modals/GoalEditModal";
@@ -104,6 +107,7 @@ let removeHabitForm = ref()
 // watch(() => prop.errors, (value) =>  {
 //     inErrors.value = value
 // })
+let today = moment().format('YYYY-MM-DD')
 
 function editGoal() {
   editGoalModalRef.value.show()
@@ -131,6 +135,25 @@ function removeHabit(habit) {
 
 function onTrack(id) {
   console.log(id)
+  Inertia.post(route("track.store"), useForm({
+      tra_habit: id,
+      tra_date: today
+    }), {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: page => {
+      }
+    });
+}
+
+function offTrack(id) {
+  console.log(id)
+  Inertia.delete(route("track.remove", {habit: id, date: today}), {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: page => {
+      }
+    });   
 }
 
 </script>

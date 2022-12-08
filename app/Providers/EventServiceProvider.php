@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         HabitTracked::class => [
-            CheckForAchievement::class,
+            // CheckForAchievement::class,
         ],
 
         AchievementVisited::class => [

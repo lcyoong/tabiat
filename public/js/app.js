@@ -19694,16 +19694,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Shared/Layout */ "./resources/js/Shared/Layout.vue");
-/* harmony import */ var _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Shared/GoalSentenceReadOnly */ "./resources/js/Shared/GoalSentenceReadOnly.vue");
-/* harmony import */ var _Modals_GoalEditModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Modals/GoalEditModal */ "./resources/js/Modals/GoalEditModal.vue");
-/* harmony import */ var _Modals_GoalRemoveModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Modals/GoalRemoveModal */ "./resources/js/Modals/GoalRemoveModal.vue");
-/* harmony import */ var _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/DropDownOptions */ "./resources/js/Shared/DropDownOptions.vue");
-/* harmony import */ var _Shared_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/Toggle */ "./resources/js/Shared/Toggle.vue");
-/* harmony import */ var _Shared_CountDown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/CountDown */ "./resources/js/Shared/CountDown.vue");
-/* harmony import */ var _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/HabitEdit */ "./resources/js/Shared/HabitEdit.vue");
-/* harmony import */ var _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Shared/HabitCreate */ "./resources/js/Shared/HabitCreate.vue");
-/* harmony import */ var _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Modals/HabitRemoveModal */ "./resources/js/Modals/HabitRemoveModal.vue");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/Layout */ "./resources/js/Shared/Layout.vue");
+/* harmony import */ var _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/GoalSentenceReadOnly */ "./resources/js/Shared/GoalSentenceReadOnly.vue");
+/* harmony import */ var _Modals_GoalEditModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Modals/GoalEditModal */ "./resources/js/Modals/GoalEditModal.vue");
+/* harmony import */ var _Modals_GoalRemoveModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Modals/GoalRemoveModal */ "./resources/js/Modals/GoalRemoveModal.vue");
+/* harmony import */ var _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/DropDownOptions */ "./resources/js/Shared/DropDownOptions.vue");
+/* harmony import */ var _Shared_Toggle__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Shared/Toggle */ "./resources/js/Shared/Toggle.vue");
+/* harmony import */ var _Shared_CountDown__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Shared/CountDown */ "./resources/js/Shared/CountDown.vue");
+/* harmony import */ var _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Shared/HabitEdit */ "./resources/js/Shared/HabitEdit.vue");
+/* harmony import */ var _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Shared/HabitCreate */ "./resources/js/Shared/HabitCreate.vue");
+/* harmony import */ var _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Modals/HabitRemoveModal */ "./resources/js/Modals/HabitRemoveModal.vue");
+
+
+
 
 
 
@@ -19733,6 +19740,8 @@ __webpack_require__.r(__webpack_exports__);
     //     inErrors.value = value
     // })
 
+    var today = moment__WEBPACK_IMPORTED_MODULE_3___default()().format('YYYY-MM-DD');
+
     function editGoal() {
       editGoalModalRef.value.show();
     }
@@ -19759,6 +19768,26 @@ __webpack_require__.r(__webpack_exports__);
 
     function onTrack(id) {
       console.log(id);
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(route("track.store"), (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
+        tra_habit: id,
+        tra_date: today
+      }), {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: function onSuccess(page) {}
+      });
+    }
+
+    function offTrack(id) {
+      console.log(id);
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia["delete"](route("track.remove", {
+        habit: id,
+        date: today
+      }), {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: function onSuccess(page) {}
+      });
     }
 
     var __returned__ = {
@@ -19768,24 +19797,29 @@ __webpack_require__.r(__webpack_exports__);
       removeHabitModalRef: removeHabitModalRef,
       editHabitForm: editHabitForm,
       removeHabitForm: removeHabitForm,
+      today: today,
       editGoal: editGoal,
       removeGoal: removeGoal,
       resetHabit: resetHabit,
       editHabit: editHabit,
       removeHabit: removeHabit,
       onTrack: onTrack,
+      offTrack: offTrack,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
-      Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_1__["default"],
-      GoalSentenceReadOnly: _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_2__["default"],
-      GoalEditModal: _Modals_GoalEditModal__WEBPACK_IMPORTED_MODULE_3__["default"],
-      GoalRemoveModal: _Modals_GoalRemoveModal__WEBPACK_IMPORTED_MODULE_4__["default"],
-      DropDownOptions: _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_5__["default"],
-      Toggle: _Shared_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"],
-      CountDown: _Shared_CountDown__WEBPACK_IMPORTED_MODULE_7__["default"],
-      HabitEdit: _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_8__["default"],
-      HabitCreate: _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_9__["default"],
-      HabitRemoveModal: _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_10__["default"]
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm,
+      moment: (moment__WEBPACK_IMPORTED_MODULE_3___default()),
+      Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_4__["default"],
+      GoalSentenceReadOnly: _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_5__["default"],
+      GoalEditModal: _Modals_GoalEditModal__WEBPACK_IMPORTED_MODULE_6__["default"],
+      GoalRemoveModal: _Modals_GoalRemoveModal__WEBPACK_IMPORTED_MODULE_7__["default"],
+      DropDownOptions: _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_8__["default"],
+      Toggle: _Shared_Toggle__WEBPACK_IMPORTED_MODULE_9__["default"],
+      CountDown: _Shared_CountDown__WEBPACK_IMPORTED_MODULE_10__["default"],
+      HabitEdit: _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_11__["default"],
+      HabitCreate: _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_12__["default"],
+      HabitRemoveModal: _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_13__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -21576,10 +21610,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Toggle"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Toggle"], {
           onToggleOn: function onToggleOn($event) {
             return $setup.onTrack(habit.hab_id);
+          },
+          onToggleOff: function onToggleOff($event) {
+            return $setup.offTrack(habit.hab_id);
           }
         }, null, 8
         /* PROPS */
-        , ["onToggleOn"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Habit edit/display"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$setup.editHabitForm === habit || $props.errors['editHabit' + habit.hab_id] != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["HabitEdit"], {
+        , ["onToggleOn", "onToggleOff"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Habit edit/display"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$setup.editHabitForm === habit || $props.errors['editHabit' + habit.hab_id] != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["HabitEdit"], {
           key: 0,
           habit: $setup.editHabitForm,
           errors: $props.errors,
@@ -22093,21 +22130,15 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_4 = ["href"];
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "mt-36"
 }, "Built with love", -1
 /* HOISTED */
 );
 
+var _hoisted_5 = [_hoisted_2, _hoisted_3, _hoisted_4];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "my-6 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-500 to-lime-500 hover:from-lime-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-    href: _ctx.route('track.index')
-  }, "Take the first step", 8
-  /* PROPS */
-  , _hoisted_4), _hoisted_5]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_5);
 }
 
 /***/ }),
@@ -22787,9 +22818,7 @@ var _hoisted_19 = {
   "class": "px-2 pt-2 pb-3 space-y-1"
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Track");
-
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Achivements");
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Achivements");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
@@ -22819,7 +22848,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href", "class"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <Link\n                :href=\"route('track.index')\"\n                class=\"text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium\"\n                :class=\"{'bg-gray-900 text-white' : isActiveLink(route('track.index'))}\"\n                aria-current=\"page\"\n              >Track</Link> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  , ["href", "class"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.route('achievement.index'),
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium", {
       'bg-gray-900 text-white': $options.isActiveLink(_ctx.route('achievement.index'))
@@ -22899,25 +22928,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       'hidden': !$data.showMobileMenu
     }]),
     id: "mobile-menu"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current: \"bg-gray-900 text-white\", Default: \"text-gray-300 hover:bg-gray-700 hover:text-white\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: _ctx.route('track.index'),
-    "class": "bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium",
-    "aria-current": "page"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_20];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current: \"bg-gray-900 text-white\", Default: \"text-gray-300 hover:bg-gray-700 hover:text-white\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <Link\n          :href=\"route('track.index')\"\n          class=\"bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium\"\n          aria-current=\"page\"\n        >Track</Link> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.route('achievement.index'),
     "class": "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_21];
+      return [_hoisted_20];
     }),
     _: 1
     /* STABLE */

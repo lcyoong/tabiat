@@ -68,12 +68,6 @@
                 :class="{'bg-gray-900 text-white' : isActiveLink(route('goal.index'))}"
                 aria-current="page"
               >Goals</Link>
-              <!-- <Link
-                :href="route('track.index')"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                :class="{'bg-gray-900 text-white' : isActiveLink(route('track.index'))}"
-                aria-current="page"
-              >Track</Link> -->
               <Link
                 :href="route('achievement.index')"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -147,11 +141,11 @@
     >
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <Link
+        <!-- <Link
           :href="route('track.index')"
           class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
           aria-current="page"
-        >Track</Link>
+        >Track</Link> -->
 
         <Link
           :href="route('achievement.index')"

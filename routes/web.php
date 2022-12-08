@@ -35,9 +35,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('goals/{goal}', [GoalController::class, 'track'])->name('goal.track');
 
-    Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
+    // Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');
-    Route::post('track/delete', [TrackController::class, 'delete'])->name('track.delete');
+    Route::delete('track/{habit}/{date}', [TrackController::class, 'delete'])->name('track.remove');
     Route::post('track/photos', [TrackPhotoController::class, 'store'])->name('track.photo.store');
 
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
