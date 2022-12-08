@@ -19631,7 +19631,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/CheckCircleIcon.js");
 /* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/ChevronRightIcon.js");
-/* harmony import */ var _Shared_Pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/Pagination */ "./resources/js/Shared/Pagination.vue");
+/* harmony import */ var _Shared_CountDown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Shared/CountDown */ "./resources/js/Shared/CountDown.vue");
 /* harmony import */ var _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/GoalSentenceReadOnly */ "./resources/js/Shared/GoalSentenceReadOnly.vue");
 /* harmony import */ var _Modals_GoalCreateModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Modals/GoalCreateModal */ "./resources/js/Modals/GoalCreateModal.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
@@ -19667,7 +19667,7 @@ __webpack_require__.r(__webpack_exports__);
       moment: (moment__WEBPACK_IMPORTED_MODULE_2___default()),
       CheckCircleIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_7__["default"],
       ChevronRightIcon: _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_8__["default"],
-      Pagination: _Shared_Pagination__WEBPACK_IMPORTED_MODULE_3__["default"],
+      CountDown: _Shared_CountDown__WEBPACK_IMPORTED_MODULE_3__["default"],
       GoalSentenceReadOnly: _Shared_GoalSentenceReadOnly__WEBPACK_IMPORTED_MODULE_4__["default"],
       GoalCreateModal: _Modals_GoalCreateModal__WEBPACK_IMPORTED_MODULE_5__["default"],
       ref: vue__WEBPACK_IMPORTED_MODULE_6__.ref
@@ -19700,9 +19700,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_GoalRemoveModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Modals/GoalRemoveModal */ "./resources/js/Modals/GoalRemoveModal.vue");
 /* harmony import */ var _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Shared/DropDownOptions */ "./resources/js/Shared/DropDownOptions.vue");
 /* harmony import */ var _Shared_Toggle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Shared/Toggle */ "./resources/js/Shared/Toggle.vue");
-/* harmony import */ var _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/HabitEdit */ "./resources/js/Shared/HabitEdit.vue");
-/* harmony import */ var _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/HabitCreate */ "./resources/js/Shared/HabitCreate.vue");
-/* harmony import */ var _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Modals/HabitRemoveModal */ "./resources/js/Modals/HabitRemoveModal.vue");
+/* harmony import */ var _Shared_CountDown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Shared/CountDown */ "./resources/js/Shared/CountDown.vue");
+/* harmony import */ var _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Shared/HabitEdit */ "./resources/js/Shared/HabitEdit.vue");
+/* harmony import */ var _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Shared/HabitCreate */ "./resources/js/Shared/HabitCreate.vue");
+/* harmony import */ var _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Modals/HabitRemoveModal */ "./resources/js/Modals/HabitRemoveModal.vue");
+
 
 
 
@@ -19780,9 +19782,10 @@ __webpack_require__.r(__webpack_exports__);
       GoalRemoveModal: _Modals_GoalRemoveModal__WEBPACK_IMPORTED_MODULE_4__["default"],
       DropDownOptions: _Shared_DropDownOptions__WEBPACK_IMPORTED_MODULE_5__["default"],
       Toggle: _Shared_Toggle__WEBPACK_IMPORTED_MODULE_6__["default"],
-      HabitEdit: _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_7__["default"],
-      HabitCreate: _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_8__["default"],
-      HabitRemoveModal: _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_9__["default"]
+      CountDown: _Shared_CountDown__WEBPACK_IMPORTED_MODULE_7__["default"],
+      HabitEdit: _Shared_HabitEdit__WEBPACK_IMPORTED_MODULE_8__["default"],
+      HabitCreate: _Shared_HabitCreate__WEBPACK_IMPORTED_MODULE_9__["default"],
+      HabitRemoveModal: _Modals_HabitRemoveModal__WEBPACK_IMPORTED_MODULE_10__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20136,6 +20139,59 @@ __webpack_require__.r(__webpack_exports__);
     var props = __props;
     var __returned__ = {
       props: props
+    };
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/CountDown.vue?vue&type=script&setup=true&lang=js":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/CountDown.vue?vue&type=script&setup=true&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    fromDate: String,
+    days: Number
+  },
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose;
+    expose();
+    var prop = __props;
+    var endDate = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return moment__WEBPACK_IMPORTED_MODULE_1___default()(prop.fromDate).add(prop.days, 'days');
+    });
+    var countDown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(endDate.value.diff(moment__WEBPACK_IMPORTED_MODULE_1___default()(), 'days'));
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      setInterval(function () {
+        countDown.value = endDate.value.diff(moment__WEBPACK_IMPORTED_MODULE_1___default()(), 'days');
+      }, 60000);
+    });
+    var __returned__ = {
+      prop: prop,
+      endDate: endDate,
+      countDown: countDown,
+      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      moment: (moment__WEBPACK_IMPORTED_MODULE_1___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -21406,9 +21462,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           days: goal.gol_days
         }, null, 8
         /* PROPS */
-        , ["name", "days"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, " Since " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(goal.created_at), 1
-        /* TEXT */
-        )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronRightIcon"], {
+        , ["name", "days"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CountDown"], {
+          fromDate: goal.created_at,
+          days: goal.gol_days
+        }, null, 8
+        /* PROPS */
+        , ["fromDate", "days"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Since {{ goal.created_at }} ")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronRightIcon"], {
           "class": "h-5 w-5 text-gray-400",
           "aria-hidden": "true"
         })])])];
@@ -21488,7 +21547,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "text-2xl"
       }, null, 8
       /* PROPS */
-      , ["name", "days"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DropDownOptions"], {
+      , ["name", "days"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CountDown"], {
+        fromDate: $props.goal.created_at,
+        days: $props.goal.gol_days
+      }, null, 8
+      /* PROPS */
+      , ["fromDate", "days"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DropDownOptions"], {
         options: [{
           label: 'Edit',
           action: 'editGoalClicked'
@@ -22188,6 +22252,33 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/CountDown.vue?vue&type=template&id=4ddcae25":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/CountDown.vue?vue&type=template&id=4ddcae25 ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "inline-flex items-center rounded-full bg-green-600 px-3 py-1 text-sm font-large text-white"
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" days to go");
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countDown), 1
+  /* TEXT */
+  ), _hoisted_2])]);
 }
 
 /***/ }),
@@ -76095,6 +76186,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/Shared/CountDown.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/Shared/CountDown.vue ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CountDown_vue_vue_type_template_id_4ddcae25__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CountDown.vue?vue&type=template&id=4ddcae25 */ "./resources/js/Shared/CountDown.vue?vue&type=template&id=4ddcae25");
+/* harmony import */ var _CountDown_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CountDown.vue?vue&type=script&setup=true&lang=js */ "./resources/js/Shared/CountDown.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var _Users_lcyoong_Documents_basement_tabiat_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,_Users_lcyoong_Documents_basement_tabiat_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CountDown_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CountDown_vue_vue_type_template_id_4ddcae25__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Shared/CountDown.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/Shared/DeleteHabitButton.vue":
 /*!***************************************************!*\
   !*** ./resources/js/Shared/DeleteHabitButton.vue ***!
@@ -76847,6 +76966,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Shared/CountDown.vue?vue&type=script&setup=true&lang=js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Shared/CountDown.vue?vue&type=script&setup=true&lang=js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CountDown.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/CountDown.vue?vue&type=script&setup=true&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js":
 /*!***************************************************************************!*\
   !*** ./resources/js/Shared/DeleteHabitButton.vue?vue&type=script&lang=js ***!
@@ -77339,6 +77474,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Button_vue_vue_type_template_id_6cf4e88e__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Button_vue_vue_type_template_id_6cf4e88e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Button.vue?vue&type=template&id=6cf4e88e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/Button.vue?vue&type=template&id=6cf4e88e");
+
+
+/***/ }),
+
+/***/ "./resources/js/Shared/CountDown.vue?vue&type=template&id=4ddcae25":
+/*!*************************************************************************!*\
+  !*** ./resources/js/Shared/CountDown.vue?vue&type=template&id=4ddcae25 ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_template_id_4ddcae25__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CountDown_vue_vue_type_template_id_4ddcae25__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CountDown.vue?vue&type=template&id=4ddcae25 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Shared/CountDown.vue?vue&type=template&id=4ddcae25");
 
 
 /***/ }),

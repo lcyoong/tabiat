@@ -7,6 +7,7 @@
           :days="goal.gol_days" 
           class="text-2xl"
           />
+        <div><CountDown :fromDate="goal.created_at" :days="goal.gol_days"/></div>
         <DropDownOptions :options="[
             { label: 'Edit', action: 'editGoalClicked'},
             { label: 'Remove', action: 'removeGoalClicked'},
@@ -78,6 +79,7 @@ import GoalEditModal from "@/Modals/GoalEditModal";
 import GoalRemoveModal from "@/Modals/GoalRemoveModal";
 import DropDownOptions from "@/Shared/DropDownOptions";
 import Toggle from "@/Shared/Toggle";
+import CountDown from "@/Shared/CountDown";
 import HabitEdit from "@/Shared/HabitEdit";
 import HabitCreate from "@/Shared/HabitCreate";
 import HabitRemoveModal from "@/Modals/HabitRemoveModal";

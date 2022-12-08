@@ -19,7 +19,8 @@
                 <div class="hidden md:block">
                   <div>
                     <p class="text-sm text-gray-900">
-                      Since {{ goal.created_at }}
+                      <CountDown :fromDate="goal.created_at" :days="goal.gol_days"/>
+                      <!-- Since {{ goal.created_at }} -->
                     </p>
                   </div>
                 </div>
@@ -42,7 +43,7 @@ import MainNav from "@/Shared/MainNav";
 import NormalButton from "@/Shared/Button";
 import moment from "moment";
 import { CheckCircleIcon, ChevronRightIcon } from '@heroicons/vue/outline'
-import Pagination from "@/Shared/Pagination";
+import CountDown from "@/Shared/CountDown";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalCreateModal from "@/Modals/GoalCreateModal";
 import { ref } from "vue";
