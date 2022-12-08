@@ -46,6 +46,8 @@ function createGoal() {
         preserveState: true,
         preserveScroll: true,
         onSuccess: page => {
+          form.reset()
+          modalRef.value.close()
         }
       }); 
 }

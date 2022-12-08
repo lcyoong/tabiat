@@ -19324,7 +19324,10 @@ __webpack_require__.r(__webpack_exports__);
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post(route("goal.store"), form, {
         preserveState: true,
         preserveScroll: true,
-        onSuccess: function onSuccess(page) {}
+        onSuccess: function onSuccess(page) {
+          form.reset();
+          modalRef.value.close();
+        }
       });
     }
 
@@ -19445,22 +19448,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    errors: Object,
-    goal: Object
+    goal: Object,
+    errors: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     var prop = __props;
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)(prop.goal);
     var modalRef = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return prop.goal;
+    }, function (value) {
+      form.gol_id = value.gol_id;
+    });
 
     function removeGoal() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post(route("goal.remove", {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia["delete"](route("goal.remove", {
         goal: form.gol_id
-      }), form, {
+      }), {
         preserveState: true,
         preserveScroll: true,
-        onSuccess: function onSuccess(page) {}
+        onSuccess: function onSuccess(page) {
+          modalRef.value.close();
+        }
       });
     }
 
@@ -19478,6 +19488,7 @@ __webpack_require__.r(__webpack_exports__);
       removeGoal: removeGoal,
       show: show,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
       useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm,
       Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia,
       Modal: _Shared_Modal__WEBPACK_IMPORTED_MODULE_3__["default"]
@@ -21139,22 +21150,34 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_2 = {
-  "class": "py-10"
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-lg text-bold text-gray-600 my-5"
+}, " Are you sure you want to remove this goal? ", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = {
+  "class": "py-10 flex gap-2"
 };
-var _hoisted_3 = ["onClick"];
+var _hoisted_4 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Modal"], {
     ref: "modalRef"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "submit",
         onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.removeGoal, ["prevent"]),
         "class": "flex-none justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-      }, "Remove Goal", 8
+      }, "Yes. Remove the goal", 8
       /* PROPS */
-      , _hoisted_3)])];
+      , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+        type: "button",
+        onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return $setup.modalRef.close();
+        }, ["prevent"])),
+        "class": "flex-none justify-center rounded-md border border-transparent bg-gray-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+      }, "No. Keep the goal")])];
     }),
     _: 1
     /* STABLE */

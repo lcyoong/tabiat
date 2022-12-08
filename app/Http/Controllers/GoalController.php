@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGoal;
 use App\Http\Requests\UpdateGoal;
+use Illuminate\Support\Facades\DB;
 
 class GoalController extends Controller
 {
@@ -42,4 +43,21 @@ class GoalController extends Controller
 
         return Inertia::render('Goal/Track', compact('goal'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Goal $goal)
+    {
+        DB::transaction(function () use($goal) {
+            $goal->habits()->delete();
+
+            $goal->delete();    
+        });
+
+        return redirect()->route('goal.index');
+    }    
 }
