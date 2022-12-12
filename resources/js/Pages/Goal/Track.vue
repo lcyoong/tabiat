@@ -24,13 +24,20 @@
       </div>
     </template>
 
-    <p class="text-xl">Habits</p>
+    <div class="flex flex-row items-center justify-between">
+      <p class="text-xl">Habits</p>
+      <SelectDate/>
+    </div>
     <ul v-if="(goal.habits.length > 0)" role="list">
       <li v-for="habit of goal.habits" :key="habit.hab_id" class="bg-white shadow sm:rounded-md my-4">
         <div class="flex items-center px-4 py-4 sm:px-6">
           <!--Toggle-->
           <div>
-            <Toggle @toggleOn="onTrack(habit.hab_id)" @toggleOff="offTrack(habit.hab_id)"/>
+            <Toggle 
+              :enabled="habit.tracks.length > 0" 
+              @toggleOn="onTrack(habit.hab_id)"
+              @toggleOff="offTrack(habit.hab_id)"
+            />
           </div>
 
           <!--Habit edit/display-->
@@ -90,10 +97,12 @@ import CountDown from "@/Shared/CountDown";
 import HabitEdit from "@/Shared/HabitEdit";
 import HabitCreate from "@/Shared/HabitCreate";
 import HabitRemoveModal from "@/Modals/HabitRemoveModal";
+import SelectDate from "@/Shared/SelectDate";
 
 let prop = defineProps({
   goal: Object,
-  errors: Object
+  errors: Object,
+  today: String
 })
 
 const editGoalModalRef = ref()
@@ -115,7 +124,7 @@ let removeHabitForm = ref()
 // watch(() => prop.errors, (value) =>  {
 //     inErrors.value = value
 // })
-let today = moment().format('YYYY-MM-DD')
+// let today = moment().format('YYYY-MM-DD')
 
 function editGoal() {
   editGoalModalRef.value.show()
@@ -145,7 +154,7 @@ function onTrack(id) {
   console.log(id)
   Inertia.post(route("track.store"), useForm({
       tra_habit: id,
-      tra_date: today
+      tra_date: prop.today
     }), {
       preserveState: true,
       preserveScroll: true,
@@ -156,7 +165,7 @@ function onTrack(id) {
 
 function offTrack(id) {
   console.log(id)
-  Inertia.delete(route("track.remove", {habit: id, date: today}), {
+  Inertia.delete(route("track.remove", {habit: id, date: prop.today}), {
       preserveState: true,
       preserveScroll: true,
       onSuccess: page => {

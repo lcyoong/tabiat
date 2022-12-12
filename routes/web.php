@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('goals/{goal}', [GoalController::class, 'update'])->name('goal.update');
     Route::delete('goals/{goal}', [GoalController::class, 'delete'])->name('goal.remove');
 
-    Route::get('goals/{goal}', [GoalController::class, 'track'])->name('goal.track');
+    Route::get('goals/{goal}/{date?}', [GoalController::class, 'track'])->name('goal.track');
 
     // Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');

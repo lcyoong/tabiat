@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Goal;
 use Inertia\Inertia;
+use App\Models\Track;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGoal;
 use App\Http\Requests\UpdateGoal;
@@ -37,11 +39,26 @@ class GoalController extends Controller
         return back();
     }
 
-    public function track(Request $request, Goal $goal)
+    public function track(Request $request, Goal $goal, $date = null)
     {
-        $goal->load('habits');
+        try {
+            $date = new Carbon($date);
+        } catch (\Exception$e) {
+            abort(500);
+        }
 
-        return Inertia::render('Goal/Track', compact('goal'));
+        // Redirect future date tracking
+        if (!$date->isPast()) {
+            return redirect()->route('goal.track');
+        }
+
+        $today = $date->format('Y-m-d');
+
+        $goal->load(['habits', 'habits.tracks' => function($query) use($today) {
+            $query->where('tra_date', $today);
+        }]);
+
+        return Inertia::render('Goal/Track', compact('goal', 'today'));
     }
 
     /**

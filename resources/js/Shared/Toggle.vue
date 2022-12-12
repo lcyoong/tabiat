@@ -9,11 +9,13 @@
 import { ref, watch } from 'vue'
 import { Switch } from '@headlessui/vue'
 
+let prop = defineProps({
+    enabled: Boolean    
+})
+
 const emit = defineEmits()
 
-const enabled = ref(false)
-
-watch(() => enabled.value, value => {
+watch(() => prop.enabled, value => {
     if(value) {
         emit('toggleOn')
     } else {
