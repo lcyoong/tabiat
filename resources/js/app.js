@@ -6,6 +6,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp, Link } from '@inertiajs/inertia-vue3'
 import Layout from "./Shared/Layout";
 import ValidationError from "@/Shared/ValidationError";
+import { SetupCalendar } from 'v-calendar';
 
 const clickOutside = {
     beforeMount: (el, binding) => {
@@ -35,6 +36,7 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
         .use(plugin)
         .use(ZiggyVue, Ziggy)
+        .use(SetupCalendar, {})
         .component('Link', Link)
         .component('ValidationError', ValidationError)
         .directive("click-outside", clickOutside)

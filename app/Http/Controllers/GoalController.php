@@ -49,7 +49,7 @@ class GoalController extends Controller
 
         // Redirect future date tracking
         if (!$date->isPast()) {
-            return redirect()->route('goal.track');
+            return redirect()->route('goal.track', ['goal' => $goal]);
         }
 
         $today = $date->format('Y-m-d');

@@ -6,7 +6,7 @@
                 type="text"
                 v-model="editHabitForm.hab_name"
                 class="block w-full rounded-md border-gray-300 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" 
-                placeholder="Stay in bed" 
+                placeholder="The habit that might help you to achieve the goal" 
             />
             <div @click.prevent="$emit('resetHabit')" class="absolute inset-y-0 right-3 flex items-center pr-3">
                 <RewindIcon class="h-6 w-6" aria-hidden="true" />

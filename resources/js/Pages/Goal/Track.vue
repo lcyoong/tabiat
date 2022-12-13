@@ -26,7 +26,7 @@
 
     <div class="flex flex-row items-center justify-between">
       <p class="text-xl">Habits</p>
-      <SelectDate/>
+      <SelectDate :date="today" :goal="goal.gol_id"/>
     </div>
     <ul v-if="(goal.habits.length > 0)" role="list">
       <li v-for="habit of goal.habits" :key="habit.hab_id" class="bg-white shadow sm:rounded-md my-4">
@@ -86,7 +86,6 @@
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from '@inertiajs/inertia-vue3';
-import moment from "moment";
 import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalEditModal from "@/Modals/GoalEditModal";
