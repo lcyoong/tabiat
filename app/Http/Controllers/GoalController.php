@@ -77,4 +77,12 @@ class GoalController extends Controller
 
         return redirect()->route('goal.index');
     }    
+
+    public function analytics(Request $request, Goal $goal)
+    {
+        $goal->load(['habits.tracks']);
+        $habits = $goal->habits;
+
+        return Inertia::render('Goal/Analytics', compact('goal', 'habits'));
+    }
 }

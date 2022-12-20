@@ -12,6 +12,7 @@
           :days="goal.gol_days"
           :key="key['countDown']"
         />
+        <Link :href="route('goal.analytics', {goal: goal.gol_id})"><ChartBarIcon class="h-5 w-5 text-gray-400" aria-hidden="true" /></Link>
         <DropDownOptions :options="[
             { label: 'Edit', action: 'editGoalClicked'},
             { label: 'Remove', action: 'removeGoalClicked'},
@@ -86,6 +87,7 @@
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from '@inertiajs/inertia-vue3';
+import { ChartBarIcon } from '@heroicons/vue/outline'
 import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import GoalEditModal from "@/Modals/GoalEditModal";

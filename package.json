@@ -28,10 +28,12 @@
         "@vue-hero-icons/outline": "^1.7.2",
         "@vue-hero-icons/solid": "^1.7.2",
         "canvas-confetti": "^1.5.1",
+        "echarts": "^5.4.1",
         "moment": "^2.29.1",
         "moment-countdown": "^0.0.3",
         "v-calendar": "^3.0.0-alpha.8",
         "vue": "^3.2.29",
+        "vue-echarts": "^6.2.4",
         "vuex": "^4.0.2"
     }
 }
