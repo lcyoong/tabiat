@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\GoalPublicController;
 use App\Http\Controllers\TrackPhotoController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\FacebookAuthController;
@@ -56,3 +57,5 @@ Route::get('/auth/linkedin/callback', [LinkedInAuthController::class, 'callback'
 
 Route::get('/auth/facebook/redirect', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
 Route::get('/auth/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');
+
+Route::get('{user}/{goal}', [GoalPublicController::class, 'show'])->name('public_goal.show');

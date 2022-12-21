@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateGoalsTable extends Migration
 {
@@ -14,7 +15,7 @@ class CreateGoalsTable extends Migration
     public function up()
     {
         Schema::create('goals', function (Blueprint $table) {
-            $table->increments('gol_id');
+            $table->uuid('gol_id')->default(DB::raw('(UUID())'));
             $table->string('gol_name', 255);
             $table->string('gol_photo', 255)->nullable();
             $table->integer('gol_user');

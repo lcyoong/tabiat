@@ -13,6 +13,8 @@ class Goal extends Model
 
     protected $primaryKey = 'gol_id';
 
+    public $incrementing = false;
+
     protected $fillable = [
         'gol_name',
         'gol_days'

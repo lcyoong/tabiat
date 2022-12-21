@@ -28,7 +28,7 @@ import 'v-calendar/dist/style.css';
 
 let prop = defineProps({
     date: String,
-    goal: Number
+    goal: String
 })
 
 watch(() => prop.date, (value) =>  {

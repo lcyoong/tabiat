@@ -15,7 +15,7 @@ class CreateHabitsTable extends Migration
     {
         Schema::create('habits', function (Blueprint $table) {
             $table->increments('hab_id');
-            $table->integer('hab_goal');
+            $table->string('hab_goal');
             $table->string('hab_name', 255);
             $table->string('hab_unit', 255)->nullable();
             $table->integer('hab_value')->default(0);
