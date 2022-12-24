@@ -12,10 +12,17 @@
           :days="goal.gol_days"
           :key="key['countDown']"
         />
-
       </div>
     </template>
-    <v-chart :option="option" :init-options="initOptions"/>
+    <div class="flex gap-2">
+        <Calendar :goal="goal" class="w-4/5"/>
+        <div class="w-1/5 flex flex-col gap-2">
+            <div v-for="habit in goal.habits" class="flex gap-2 justify-left items-center">
+                <div class="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600x font-semibold text-white" :style="{'background-color': habit.hab_color}"></div> 
+                <div class="text-xs">{{ habit.hab_name }}</div>
+            </div>
+        </div>
+    </div>
   </Layout>
 </template>
 
@@ -24,6 +31,7 @@ import { ref } from "vue";
 import Layout from "@/Shared/Layout";
 import GoalSentenceReadOnly from "@/Shared/GoalSentenceReadOnly";
 import CountDown from "@/Shared/CountDown";
+import Calendar from "@/Shared/Calendar";
 import { use } from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { PieChart, BarChart, PictorialBarChart } from 'echarts/charts';

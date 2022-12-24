@@ -20,6 +20,18 @@ class Goal extends Model
         'gol_days'
     ];
 
+    protected $appends = ['gol_start', 'gol_end'];
+
+    public function getGolStartAttribute()
+    {
+        return $this->created_at->format('Y-m-d');
+    }
+
+    public function getGolEndAttribute()
+    {
+        return $this->created_at->addDays($this->gol_days)->format('Y-m-d');
+    }    
+
     /**
      * Scope a query to include habit of the current authenticated user
      *
