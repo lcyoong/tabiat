@@ -16,63 +16,71 @@
         <DropDownOptions :options="[
             { label: 'Edit', action: 'editGoalClicked'},
             { label: 'Remove', action: 'removeGoalClicked'},
-            { label: 'Milestone', action: 'goalMilestoneClicked'},
           ]"
           @editGoalClicked="editGoal"
           @removeGoalClicked="removeGoal"
-          @goalMilestoneClicked="removeGoal"
         />
       </div>
     </template>
 
-    <div class="flex flex-row items-center justify-between">
-      <p class="text-xl">Habits</p>
-      <SelectDate :date="today" :goal="goal.gol_id"/>
-    </div>
-    <ul v-if="(goal.habits.length > 0)" role="list">
-      <li v-for="habit of goal.habits" :key="habit.hab_id" class="bg-white shadow sm:rounded-md my-4">
-        <div class="flex items-center px-4 py-4 sm:px-6">
-          <!--Toggle-->
-          <div>
-            <Toggle 
-              :enabled="habit.tracks.length > 0" 
-              @toggleOn="onTrack(habit.hab_id)"
-              @toggleOff="offTrack(habit.hab_id)"
-            />
-          </div>
+    <Tabs :tabs="tabs" @clickTab="clickTab"/>
+    <!--Habit tab-->
+    <div v-if="tabs.find(el => el.code == 'habit').current == true" class="py-4">
+      <div class="flex flex-row items-center justify-between">
+        <!-- <p class="text-xl">Habits</p> -->
+        <SelectDate :date="today" :goal="goal.gol_id"/>
+      </div>
+      <ul v-if="(goal.habits.length > 0)" role="list">
+        <li v-for="habit of goal.habits" :key="habit.hab_id" class="bg-white shadow sm:rounded-md my-4">
+          <div class="flex items-center px-4 py-4 sm:px-6">
+            <!--Toggle-->
+            <div>
+              <Toggle 
+                :enabled="habit.tracks.length > 0" 
+                @toggleOn="onTrack(habit.hab_id)"
+                @toggleOff="offTrack(habit.hab_id)"
+              />
+            </div>
 
-          <!--Habit edit/display-->
-          <div class="flex min-w-0 flex-1 items-center">
-            <HabitEdit 
-              v-if="(editHabitForm === habit || errors['editHabit' + habit.hab_id] != null)"
-              :habit="editHabitForm" 
-              :errors="errors"
-              @resetHabit="resetHabit(habit)"
-              @habitUpdatedx="resetHabit"
-            />
-            <div v-else class="min-w-0 flex-1 px-4">
-              <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
+            <!--Habit edit/display-->
+            <div class="flex min-w-0 flex-1 items-center">
+              <HabitEdit 
+                v-if="(editHabitForm === habit || errors['editHabit' + habit.hab_id] != null)"
+                :habit="editHabitForm" 
+                :errors="errors"
+                @resetHabit="resetHabit(habit)"
+                @habitUpdatedx="resetHabit"
+              />
+              <div v-else class="min-w-0 flex-1 px-4">
+                <p class="truncate text-sm font-medium">{{ habit.hab_name }}</p>
+              </div>
+            </div>
+
+            <!--Habit options-->
+            <div>
+              <DropDownOptions :id="('habit'+habit.hab_id)" :options="[
+                  { label: 'Edit', action: 'editHabitClicked'},
+                  { label: 'Remove', action: 'removeHabitClicked'},
+                ]"
+                @editHabitClicked="editHabit(habit)"
+                @removeHabitClicked="removeHabit(habit)"
+                />
             </div>
           </div>
-
-          <!--Habit options-->
-          <div>
-            <DropDownOptions :id="('habit'+habit.hab_id)" :options="[
-                { label: 'Edit', action: 'editHabitClicked'},
-                { label: 'Remove', action: 'removeHabitClicked'},
-              ]"
-              @editHabitClicked="editHabit(habit)"
-              @removeHabitClicked="removeHabit(habit)"
-              />
-          </div>
-        </div>
-      </li>
-    </ul>
-    <div v-else class="text-lg text-bold text-gray-300 my-5">
-      Habits can help towards realizing your goal. Start now.
+        </li>
+      </ul>
+      <div v-else class="text-lg text-bold text-gray-300 my-5">
+        Habits can help towards realizing your goal. Start now.
+      </div>
+      <HabitCreate :goal="goal" :errors="errors"/>
     </div>
-
-    <HabitCreate :goal="goal" :errors="errors"/>    
+    <!--Milestone tab-->
+    <div v-else class="py-4">
+      <!-- <div class="flex flex-row items-center justify-between">
+        <p class="text-xl">Milestones</p>
+      </div> -->
+      <TrackMilestone :gol_id="goal.gol_id" :milestones="goal.milestones" :errors="errors"/>
+    </div>
 
     <GoalEditModal :errors="errors" :goal="goal" ref="editGoalModalRef" @goalUpdated="key['countDown'] = Date()"/>
 
@@ -94,10 +102,12 @@ import GoalEditModal from "@/Modals/GoalEditModal";
 import GoalRemoveModal from "@/Modals/GoalRemoveModal";
 import DropDownOptions from "@/Shared/DropDownOptions";
 import Toggle from "@/Shared/Toggle";
+import Tabs from "@/Shared/Tabs";
 import CountDown from "@/Shared/CountDown";
 import HabitEdit from "@/Shared/HabitEdit";
 import HabitCreate from "@/Shared/HabitCreate";
 import HabitRemoveModal from "@/Modals/HabitRemoveModal";
+import TrackMilestone from "@/Shared/TrackMilestone";
 import SelectDate from "@/Shared/SelectDate";
 
 let prop = defineProps({
@@ -115,6 +125,11 @@ const removeHabitModalRef = ref()
 let key = ref({
   countDown: Date()
 })
+
+let tabs = ref([
+  { name: 'Habits', code: 'habit', current: true },
+  { name: 'Milestones', code: 'milestone', current: false },
+])
 
 // let inErrors = ref(prop.errors)
 
@@ -172,6 +187,11 @@ function offTrack(id) {
       onSuccess: page => {
       }
     });   
+}
+
+function clickTab(code) {
+  tabs.value.forEach(el => el.current = false )
+  tabs.value[tabs.value.findIndex(el => el.code == code)].current = true
 }
 
 </script>

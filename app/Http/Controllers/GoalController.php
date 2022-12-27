@@ -54,7 +54,7 @@ class GoalController extends Controller
 
         $today = $date->format('Y-m-d');
 
-        $goal->load(['habits', 'habits.tracks' => function($query) use($today) {
+        $goal->load(['habits', 'milestones', 'habits.tracks' => function($query) use($today) {
             $query->where('tra_date', $today);
         }]);
 

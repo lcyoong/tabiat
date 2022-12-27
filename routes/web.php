@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\HabitController;
 use App\Http\Controllers\TrackController;
+use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\GoalPublicController;
 use App\Http\Controllers\TrackPhotoController;
 use App\Http\Controllers\AchievementController;
@@ -44,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
     Route::delete('habit/{habit}', [HabitController::class, 'delete'])->name('habit.remove');
+
+    Route::post('milestone', [MilestoneController::class, 'store'])->name('milestone.store');
+    Route::delete('milestone/{milestone}', [MilestoneController::class, 'delete'])->name('milestone.remove');
 
     Route::get('achievements', [AchievementController::class, 'index'])->name('achievement.index');
 

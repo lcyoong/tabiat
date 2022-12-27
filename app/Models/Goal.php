@@ -55,6 +55,11 @@ class Goal extends Model
         return $this->hasMany(Habit::class, 'hab_goal');
     }
 
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class, 'mil_goal');
+    }    
+
     protected static function booted()
     {
         static::creating(function ($goal) {
