@@ -46,8 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
     Route::delete('habit/{habit}', [HabitController::class, 'delete'])->name('habit.remove');
 
-    Route::post('milestone', [MilestoneController::class, 'store'])->name('milestone.store');
-    Route::delete('milestone/{milestone}', [MilestoneController::class, 'delete'])->name('milestone.remove');
+    Route::post('milestones', [MilestoneController::class, 'store'])->name('milestone.store');
+    Route::post('milestones/{milestone}', [MilestoneController::class, 'update'])->name('milestone.update');
+    Route::delete('milestones/{milestone}', [MilestoneController::class, 'delete'])->name('milestone.remove');
 
     Route::get('achievements', [AchievementController::class, 'index'])->name('achievement.index');
 

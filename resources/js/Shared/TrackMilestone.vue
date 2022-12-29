@@ -28,6 +28,8 @@
     </div>      
     <MilestoneCreate :gol_id="gol_id" :errors="errors"/>
 
+    <MilestoneEditModal :errors="errors" :milestone="editMilestoneForm" ref="editMilestoneModalRef"/>
+
     <MilestoneRemoveModal :key="1" :errors="errors" :milestone="removeMilestoneForm" ref="removeMilestoneModalRef"/>
 </template>
 
@@ -36,6 +38,7 @@ import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import MilestoneCreate from "@/Shared/MilestoneCreate";
 import DropDownOptions from "@/Shared/DropDownOptions";
+import MilestoneEditModal from "@/Modals/MilestoneEditModal";
 import MilestoneRemoveModal from "@/Modals/MilestoneRemoveModal";
 
 let prop = defineProps({
@@ -50,8 +53,14 @@ let removeMilestoneForm = ref()
 
 const removeMilestoneModalRef = ref()
 
+// let editMilestoneKey = ref(Date())
+
+const editMilestoneModalRef = ref()
+
 function editMilestone(milestone) {
+  // editMilestoneKey.value = Date()
   editMilestoneForm.value = milestone
+  editMilestoneModalRef.value.show()
 }
 
 function removeMilestone(milestone) {
@@ -60,4 +69,8 @@ function removeMilestone(milestone) {
   removeMilestoneModalRef.value.key = 2
   removeMilestoneModalRef.value.show()
 }
+
+// function milestoneUpdated() {
+//   editMilestoneForm.value = null
+// }
 </script>
