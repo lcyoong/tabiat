@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:flex lg:h-full lg:flex-col">
+  <div class="lg:flex lg:h-full lg:flex-col">    
     <header class="flex items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
       <h1 class="text-lg font-semibold text-gray-900">
         <time datetime="2022-01">{{ moment(currentMonth).format('MMMM Y') }}</time>
@@ -105,6 +105,12 @@
                 :style="{'background-color': habits.find(el => el.hab_id == event.tra_habit)?.hab_color}">
               </div>
             </div>
+            <div>
+              <div @click.prevent="showMilestone(milestone)" v-for="milestone in day.milestones" class="flex items-center gap-0.5">
+                <StarIcon class="h-3 w-3 text-yellow-600" aria-hidden="true" />
+                <div class="text-xs truncate hover:text-green-600 cursor-pointer">{{ milestone.mil_content }}</div>                
+              </div>
+            </div>            
           </div>
         </div>
         <div class="isolate grid w-full grid-cols-7 grid-rows-6 gap-px lg:hidden">
@@ -118,6 +124,7 @@
         </div>
       </div>
     </div>
+    <MilestoneDisplay :milestone="milestoneSelected" ref="milestoneDisplayRef"/>
   </div>
 </template>
 
@@ -130,18 +137,24 @@ import {
   ClockIcon,
   DotsHorizontalIcon,
 } from '@heroicons/vue/solid';
+import { StarIcon } from '@heroicons/vue/outline'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import MilestoneDisplay from "@/Shared/MilestoneDisplay";
 import moment from "moment";
 
 let prop = defineProps({
   goal: Object
 })
 
+let milestoneDisplayRef = ref()
+
 const currentMonth = ref(moment().startOf('month').format('YYYY-MM-DD'))
 
 const habits = computed(() => {
   return prop.goal.habits
 })
+
+const milestoneSelected = ref()
 
 const days = computed(() => {
   let tracks = prop.goal.habits.flatMap(habit => habit.tracks.map(track => track))
@@ -157,7 +170,8 @@ const days = computed(() => {
       date: current.format('YYYY-MM-DD'),
       isCurrentMonth: current.year() == moment(currentMonth.value).year() && current.month() == moment(currentMonth.value).month(),
       isToday: current.format('YYYY-MM-DD') == moment().format('YYYY-MM-DD'),
-      events: tracks.filter(el => el.tra_date == current.format('YYYY-MM-DD'))
+      events: tracks.filter(el => el.tra_date == current.format('YYYY-MM-DD')),
+      milestones: prop.goal.milestones.filter(el => el.mil_date == current.format('YYYY-MM-DD'))
     })
     current = current.add(1, 'days')
   }
@@ -177,6 +191,10 @@ function thisMonth() {
   currentMonth.value = moment().startOf('month').format('YYYY-MM-DD')
 }
 
+function showMilestone(value) {
+  milestoneSelected.value = value
+  milestoneDisplayRef.value.open()
+}
 
 const selectedDay = days.value.find((day) => day.isSelected)
 </script>

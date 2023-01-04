@@ -80,7 +80,8 @@ class GoalController extends Controller
 
     public function analytics(Request $request, Goal $goal)
     {
-        $goal->load(['habits.tracks']);
+        $goal->load(['milestones', 'habits.tracks']);
+        
         $habits = $goal->habits;
 
         return Inertia::render('Goal/Analytics', compact('goal', 'habits'));
