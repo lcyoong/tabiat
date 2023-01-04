@@ -3,7 +3,7 @@
     <div>
       <Link
         class="rounded-full px-4 py-2 bg-blue-600 text-white text-sm hover:bg-blue-500"
-        :href="$route('track.index', previousDay())"
+        :href="route('track.index', previousDay())"
       >Previous day</Link>
     </div>
     <div class="text-center">
@@ -15,7 +15,7 @@
     <div>
       <Link
         class="rounded-full px-4 py-2 bg-blue-600 text-white text-sm hover:bg-blue-500"
-        :href="$route('track.index', nextDay())"
+        :href="route('track.index', nextDay())"
       >Next day</Link>
     </div>
   </div>

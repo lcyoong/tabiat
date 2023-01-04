@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import MainNav from "../Shared/MainNav";
+import MainNav from "@/Shared/MainNav";
 import moment from "moment";
-import Pagination from "../Shared/Pagination";
+import Pagination from "@/Shared/Pagination";
 
 export default {
   props: {

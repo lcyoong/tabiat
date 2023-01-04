@@ -39,7 +39,7 @@ export default {
 
   methods: {
     updateHabit: function(id) {
-      Inertia.post(this.$route("habit.update", this.form.hab_id), this.form, {
+      Inertia.post(this.route("habit.update", this.form.hab_id), this.form, {
         preserveState: true,
         preserveScroll: true,
         onSuccess: page => {

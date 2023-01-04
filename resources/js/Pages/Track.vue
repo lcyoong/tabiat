@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import TrackNav from "../Shared/TrackNav";
-import TrackItem from "../Shared/TrackItem";
-import EditHabitForm from "../Shared/EditHabitForm";
-import NewHabitForm from "../Shared/NewHabitForm";
-import MainNav from "../Shared/MainNav";
-import AttachPhoto from "../Shared/AttachPhoto";
+import TrackNav from "@/Shared/TrackNav";
+import TrackItem from "@/Shared/TrackItem";
+import EditHabitForm from "@/Shared/EditHabitForm";
+import NewHabitForm from "@/Shared/NewHabitForm";
+import MainNav from "@/Shared/MainNav";
+import AttachPhoto from "@/Shared/AttachPhoto";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-vue3";
 import { computed } from "vue";

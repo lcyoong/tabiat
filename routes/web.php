@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\HabitController;
+use App\Http\Controllers\TrackController;
+use App\Http\Controllers\MilestoneController;
+use App\Http\Controllers\GoalPublicController;
+use App\Http\Controllers\TrackPhotoController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\FacebookAuthController;
-use App\Http\Controllers\HabitController;
 use App\Http\Controllers\LinkedInAuthController;
-use App\Http\Controllers\TrackController;
-use App\Http\Controllers\TrackPhotoController;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\AccountProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,18 +29,32 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::middleware('auth')->group(function () {
-    Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
+    Route::get('goals', [GoalController::class, 'index'])->name('goal.index');
+    // Route::get('goals/new', [GoalController::class, 'create'])->name('goal.create');
+    Route::post('goals', [GoalController::class, 'store'])->name('goal.store');
+    Route::post('goals/{goal}', [GoalController::class, 'update'])->name('goal.update');
+    Route::delete('goals/{goal}', [GoalController::class, 'delete'])->name('goal.remove');
+    Route::get('goals/{goal}/analytics', [GoalController::class, 'analytics'])->name('goal.analytics');
+    Route::get('goals/{goal}/{date?}', [GoalController::class, 'track'])->name('goal.track');
+
+    // Route::get('track/{date?}', [TrackController::class, 'show'])->name('track.index');
     Route::post('track', [TrackController::class, 'store'])->name('track.store');
-    Route::post('track/delete', [TrackController::class, 'delete'])->name('track.delete');
-    Route::post('track/photos', [TrackPhotoController::class, 'store'])->name('track.photo.store');
+    Route::delete('track/{habit}/{date}', [TrackController::class, 'delete'])->name('track.remove');
+    // Route::post('track/photos', [TrackPhotoController::class, 'store'])->name('track.photo.store');
 
     Route::post('habit', [HabitController::class, 'store'])->name('habit.store');
     Route::post('habit/{habit}', [HabitController::class, 'update'])->name('habit.update');
-    Route::delete('habit/{habit}', [HabitController::class, 'destroy'])->name('habit.delete');
+    Route::delete('habit/{habit}', [HabitController::class, 'delete'])->name('habit.remove');
+
+    Route::post('milestones', [MilestoneController::class, 'store'])->name('milestone.store');
+    Route::post('milestones/{milestone}', [MilestoneController::class, 'update'])->name('milestone.update');
+    Route::delete('milestones/{milestone}', [MilestoneController::class, 'delete'])->name('milestone.remove');
 
     Route::get('achievements', [AchievementController::class, 'index'])->name('achievement.index');
 
-    Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
+    Route::get('account/profile', [AccountProfileController::class, 'show'])->name('profile.show');
+    Route::post('account/profile', [AccountProfileController::class, 'update'])->name('profile.update');
+
 });
 
 Route::get('/auth/linkedin/redirect', [LinkedInAuthController::class, 'redirect'])->name('linkedin.login');
@@ -45,3 +62,5 @@ Route::get('/auth/linkedin/callback', [LinkedInAuthController::class, 'callback'
 
 Route::get('/auth/facebook/redirect', [FacebookAuthController::class, 'redirect'])->name('facebook.login');
 Route::get('/auth/facebook/callback', [FacebookAuthController::class, 'callback'])->name('facebook.callback');
+
+Route::get('{user}/{goal}', [GoalPublicController::class, 'show'])->name('public_goal.show');

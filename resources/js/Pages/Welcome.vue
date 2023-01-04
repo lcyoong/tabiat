@@ -12,11 +12,6 @@
             <span class="underline underline-offset-4 italic">daily</span>
             steps.
         </p>
-        <a
-            class="my-6 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-gradient-to-r from-indigo-500 to-lime-500 hover:from-lime-500 hover:to-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            :href="$route('track.index')"
-            >Take the first step</a
-        >
 
         <div class="mt-36">Built with love</div>
     </div>

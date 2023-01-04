@@ -52,7 +52,7 @@ export default {
 
   methods: {
     addNewHabit: function() {
-      Inertia.post(this.$route("habit.store"), this.form, {
+      Inertia.post(this.route("habit.store"), this.form, {
         preserveState: true,
         preserveScroll: true,
         onSuccess: page => {

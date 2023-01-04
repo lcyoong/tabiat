@@ -36,20 +36,24 @@ class TrackController extends Controller
     {
         $input = $request->input();
 
-        return Track::firstOrCreate([
-            'tra_habit' => $input['habit'],
-            'tra_date' => $input['date'],
+        Track::firstOrCreate([
+            'tra_habit' => $input['tra_habit'],
+            'tra_date' => $input['tra_date'],
         ]);
+
+        return back();
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, Habit $habit, $date)
     {
         $input = $request->input();
 
-        return Track::where([
-            'tra_habit' => $input['habit'],
-            'tra_date' => $input['date'],
+        Track::where([
+            'tra_habit' => $habit->hab_id,
+            'tra_date' => $date,
         ])->delete();
+
+        return back()->setStatusCode(303);
     }
 
 }

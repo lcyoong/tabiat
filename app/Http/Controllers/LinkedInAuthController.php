@@ -32,6 +32,8 @@ class LinkedInAuthController extends Controller
         $user = User::firstOrCreate(['email' => $ouser->email],
             [
                 'name' => $ouser->name,
+                'auth_email' => $ouser->email,
+                'user_name' => $ouser->name.date('ymdHis'),
                 'password' => bcrypt(Str::random(40)),
                 'avatar' => $ouser->avatar,
                 'signup_with' => $this->driver,
